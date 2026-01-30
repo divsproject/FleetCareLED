@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import '../../../data/models/duty_status.dart';
 import '../../../core/values/app_colors.dart';
 import '../controllers/home_controller.dart';
+import 'home_drawer.dart';
 // Note: Imports for sub-screens will be added as they are migrated
 // import 'hos/hours_of_service_screen.dart';
 // import 'dvir/dvir_screen.dart';
@@ -168,37 +169,7 @@ class HomeView extends StatelessWidget {
                   left: controller.showQuickActions.value ? 0 : -280,
                   top: 0,
                   bottom: 0,
-                  child: Container(
-                    width: 280,
-                    color: const Color(0xFF1F1F1F),
-                    child: SafeArea(
-                      child: ListView(
-                        padding: const EdgeInsets.all(12),
-                        children: [
-                          _tile(Icons.timer, "HoS", () {
-                            controller.closeQuickActions();
-                            // Get.toNamed(AppRoutes.HOS); // TODO: Implement route
-                          }),
-                          _tile(Icons.assignment, "DVIR", () {
-                            // Get.toNamed(AppRoutes.DVIR);
-                          }),
-                          _tile(Icons.alt_route, "Routes", () {
-                            // Get.toNamed(AppRoutes.ROUTES);
-                          }),
-                          _tile(Icons.description, "Forms", () {
-                            // Get.toNamed(AppRoutes.FORMS);
-                          }),
-                          _tile(Icons.local_gas_station, "Fueling", () {
-                            // Get.toNamed(AppRoutes.FUELING);
-                          }),
-                          _tile(Icons.folder, "Document", () {}),
-                          _tile(Icons.local_shipping, "Vehicle", () {}),
-                          _tile(Icons.swap_horiz, "Driving", () {}),
-                          _tile(Icons.settings, "Settings", () {}),
-                        ],
-                      ),
-                    ),
-                  ),
+                  child: HomeDrawer(controller: controller),
                 ),
               ),
             ],
@@ -436,15 +407,6 @@ class HomeView extends StatelessWidget {
         ),
       );
     });
-  }
-
-  Widget _tile(IconData icon, String label, VoidCallback onTap) {
-    return ListTile(
-      leading: Icon(icon, color: Colors.white),
-      title: Text(label, style: const TextStyle(color: Colors.white)),
-      trailing: const Icon(Icons.chevron_right),
-      onTap: onTap,
-    );
   }
 }
 

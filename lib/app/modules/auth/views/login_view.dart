@@ -43,10 +43,7 @@ class LoginView extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         // 🔹 LOGO
-                        Image.asset(
-                          "assets/images/logo.png",
-                          height: 60,
-                        ),
+                        Image.asset("assets/images/logo.png", height: 60),
 
                         const SizedBox(height: 20),
 
@@ -62,29 +59,33 @@ class LoginView extends StatelessWidget {
                         const SizedBox(height: 14),
 
                         // 🔹 PASSWORD
-                        Obx(() => CustomTextField(
-                              label: "Password",
-                              hint: "Enter Password",
-                              icon: Icons.lock_outline,
-                              isPassword: true,
-                              controller: controller.passwordController,
-                              validator: controller.validatePassword,
-                              obscureText: controller.obscurePassword.value,
-                              onTogglePassword:
-                                  controller.togglePasswordVisibility,
-                            )),
+                        Obx(
+                          () => CustomTextField(
+                            label: "Password",
+                            hint: "Enter Password",
+                            icon: Icons.lock_outline,
+                            isPassword: true,
+                            controller: controller.passwordController,
+                            validator: controller.validatePassword,
+                            obscureText: controller.obscurePassword.value,
+                            onTogglePassword:
+                                controller.togglePasswordVisibility,
+                          ),
+                        ),
 
                         const SizedBox(height: 10),
 
                         // 🔹 REMEMBER + FORGOT
                         Row(
                           children: [
-                            Obx(() => Checkbox(
-                                  value: controller.rememberMe.value,
-                                  activeColor: const Color(0xFF2AA6DF),
-                                  onChanged: (v) =>
-                                      controller.rememberMe.value = v!,
-                                )),
+                            Obx(
+                              () => Checkbox(
+                                value: controller.rememberMe.value,
+                                activeColor: const Color(0xFF2AA6DF),
+                                onChanged: (v) =>
+                                    controller.rememberMe.value = v!,
+                              ),
+                            ),
                             const Text("Remember me"),
                             const Spacer(),
                             TextButton(
@@ -100,32 +101,17 @@ class LoginView extends StatelessWidget {
                         const SizedBox(height: 12),
 
                         // 🔹 NEXT BUTTON
-                        Obx(() => CustomButton(
-                              text: "LOGIN",
-                              onPressed: controller.login,
-                              isLoading: controller.isLoading.value,
-                              backgroundColor: const Color(0xFF2AA6DF),
-                              borderRadius: 30, // Original UI uses 30
-                            )),
+                        Obx(
+                          () => CustomButton(
+                            text: "LOGIN",
+                            onPressed: controller.login,
+                            isLoading: controller.isLoading.value,
+                            backgroundColor: const Color(0xFF2AA6DF),
+                            borderRadius: 30, // Original UI uses 30
+                          ),
+                        ),
 
                         const SizedBox(height: 16),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text("Don't have an account? "),
-                            TextButton(
-                              onPressed: controller.navigateToSignup,
-                              child: const Text(
-                                'Sign Up',
-                                style: TextStyle(
-                                  color: Color(0xFF2AA6DF),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),

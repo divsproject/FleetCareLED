@@ -2,6 +2,11 @@ import 'package:get/get.dart';
 
 import '../modules/assignment/bindings/assignment_binding.dart';
 import '../modules/assignment/views/assignment_view.dart';
+import '../modules/assignment/views/select_vehicle_view.dart';
+import '../modules/assignment/views/select_trailer_view.dart';
+import '../modules/assignment/views/enter_trailer_view.dart';
+import '../modules/assignment/views/select_shipping_view.dart';
+import '../modules/assignment/views/enter_shipping_view.dart';
 import '../modules/auth/bindings/auth_binding.dart';
 import '../modules/auth/views/login_view.dart';
 import '../modules/auth/views/signup_view.dart';
@@ -41,6 +46,31 @@ class AppPages {
     GetPage(
       name: AppRoutes.ASSIGNMENT,
       page: () => const AssignmentView(),
+      binding: AssignmentBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SELECT_VEHICLE,
+      page: () => const SelectVehicleView(),
+      binding: AssignmentBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SELECT_TRAILER,
+      page: () => const SelectTrailerView(),
+      binding: AssignmentBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.ENTER_TRAILER,
+      page: () => const EnterTrailerView(),
+      binding: AssignmentBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SELECT_SHIPPING,
+      page: () => const SelectShippingView(),
+      binding: AssignmentBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.ENTER_SHIPPING,
+      page: () => const EnterShippingView(),
       binding: AssignmentBinding(),
     ),
     GetPage(
