@@ -20,6 +20,8 @@ import '../modules/dvir/views/dvir_view.dart';
 import '../modules/routes/views/routes_view.dart';
 import '../modules/forms/views/forms_view.dart';
 import '../modules/fueling/views/fueling_view.dart';
+import '../modules/co_driver_login/bindings/co_driver_login_binding.dart';
+import '../modules/co_driver_login/views/co_driver_login_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -102,6 +104,11 @@ class AppPages {
     GetPage(
       name: AppRoutes.FUELING,
       page: () => const FuelingView(),
+    ),
+    GetPage(
+      name: AppRoutes.CO_DRIVER_LOGIN,
+      page: () => const CoDriverLoginView(),
+      binding: CoDriverLoginBinding(),
     ),
   ];
 }

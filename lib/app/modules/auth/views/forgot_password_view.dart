@@ -23,9 +23,6 @@ class ForgotPasswordView extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
 
-              // Blue Overlay
-              Container(color: Colors.blue.withOpacity(0.85)),
-
               // Card
               Center(
                 child: SingleChildScrollView(

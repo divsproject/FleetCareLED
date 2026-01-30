@@ -17,6 +17,11 @@ class HomeDrawer extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(12),
           children: [
+            _tile(Icons.person_add, "Co-Driver Login", () {
+              controller.closeQuickActions();
+              Get.toNamed(AppRoutes.CO_DRIVER_LOGIN);
+            }),
+            const Divider(color: Colors.white24),
             _tile(Icons.timer, "HoS", () {
               controller.closeQuickActions();
               Get.toNamed(AppRoutes.HOS);
@@ -29,29 +34,21 @@ class HomeDrawer extends StatelessWidget {
               controller.closeQuickActions();
               Get.toNamed(AppRoutes.ROUTES);
             }),
-            _tile(Icons.description, "Forms", () {
-              controller.closeQuickActions();
-              Get.toNamed(AppRoutes.FORMS);
-            }),
             _tile(Icons.local_gas_station, "Fueling", () {
               controller.closeQuickActions();
               Get.toNamed(AppRoutes.FUELING);
             }),
             _tile(Icons.folder, "Document", () {
               controller.closeQuickActions();
-              Get.toNamed(AppRoutes.DOCUMENTS);
             }),
             _tile(Icons.local_shipping, "Vehicle", () {
               controller.closeQuickActions();
-              Get.toNamed(AppRoutes.ASSIGNMENT);
             }),
             _tile(Icons.swap_horiz, "Driving", () {
               controller.closeQuickActions();
-              // Placeholder or verify route
             }),
             _tile(Icons.settings, "Settings", () {
               controller.closeQuickActions();
-              Get.toNamed(AppRoutes.SETTINGS);
             }),
           ],
         ),

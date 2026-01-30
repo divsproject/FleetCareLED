@@ -16,6 +16,7 @@ abstract class AppRoutes {
   static const ROUTES = _Paths.ROUTES;
   static const FORMS = _Paths.FORMS;
   static const FUELING = _Paths.FUELING;
+  static const CO_DRIVER_LOGIN = _Paths.CO_DRIVER_LOGIN;
   static const SPLASH = _Paths.SPLASH;
 }
 
@@ -37,5 +38,6 @@ abstract class _Paths {
   static const ROUTES = '/routes';
   static const FORMS = '/forms';
   static const FUELING = '/fueling';
+  static const CO_DRIVER_LOGIN = '/co-driver-login';
   static const SPLASH = '/splash';
 }
