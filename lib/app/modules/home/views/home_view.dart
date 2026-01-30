@@ -3,6 +3,8 @@ import 'package:get/get.dart';
 import '../../../data/models/duty_status.dart';
 import '../../../core/values/app_colors.dart';
 import '../controllers/home_controller.dart';
+import '../../../routes/app_routes.dart';
+import 'widgets/select_note_widget.dart';
 import 'home_drawer.dart';
 // Note: Imports for sub-screens will be added as they are migrated
 // import 'hos/hours_of_service_screen.dart';
@@ -337,9 +339,9 @@ class HomeView extends StatelessWidget {
                     subtitle: Text(controller.selectedNote.value),
                     trailing: const Icon(Icons.chevron_right),
                     onTap: () async {
-                      // Navigate to note selection screen
-                      // final note = await Get.to(() => SelectNoteScreen());
-                      // if (note != null) controller.updateNote(note);
+                      // Navigate to note selection widget
+                      final note = await Get.to(() => const SelectNoteWidget());
+                      if (note != null) controller.updateNote(note);
                     },
                   ),
                 ),
