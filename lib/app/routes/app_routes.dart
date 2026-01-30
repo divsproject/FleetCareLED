@@ -11,6 +11,11 @@ abstract class AppRoutes {
   static const ENTER_TRAILER = _Paths.ENTER_TRAILER;
   static const SELECT_SHIPPING = _Paths.SELECT_SHIPPING;
   static const ENTER_SHIPPING = _Paths.ENTER_SHIPPING;
+  static const HOS = _Paths.HOS;
+  static const DVIR = _Paths.DVIR;
+  static const ROUTES = _Paths.ROUTES;
+  static const FORMS = _Paths.FORMS;
+  static const FUELING = _Paths.FUELING;
   static const SPLASH = _Paths.SPLASH;
 }
 
@@ -27,5 +32,10 @@ abstract class _Paths {
   static const ENTER_TRAILER = '/assignment/enter-trailer';
   static const SELECT_SHIPPING = '/assignment/select-shipping';
   static const ENTER_SHIPPING = '/assignment/enter-shipping';
+  static const HOS = '/hos';
+  static const DVIR = '/dvir';
+  static const ROUTES = '/routes';
+  static const FORMS = '/forms';
+  static const FUELING = '/fueling';
   static const SPLASH = '/splash';
 }

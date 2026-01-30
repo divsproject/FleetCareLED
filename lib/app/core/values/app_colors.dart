@@ -31,4 +31,18 @@ class AppColors {
   static const Color inputBorder = Color(0xFFE0E0E0);
   static const Color inputFocus = primary;
   static const Color inputError = Color(0xFFFF4D4F);
+
+  // Status Colors
+  static const Color success = Color(0xFF4CAF50);
+  static const Color error = Color(0xFFF44336);
+  static const Color warning = Color(0xFFFFC107);
+  static const Color info = Color(0xFF2196F3);
+
+  // Specific UI Colors
+  static const Color lightBlueBg = Color(0xFFEAF6FF);
+  static const Color lightGreenBg = Color(0xFFF2FBF6);
+  static const Color lightGreenIconBg = Color(0xFFE0F2E9);
+  static const Color redLight =
+      Color(0xFFFFEBEE); // approximate for Colors.red.withOpacity(0.1)
+  static const Color scaffoldBackground = Color(0xFFF4F9FD);
 }

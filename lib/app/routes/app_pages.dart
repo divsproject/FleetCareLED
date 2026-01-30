@@ -15,6 +15,11 @@ import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/hos/views/hours_of_service_view.dart';
+import '../modules/dvir/views/dvir_view.dart';
+import '../modules/routes/views/routes_view.dart';
+import '../modules/forms/views/forms_view.dart';
+import '../modules/fueling/views/fueling_view.dart';
 import 'app_routes.dart';
 
 class AppPages {
@@ -77,6 +82,26 @@ class AppPages {
       name: AppRoutes.SPLASH,
       page: () => const SplashView(),
       binding: SplashBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.HOS,
+      page: () => const HoursOfServiceView(),
+    ),
+    GetPage(
+      name: AppRoutes.DVIR,
+      page: () => const DvirView(),
+    ),
+    GetPage(
+      name: AppRoutes.ROUTES,
+      page: () => const RoutesView(),
+    ),
+    GetPage(
+      name: AppRoutes.FORMS,
+      page: () => const FormsView(),
+    ),
+    GetPage(
+      name: AppRoutes.FUELING,
+      page: () => const FuelingView(),
     ),
   ];
 }

@@ -121,7 +121,7 @@ class SelectVehicleView extends StatelessWidget {
     final bool isSelected = controller.selectedVehicle.value == vehicleNo;
 
     return ListTile(
-      title: Text("Vehicle \$vehicleNo"),
+      title: Text("Vehicle $vehicleNo"),
       subtitle: subtitle != null ? Text(subtitle) : null,
       trailing: isSelected
           ? const Icon(Icons.check_circle, color: Colors.blue)
