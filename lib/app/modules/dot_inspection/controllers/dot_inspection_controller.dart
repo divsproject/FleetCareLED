@@ -10,10 +10,10 @@ class DotInspectionController extends GetxController {
   }
 
   void sendEldOutputFile() {
-    Get.toNamed(AppRoutes.ACCESS_CODE);
+    Get.toNamed(AppRoutes.ACCESS_CODE, arguments: AppRoutes.SEND_ELD_DATA);
   }
 
   void sendLogs() {
-    Get.toNamed(AppRoutes.ACCESS_CODE);
+    Get.toNamed(AppRoutes.ACCESS_CODE, arguments: AppRoutes.SEND_LOGS);
   }
 }

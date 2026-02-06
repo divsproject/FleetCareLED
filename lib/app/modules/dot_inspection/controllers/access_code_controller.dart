@@ -5,6 +5,14 @@ class AccessCodeController extends GetxController {
   final code = "".obs;
   final isConfirming = false.obs; // false = Set Mode, true = Confirm Mode
   String _firstCode = "";
+  String? nextRoute;
+
+  @override
+  void onInit() {
+    super.onInit();
+    // Get the next route from arguments
+    nextRoute = Get.arguments as String?;
+  }
 
   void onKeyTap(String value) {
     if (code.value.length < 4) {
@@ -33,8 +41,9 @@ class AccessCodeController extends GetxController {
     } else {
       // Confirm Mode Completed
       if (code.value == _firstCode) {
-        // Success
-        Get.offNamed(AppRoutes.DOT_INSPECTION_DETAIL);
+        // Success - navigate to the specified route or default
+        final targetRoute = nextRoute ?? AppRoutes.DOT_INSPECTION_DETAIL;
+        Get.offNamed(targetRoute);
       } else {
         // Mismatch
         Get.snackbar("Error", "Codes do not match. Please try again.");
@@ -49,6 +58,7 @@ class AccessCodeController extends GetxController {
   }
 
   void onSkip() {
-    Get.offNamed(AppRoutes.DOT_INSPECTION_DETAIL);
+    final targetRoute = nextRoute ?? AppRoutes.DOT_INSPECTION_DETAIL;
+    Get.offNamed(targetRoute);
   }
 }

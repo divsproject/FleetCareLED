@@ -29,6 +29,9 @@ abstract class AppRoutes {
   static const DOT_INSPECTION = _Paths.DOT_INSPECTION;
   static const DOT_INSPECTION_DETAIL = _Paths.DOT_INSPECTION_DETAIL;
   static const ACCESS_CODE = _Paths.ACCESS_CODE;
+  static const SEND_ELD_DATA = _Paths.SEND_ELD_DATA;
+  static const SEND_LOGS = _Paths.SEND_LOGS;
+  static const NOTIFICATION = _Paths.NOTIFICATION;
 }
 
 abstract class _Paths {
@@ -62,4 +65,7 @@ abstract class _Paths {
   static const DOT_INSPECTION = '/dot-inspection';
   static const DOT_INSPECTION_DETAIL = '/dot-inspection-detail';
   static const ACCESS_CODE = '/access-code';
+  static const SEND_ELD_DATA = '/send-eld-data';
+  static const SEND_LOGS = '/send-logs';
+  static const NOTIFICATION = '/notification';
 }

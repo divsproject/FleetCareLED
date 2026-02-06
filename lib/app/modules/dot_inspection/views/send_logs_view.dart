@@ -1,0 +1,191 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
+import '../../../core/values/app_colors.dart';
+import '../../../global_widgets/custom_text.dart';
+import '../controllers/dot_inspection_controller.dart';
+
+class SendLogsView extends GetView<DotInspectionController> {
+  const SendLogsView({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final RxBool isEmail = true.obs;
+    final RxBool showSuccess = false.obs;
+    final TextEditingController faxController = TextEditingController();
+
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: CustomText(
+          "Send Logs & inspections",
+          color: Colors.white,
+          fontSize: 18.sp,
+          fontWeight: FontWeight.w600,
+        ),
+        centerTitle: true,
+        backgroundColor: AppColors.primary,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+          onPressed: () => Get.back(),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 20.sp),
+            onPressed: () {},
+          )
+        ],
+      ),
+      body: Column(
+        children: [
+          // Tabs
+          Container(
+            color: Colors.white,
+            child: Row(
+              children: [
+                Expanded(
+                  child: Obx(() => InkWell(
+                        onTap: () => isEmail.value = true,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 2.h),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: isEmail.value
+                                    ? AppColors.primary
+                                    : Colors.transparent,
+                                width: 3,
+                              ),
+                            ),
+                          ),
+                          child: CustomText(
+                            "Email",
+                            textAlign: TextAlign.center,
+                            color:
+                                isEmail.value ? AppColors.primary : Colors.grey,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )),
+                ),
+                Expanded(
+                  child: Obx(() => InkWell(
+                        onTap: () => isEmail.value = false,
+                        child: Container(
+                          padding: EdgeInsets.symmetric(vertical: 2.h),
+                          decoration: BoxDecoration(
+                            border: Border(
+                              bottom: BorderSide(
+                                color: !isEmail.value
+                                    ? AppColors.primary
+                                    : Colors.transparent,
+                                width: 3,
+                              ),
+                            ),
+                          ),
+                          child: CustomText(
+                            "Fax",
+                            textAlign: TextAlign.center,
+                            color: !isEmail.value
+                                ? AppColors.primary
+                                : Colors.grey,
+                            fontSize: 15.sp,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      )),
+                ),
+              ],
+            ),
+          ),
+
+          // Success Banner
+          Obx(() => showSuccess.value
+              ? Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                  color: Colors.green,
+                  child: CustomText(
+                    "Your Logs are being faxed to (248) 765-83-8395.",
+                    textAlign: TextAlign.center,
+                    color: Colors.white,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w600,
+                  ),
+                )
+              : SizedBox()),
+
+          // Content
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.all(5.w),
+              child: Obx(() => Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (!isEmail.value) ...[
+                        CustomText(
+                          "Fax 8 Logs & 2 Vehicle Inspections & 2 Vehicle Inspections",
+                          fontSize: 14.sp,
+                          color: Colors.grey[700],
+                        ),
+                        SizedBox(height: 3.h),
+                        CustomText(
+                          "RECIPIENT FAX",
+                          fontSize: 14.sp,
+                          color: AppColors.primary,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        SizedBox(height: 1.h),
+                        TextField(
+                          controller: faxController,
+                          keyboardType: TextInputType.phone,
+                          decoration: InputDecoration(
+                            hintText: "Fax Number",
+                            hintStyle: TextStyle(color: Colors.grey[400]),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey[300]!),
+                            ),
+                            focusedBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: AppColors.primary),
+                            ),
+                          ),
+                        ),
+                      ],
+                      SizedBox(height: 5.h),
+                      Center(
+                        child: SizedBox(
+                          width: 70.w,
+                          height: 6.h,
+                          child: OutlinedButton(
+                            onPressed: () {
+                              showSuccess.value = true;
+                              Future.delayed(Duration(seconds: 2), () {
+                                showSuccess.value = false;
+                              });
+                            },
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(
+                                  color: AppColors.primary, width: 2),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                            child: CustomText(
+                              "Send",
+                              color: AppColors.primary,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  )),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

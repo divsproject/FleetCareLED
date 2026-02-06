@@ -12,16 +12,20 @@ class EditProfileView extends GetView<EditProfileController> {
 
   @override
   Widget build(BuildContext context) {
+    // Check if we can go back (i.e., not accessed directly from bottom nav)
+    final bool canGoBack = Navigator.of(context).canPop();
+
     return Scaffold(
       backgroundColor: Colors.white, // As per design
       appBar: AppBar(
         backgroundColor: const Color(0xFF2AA6DF), // Matching dashboard blue
-        // Leading removed for tab integration
-        // automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
-          onPressed: () => Get.back(),
-        ),
+        automaticallyImplyLeading: canGoBack,
+        leading: canGoBack
+            ? IconButton(
+                icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+                onPressed: () => Get.back(),
+              )
+            : null,
         title: CustomText(
           "Edit Driver Profile",
           color: Colors.white,

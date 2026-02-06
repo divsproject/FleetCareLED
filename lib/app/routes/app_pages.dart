@@ -10,8 +10,12 @@ import 'package:fleetcare_eld/app/modules/dot_inspection/views/access_code_view.
 import 'package:fleetcare_eld/app/modules/dot_inspection/bindings/dot_inspection_binding.dart';
 import 'package:fleetcare_eld/app/modules/dot_inspection/views/dot_inspection_view.dart';
 import 'package:fleetcare_eld/app/modules/dot_inspection/views/dot_inspection_detail_view.dart';
+import 'package:fleetcare_eld/app/modules/dot_inspection/views/send_eld_data_view.dart';
+import 'package:fleetcare_eld/app/modules/dot_inspection/views/send_logs_view.dart';
 import 'package:fleetcare_eld/app/modules/help/bindings/help_binding.dart';
 import 'package:fleetcare_eld/app/modules/help/views/help_view.dart';
+import 'package:fleetcare_eld/app/modules/notification/bindings/notification_binding.dart';
+import 'package:fleetcare_eld/app/modules/notification/views/notification_view.dart';
 import 'package:fleetcare_eld/app/modules/settings/bindings/settings_binding.dart';
 import 'package:fleetcare_eld/app/modules/settings/views/settings_view.dart';
 import 'package:get/get.dart';
@@ -171,6 +175,19 @@ class AppPages {
       name: AppRoutes.ACCESS_CODE,
       page: () => const AccessCodeView(),
       binding: AccessCodeBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.SEND_ELD_DATA,
+      page: () => const SendEldDataView(),
+    ),
+    GetPage(
+      name: AppRoutes.SEND_LOGS,
+      page: () => const SendLogsView(),
+    ),
+    GetPage(
+      name: AppRoutes.NOTIFICATION,
+      page: () => const NotificationView(),
+      binding: NotificationBinding(),
     ),
     GetPage(
       name: AppRoutes.EDIT_PROFILE,

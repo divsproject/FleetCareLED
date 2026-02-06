@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../home/views/home_view.dart';
 import '../../home/views/home_drawer.dart';
 import '../../home/controllers/home_controller.dart';
@@ -40,10 +41,10 @@ class DashboardView extends GetView<DashboardController> {
                     icon: const Icon(Icons.menu, color: Colors.white),
                     onPressed: homeController.toggleQuickActions,
                   ),
-                  actions: const [
-                    Padding(
-                      padding: EdgeInsets.only(right: 16),
-                      child: Icon(Icons.notifications, color: Colors.red),
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Icons.notifications, color: Colors.red),
+                      onPressed: () => Get.toNamed(AppRoutes.NOTIFICATION),
                     ),
                   ],
                 );
@@ -101,12 +102,63 @@ class DashboardView extends GetView<DashboardController> {
           selectedItemColor: const Color(0xFF2AA6DF),
           unselectedItemColor: Colors.grey,
           onTap: controller.changeTab,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-            BottomNavigationBarItem(icon: Icon(Icons.inbox), label: "Inbox"),
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.message), label: "Message"),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+              icon: SvgPicture.asset(
+                'assets/icons/home 03.svg',
+                width: 24,
+                height: 24,
+                colorFilter: ColorFilter.mode(
+                  controller.currentIndex.value == 0
+                      ? const Color(0xFF2AA6DF)
+                      : Colors.grey,
+                  BlendMode.srcIn,
+                ),
+              ),
+              label: "Home",
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/direct.svg',
+                width: 24,
+                height: 24,
+                colorFilter: ColorFilter.mode(
+                  controller.currentIndex.value == 1
+                      ? const Color(0xFF2AA6DF)
+                      : Colors.grey,
+                  BlendMode.srcIn,
+                ),
+              ),
+              label: "Inbox",
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/message.svg',
+                width: 24,
+                height: 24,
+                colorFilter: ColorFilter.mode(
+                  controller.currentIndex.value == 2
+                      ? const Color(0xFF2AA6DF)
+                      : Colors.grey,
+                  BlendMode.srcIn,
+                ),
+              ),
+              label: "Message",
+            ),
+            BottomNavigationBarItem(
+              icon: SvgPicture.asset(
+                'assets/icons/user.svg',
+                width: 24,
+                height: 24,
+                colorFilter: ColorFilter.mode(
+                  controller.currentIndex.value == 3
+                      ? const Color(0xFF2AA6DF)
+                      : Colors.grey,
+                  BlendMode.srcIn,
+                ),
+              ),
+              label: "Profile",
+            ),
           ],
         ),
       ),
