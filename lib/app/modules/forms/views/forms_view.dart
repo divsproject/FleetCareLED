@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/custom_text.dart';
@@ -13,36 +14,36 @@ class FormsView extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackground,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        title: const CustomText(
+        title: CustomText(
           "Forms",
           color: Colors.white,
-          fontSize: 20,
+          fontSize: 20.sp,
           fontWeight: FontWeight.w600,
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: 24.sp),
           onPressed: () => Get.back(),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(16.r),
         child: Column(
           children: [
             // 🔹 Last Issue Card
             Container(
-              padding: const EdgeInsets.all(14),
+              padding: EdgeInsets.all(14.r),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(14),
+                borderRadius: BorderRadius.circular(14.r),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomText("Tyre Issue"),
+                  CustomText("Tyre Issue", fontSize: 14.sp),
                   CustomText(
                     "Oct 8 • 8:08 PM",
                     color: AppColors.textSecondary,
-                    fontSize: 12,
+                    fontSize: 12.sp,
                   ),
                 ],
               ),
@@ -53,16 +54,18 @@ class FormsView extends StatelessWidget {
             CustomButton(
               label: "Start a Form",
               onPressed: () {},
-              borderRadius: 24,
+              borderRadius: 24.r,
+              height: 48.h,
             ),
-            const SizedBox(height: 12),
+            SizedBox(height: 12.h),
 
             // 🔹 Create an Issue
             CustomButton(
               label: "Create an Issue",
               onPressed: () {},
               isOutlined: true,
-              borderRadius: 24,
+              borderRadius: 24.r,
+              height: 48.h,
             ),
           ],
         ),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../../../global_widgets/custom_text_field.dart';
@@ -23,7 +23,7 @@ class AddDefectView extends GetView<DvirController> {
         centerTitle: true,
         backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
           onPressed: () => Get.back(),
         ),
         actions: [
@@ -44,10 +44,10 @@ class AddDefectView extends GetView<DvirController> {
         children: [
           // 🔍 Search bar
           Padding(
-            padding: EdgeInsets.all(4.w),
+            padding: EdgeInsets.all(16.w),
             child: CustomTextField(
               hintText: "Search here...",
-              prefixIcon: Icon(Icons.search, color: Colors.black, size: 20.sp),
+              prefixIcon: Icon(Icons.search, color: Colors.black, size: 24.sp),
             ),
           ),
 
@@ -60,12 +60,12 @@ class AddDefectView extends GetView<DvirController> {
 
                 // Camera Button Section (Mocking under 'Other' or separate)
                 Padding(
-                  padding: EdgeInsets.all(4.w),
+                  padding: EdgeInsets.all(16.w),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
-                      height: 7.h,
-                      width: 7.h,
+                      height: 56.h,
+                      width: 56.h,
                       decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           border: Border.all(
@@ -82,10 +82,10 @@ class AddDefectView extends GetView<DvirController> {
 
                 // Comment Section
                 Container(
-                  height: 8.h,
+                  height: 64.h,
                   width: double.infinity,
                   color: Colors.grey.shade50,
-                  padding: EdgeInsets.symmetric(horizontal: 4.w),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   alignment: Alignment.centerLeft,
                   child: Text(
                     "Enter Comment",
@@ -109,7 +109,7 @@ class AddDefectView extends GetView<DvirController> {
       children: [
         Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.5.h),
+          padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
           color: Colors.grey.shade100,
           child: Text(
             title,
@@ -137,17 +137,17 @@ class AddDefectView extends GetView<DvirController> {
                         value: isSelected,
                         onChanged: (val) => controller.toggleDefect(item),
                         controlAffinity: ListTileControlAffinity.leading,
-                        contentPadding: EdgeInsets.symmetric(horizontal: 4.w),
+                        contentPadding: EdgeInsets.symmetric(horizontal: 16.w),
                         checkboxShape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4)),
+                            borderRadius: BorderRadius.circular(4.r)),
                         activeColor: AppColors.primary,
                       ),
                       Divider(
                         height: 1,
                         thickness: 1,
                         color: Colors.grey.shade200,
-                        indent: 4.w,
-                        endIndent: 4.w,
+                        indent: 16.w,
+                        endIndent: 16.w,
                       ),
                     ],
                   );

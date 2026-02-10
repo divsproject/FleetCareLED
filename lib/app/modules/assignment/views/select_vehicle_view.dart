@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/custom_text_field.dart';
@@ -26,13 +26,13 @@ class SelectVehicleView extends StatelessWidget {
             centerTitle: true,
             backgroundColor: AppColors.primary,
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+              icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
               onPressed: () => Get.back(),
             ),
             actions: [
               IconButton(
                 icon:
-                    Icon(Icons.edit_outlined, color: Colors.white, size: 20.sp),
+                    Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
                 onPressed: () {},
               )
             ],
@@ -41,28 +41,28 @@ class SelectVehicleView extends StatelessWidget {
             children: [
               // 🔍 Search bar
               Padding(
-                padding: EdgeInsets.all(4.w),
+                padding: EdgeInsets.all(16.w),
                 child: CustomTextField(
                   hintText: "Search here...",
                   suffixIcon:
-                      Icon(Icons.search, color: Colors.grey, size: 20.sp),
+                      Icon(Icons.search, color: Colors.grey, size: 24.sp),
                 ),
               ),
 
               Expanded(
                 child: ListView(
-                  padding: EdgeInsets.symmetric(horizontal: 4.w),
+                  padding: EdgeInsets.symmetric(horizontal: 16.w),
                   children: [
                     // Suggested Section
                     _buildSectionHeader("Suggested (1)"),
-                    SizedBox(height: 1.h),
+                    SizedBox(height: 8.h),
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(color: Colors.grey.shade300),
                         borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(12),
-                            topRight: Radius.circular(12)),
+                            topLeft: Radius.circular(12.r),
+                            topRight: Radius.circular(12.r)),
                       ),
                       // Assuming "305" is the suggested one
                       child: _vehicleTile(
@@ -75,18 +75,13 @@ class SelectVehicleView extends StatelessWidget {
                       ),
                     ),
 
-                    // In the design, Suggested and Other Vehicles look somewhat connected or just separate cards.
-                    // Design shows "Suggested (1)" header inside a light blue box, then the list item.
-                    // Actually, looking closely at the image:
-                    // There is a rounded container. Top part is light blue header "Suggested (1)". Bottom part is white list item "305".
-
-                    SizedBox(height: 3.h),
+                    SizedBox(height: 24.h),
 
                     // Other Vehicles Section
                     Container(
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey.shade300),
-                        borderRadius: BorderRadius.circular(12),
+                        borderRadius: BorderRadius.circular(12.r),
                       ),
                       child: Column(
                         children: [
@@ -111,19 +106,19 @@ class SelectVehicleView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10.h), // Spacing for bottom button
+                    SizedBox(height: 80.h), // Spacing for bottom button
                   ],
                 ),
               ),
 
               // DONE button
               Padding(
-                padding: EdgeInsets.all(4.w),
+                padding: EdgeInsets.all(16.w),
                 child: CustomButton(
                   label: "Done",
-                  height: 6.h,
+                  height: 50.h,
                   width: double.infinity,
-                  borderRadius: 30, // Rounded full
+                  borderRadius: 30.r, // Rounded full
                   onPressed: () {
                     Get.back();
                   },
@@ -140,11 +135,11 @@ class SelectVehicleView extends StatelessWidget {
   Widget _buildSectionHeaderBox(String title) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.5.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       decoration: BoxDecoration(
-        color: Color(0xFFEBF8FE), // Light blue background
+        color: const Color(0xFFEBF8FE), // Light blue background
         borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(12), topRight: Radius.circular(12)),
+            topLeft: Radius.circular(12.r), topRight: Radius.circular(12.r)),
       ),
       child: Text(
         title,
@@ -165,7 +160,7 @@ class SelectVehicleView extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey.shade300),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(12.r),
       ),
       child: Column(
         children: [
@@ -191,8 +186,7 @@ class SelectVehicleView extends StatelessWidget {
     return Column(
       children: [
         ListTile(
-          contentPadding:
-              EdgeInsets.symmetric(horizontal: 4.w, vertical: 0.5.h),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 4.h),
           title: Text(
             vehicleNo,
             style: TextStyle(
@@ -222,8 +216,8 @@ class SelectVehicleView extends StatelessWidget {
             height: 1,
             thickness: 1,
             color: Colors.grey.shade200,
-            indent: 4.w,
-            endIndent: 4.w,
+            indent: 16.w,
+            endIndent: 16.w,
           ),
       ],
     );

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../../../services/driver_service.dart';
@@ -23,12 +23,12 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
         centerTitle: true,
         backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
           onPressed: () => Get.back(),
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -38,20 +38,20 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
               fontSize: 17.sp,
               color: Colors.black,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             Obx(() => Column(
                   children: controller.drivers.map((driver) {
                     return _buildDriverTile(driver);
                   }).toList(),
                 )),
-            SizedBox(height: 4.h),
+            SizedBox(height: 32.h),
             CustomText(
               "Switching Drivers",
               fontWeight: FontWeight.bold,
               fontSize: 17.sp,
               color: Colors.black,
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: 24.h),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -59,11 +59,11 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
                     child: Obx(() => _buildDriverCard(
                         controller.currentDriver.value, "Current Driver"))),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 2.w),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w),
                   child: Column(
                     children: [
                       _buildArrowButton(Icons.arrow_forward),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: 8.h),
                       _buildArrowButton(Icons.arrow_back),
                     ],
                   ),
@@ -81,18 +81,18 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
 
   Widget _buildDriverTile(DriverProfile driver) {
     return Container(
-      margin: EdgeInsets.only(bottom: 2.h),
-      padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.5.h),
+      margin: EdgeInsets.only(bottom: 16.h),
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
       ),
       child: Row(
         children: [
           Container(
-            height: 4.h,
-            width: 4.h,
+            height: 32.h,
+            width: 32.h,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: Colors.blue[50],
@@ -108,7 +108,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
               ),
             ),
           ),
-          SizedBox(width: 4.w),
+          SizedBox(width: 16.w),
           Column(children: [
             Text(
               driver.name,
@@ -118,28 +118,27 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
                 color: Colors.black,
               ),
             ),
-            SizedBox(height: 1.h),
+            SizedBox(height: 8.h),
             Obx(() {
               if (controller.currentDriver.value?.id == driver.id) {
                 return Container(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 2.w, vertical: 0.5.h),
+                  padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
                   decoration: BoxDecoration(
                     color: AppColors.success.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(12.r),
                     border: Border.all(color: AppColors.success),
                   ),
                   child: Row(
                     children: [
                       Container(
-                        height: 1.5.h,
-                        width: 1.5.h,
+                        height: 12.h,
+                        width: 12.h,
                         decoration: const BoxDecoration(
                           color: AppColors.success,
                           shape: BoxShape.circle,
                         ),
                       ),
-                      SizedBox(width: 1.w),
+                      SizedBox(width: 4.w),
                       Text(
                         "Current Driver",
                         style: TextStyle(
@@ -176,27 +175,27 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
   Widget _buildDriverCard(DriverProfile? driver, String label) {
     if (driver == null) return const SizedBox.shrink();
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 3.h, horizontal: 2.w),
+      padding: EdgeInsets.symmetric(vertical: 24.h, horizontal: 8.w),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Colors.grey.withOpacity(0.4)),
       ),
       child: Column(
         children: [
           CircleAvatar(
-            radius: 35.sp,
+            radius: 35.r,
             backgroundImage: driver.image.isNotEmpty
                 ? AssetImage(driver.image)
                 : const AssetImage("assets/images/user_placeholder.png")
                     as ImageProvider, // Fallback need placeholder
             backgroundColor: Colors.grey[200],
           ),
-          SizedBox(height: 1.5.h),
+          SizedBox(height: 12.h),
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 0.5.h),
+            padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 4.h),
             decoration: BoxDecoration(
               color: Colors.blue[50], // Light blue bubble
-              borderRadius: BorderRadius.circular(15.0),
+              borderRadius: BorderRadius.circular(15.r),
             ),
             child: Text(
               label,
@@ -207,7 +206,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
               ),
             ),
           ),
-          SizedBox(height: 1.h),
+          SizedBox(height: 8.h),
           Text(
             driver.name,
             style: TextStyle(
@@ -226,8 +225,8 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
     return InkWell(
       onTap: controller.switchDriver,
       child: Container(
-        height: 4.5.h,
-        width: 4.5.h,
+        height: 36.h,
+        width: 36.h,
         decoration: const BoxDecoration(
           color: AppColors.primary, // Blue button
           shape: BoxShape.circle,

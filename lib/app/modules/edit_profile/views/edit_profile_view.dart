@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/custom_text.dart';
@@ -35,7 +35,7 @@ class EditProfileView extends GetView<EditProfileController> {
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(5.w),
+        padding: EdgeInsets.all(16.w), // Adjusted to 16.w for better spacing
         child: Column(
           children: [
             // Profile Image Section
@@ -45,8 +45,8 @@ class EditProfileView extends GetView<EditProfileController> {
                   Stack(
                     children: [
                       Container(
-                        width: 25.w,
-                        height: 25.w,
+                        width: 100.w, // Adjusted size
+                        height: 100.w,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: Colors.grey.shade300,
@@ -63,22 +63,22 @@ class EditProfileView extends GetView<EditProfileController> {
                         child: InkWell(
                           onTap: controller.pickImage,
                           child: CircleAvatar(
-                            radius: 12.sp,
+                            radius: 18.r, // Adjusted size
                             backgroundColor: Colors.amber, // As per design
                             child: Icon(Icons.camera_alt_outlined,
-                                color: Colors.black, size: 15.sp),
+                                color: Colors.black, size: 20.sp),
                           ),
                         ),
                       )
                     ],
                   ),
-                  SizedBox(height: 1.h),
+                  SizedBox(height: 10.h),
                   CustomText("Upload Photo",
-                      fontWeight: FontWeight.bold, fontSize: 15.sp),
+                      fontWeight: FontWeight.bold, fontSize: 16.sp),
                 ],
               ),
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: 24.h),
 
             // Fields
             _buildField("Driver Name", "Enter Name", controller.nameController),
@@ -93,21 +93,17 @@ class EditProfileView extends GetView<EditProfileController> {
             _buildField("Truck RC Book", "Enter Truck RC Book",
                 controller.truckRcController),
 
-            SizedBox(height: 3.h),
+            SizedBox(height: 20.h),
 
             // Save Button
-            SizedBox(
-              width: double.infinity,
-              height: 6.h,
-              child: CustomButton(
-                label: "Save",
-                onPressed: controller.saveProfile,
-                backgroundColor:
-                    const Color(0xFF2AA6DF), // Matching design blue
-                borderRadius: 30, // Rounded full
-              ),
+            CustomButton(
+              label: "Save",
+              onPressed: controller.saveProfile,
+              backgroundColor: const Color(0xFF2AA6DF), // Matching design blue
+              borderRadius: 30.r, // Rounded full
+              height: 50.h,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 20.h),
           ],
         ),
       ),
@@ -117,12 +113,12 @@ class EditProfileView extends GetView<EditProfileController> {
   Widget _buildField(
       String label, String hint, TextEditingController textController) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 2.h),
+      padding: EdgeInsets.only(bottom: 16.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(label, fontWeight: FontWeight.bold, fontSize: 16.sp),
-          SizedBox(height: 1.h),
+          CustomText(label, fontWeight: FontWeight.bold, fontSize: 14.sp),
+          SizedBox(height: 8.h),
           CustomTextField(
             controller: textController,
             hintText: hint,

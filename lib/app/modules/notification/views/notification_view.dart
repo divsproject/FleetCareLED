@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../controllers/notification_controller.dart';
@@ -22,7 +22,7 @@ class NotificationView extends GetView<NotificationController> {
         centerTitle: true,
         backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
           onPressed: () => Get.back(),
         ),
         actions: [
@@ -46,7 +46,7 @@ class NotificationView extends GetView<NotificationController> {
               children: [
                 Icon(Icons.notifications_none,
                     size: 80.sp, color: Colors.grey[300]),
-                SizedBox(height: 2.h),
+                SizedBox(height: 16.h),
                 CustomText(
                   "No notifications",
                   fontSize: 16.sp,
@@ -70,7 +70,7 @@ class NotificationView extends GetView<NotificationController> {
               background: Container(
                 color: Colors.red,
                 alignment: Alignment.centerRight,
-                padding: EdgeInsets.only(right: 5.w),
+                padding: EdgeInsets.only(right: 20.w),
                 child: Icon(Icons.delete, color: Colors.white, size: 24.sp),
               ),
               onDismissed: (direction) {
@@ -86,14 +86,15 @@ class NotificationView extends GetView<NotificationController> {
                 onTap: () => controller.markAsRead(index),
                 child: Container(
                   color: notification.isRead ? Colors.white : Colors.blue[50],
-                  padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        margin: EdgeInsets.only(top: 0.5.h, right: 3.w),
-                        width: 10,
-                        height: 10,
+                        margin: EdgeInsets.only(top: 4.h, right: 12.w),
+                        width: 10.r,
+                        height: 10.r,
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
                           color: notification.isRead
@@ -111,13 +112,13 @@ class NotificationView extends GetView<NotificationController> {
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),
-                            SizedBox(height: 0.5.h),
+                            SizedBox(height: 4.h),
                             CustomText(
                               notification.message,
                               fontSize: 15.sp,
                               color: Colors.grey[700],
                             ),
-                            SizedBox(height: 1.h),
+                            SizedBox(height: 8.h),
                             CustomText(
                               notification.time,
                               fontSize: 14.sp,

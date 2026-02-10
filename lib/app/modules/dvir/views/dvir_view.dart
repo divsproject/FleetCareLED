@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../routes/app_routes.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_button.dart';
@@ -14,39 +15,41 @@ class DvirView extends StatelessWidget {
       backgroundColor: AppColors.scaffoldBackground,
       appBar: AppBar(
         backgroundColor: AppColors.primary,
-        title: const CustomText(
+        title: CustomText(
           "DVIRs",
           color: Colors.white,
-          fontSize: 20,
+          fontSize: 20.sp,
           fontWeight: FontWeight.w600,
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, size: 24.sp),
           onPressed: () => Get.back(),
         ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CircleAvatar(
-            radius: 40,
+          CircleAvatar(
+            radius: 40.r,
             backgroundColor: AppColors.lightBlueBg,
-            child: Icon(Icons.assignment, size: 36, color: AppColors.primary),
+            child:
+                Icon(Icons.assignment, size: 36.sp, color: AppColors.primary),
           ),
-          const SizedBox(height: 16),
-          const CustomText(
+          SizedBox(height: 16.h),
+          CustomText(
             "No DVIRs Available",
             fontWeight: FontWeight.w600,
+            fontSize: 16.sp,
           ),
-          const SizedBox(height: 6),
-          const CustomText(
+          SizedBox(height: 6.h),
+          CustomText(
             "Tap the button below to create a DVIR.",
             color: AppColors.textSecondary,
-            fontSize: 12,
+            fontSize: 12.sp,
           ),
-          const SizedBox(height: 20),
+          SizedBox(height: 20.h),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 40),
+            padding: EdgeInsets.symmetric(horizontal: 40.w),
             child: CustomButton(
               label: "Create DVIR",
               height: 46,

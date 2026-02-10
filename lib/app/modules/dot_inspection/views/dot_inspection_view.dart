@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../controllers/dot_inspection_controller.dart';
@@ -22,18 +22,18 @@ class DotInspectionView extends GetView<DotInspectionController> {
         centerTitle: true,
         backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
           onPressed: () => Get.back(),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 20.sp),
+            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
             onPressed: () {},
           )
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 3.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 24.h),
         child: Column(
           children: [
             // Section 1
@@ -48,7 +48,7 @@ class DotInspectionView extends GetView<DotInspectionController> {
               footer: "Press and hold to set an access code",
             ),
 
-            Divider(color: Colors.grey.shade300, thickness: 1, height: 6.h),
+            Divider(color: Colors.grey.shade300, thickness: 1, height: 48.h),
 
             // Section 2
             _buildSection(
@@ -59,7 +59,7 @@ class DotInspectionView extends GetView<DotInspectionController> {
               onTap: controller.sendEldOutputFile,
             ),
 
-            Divider(color: Colors.grey.shade300, thickness: 1, height: 6.h),
+            Divider(color: Colors.grey.shade300, thickness: 1, height: 48.h),
 
             // Section 3
             _buildSection(
@@ -93,9 +93,9 @@ class DotInspectionView extends GetView<DotInspectionController> {
             color: Colors.black,
           ),
         ),
-        SizedBox(height: 1.5.h),
+        SizedBox(height: 12.h),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 2.w),
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Text(
             description,
             textAlign: TextAlign.center,
@@ -106,16 +106,16 @@ class DotInspectionView extends GetView<DotInspectionController> {
             ),
           ),
         ),
-        SizedBox(height: 3.h),
+        SizedBox(height: 24.h),
         SizedBox(
-          width: 70.w, // Max width for button
-          height: 6.h,
+          width: 260.w, // Max width for button
+          height: 48.h,
           child: OutlinedButton(
             onPressed: onTap,
             style: OutlinedButton.styleFrom(
               side: BorderSide(color: Colors.grey.withOpacity(0.5), width: 1),
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10.0),
+                borderRadius: BorderRadius.circular(10.r),
               ),
               backgroundColor: Colors.white,
             ),
@@ -130,7 +130,7 @@ class DotInspectionView extends GetView<DotInspectionController> {
           ),
         ),
         if (footer != null) ...[
-          SizedBox(height: 2.h),
+          SizedBox(height: 16.h),
           Text(
             footer,
             style: TextStyle(

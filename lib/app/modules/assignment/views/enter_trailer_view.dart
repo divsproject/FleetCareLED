@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../global_widgets/custom_button.dart';
+import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_text_field.dart';
+import '../../../core/values/app_colors.dart';
 import '../controllers/assignment_controller.dart';
 
 class EnterTrailerView extends StatelessWidget {
@@ -10,50 +15,40 @@ class EnterTrailerView extends StatelessWidget {
     return GetBuilder<AssignmentController>(
       builder: (controller) {
         return Scaffold(
-          backgroundColor: const Color(0xFFF4F9FD),
+          backgroundColor: AppColors.scaffoldBackground,
           appBar: AppBar(
-            backgroundColor: const Color(0xFF2AA6DF),
+            backgroundColor: AppColors.primary,
             elevation: 0,
-            title: const Text("Trailer"),
+            title: CustomText(
+              "Trailer",
+              color: Colors.white,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600,
+            ),
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: Icon(Icons.arrow_back, size: 24.sp),
               onPressed: () => Get.back(),
             ),
+            centerTitle: true,
           ),
           body: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w),
             child: Column(
               children: [
                 // 🔹 Input
-                TextField(
-                  decoration: InputDecoration(
-                    labelText: "Trailer",
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
+                const CustomTextField(
+                  label: "Trailer",
+                  hintText: "Enter Trailer Number",
                 ),
 
                 const Spacer(),
 
                 // 🔹 Save Button
-                SizedBox(
-                  width: double.infinity,
-                  height: 48,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF2AA6DF),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(24),
-                      ),
-                    ),
-                    onPressed: () {
-                      // TODO: Implement save manual trailer logic
-                      Get.back();
-                    },
-                    child: const Text("Save",
-                        style: TextStyle(color: Colors.white)),
-                  ),
+                CustomButton(
+                  label: "Save",
+                  onPressed: () => Get.back(),
+                  height: 48.h,
+                  borderRadius: 24.r,
                 ),
               ],
             ),

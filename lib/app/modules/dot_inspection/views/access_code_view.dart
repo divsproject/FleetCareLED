@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../controllers/access_code_controller.dart';
@@ -24,12 +24,12 @@ class AccessCodeView extends GetView<AccessCodeController> {
         centerTitle: true,
         backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
           onPressed: () => Get.back(),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 20.sp),
+            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
             onPressed: () {},
           )
         ],
@@ -41,7 +41,7 @@ class AccessCodeView extends GetView<AccessCodeController> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Obx(() => Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10.w),
+                      padding: EdgeInsets.symmetric(horizontal: 40.w),
                       child: CustomText(
                         controller.isConfirming.value
                             ? "Confirm your access code"
@@ -51,15 +51,15 @@ class AccessCodeView extends GetView<AccessCodeController> {
                         textAlign: TextAlign.center,
                       ),
                     )),
-                SizedBox(height: 5.h),
+                SizedBox(height: 40.h),
                 // Code Indicators
                 Obx(() => Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: List.generate(4, (index) {
                         bool filled = index < controller.code.value.length;
                         return Container(
-                          margin: EdgeInsets.symmetric(horizontal: 2.w),
-                          width: 10.w,
+                          margin: EdgeInsets.symmetric(horizontal: 8.w),
+                          width: 40.w,
                           child: Column(
                             children: [
                               CustomText(
@@ -68,7 +68,7 @@ class AccessCodeView extends GetView<AccessCodeController> {
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
-                              SizedBox(height: 1.h),
+                              SizedBox(height: 8.h),
                               Container(
                                 height: 2,
                                 color: filled ? Colors.black : Colors.grey[400],
@@ -78,7 +78,7 @@ class AccessCodeView extends GetView<AccessCodeController> {
                         );
                       }),
                     )),
-                SizedBox(height: 5.h),
+                SizedBox(height: 40.h),
                 TextButton(
                   onPressed: controller.onSkip,
                   child: CustomText(
@@ -94,7 +94,7 @@ class AccessCodeView extends GetView<AccessCodeController> {
           // Keypad
           Container(
             color: Colors.grey[200],
-            padding: EdgeInsets.only(bottom: 2.h),
+            padding: EdgeInsets.only(bottom: 16.h),
             child: Column(
               children: [
                 _buildKeyRow(["1", "2", "3"], ["", "ABC", "DEF"]),
@@ -119,10 +119,10 @@ class AccessCodeView extends GetView<AccessCodeController> {
             child: InkWell(
               onTap: controller.onBackspace,
               child: Container(
-                height: 8.h,
+                height: 64.h,
                 alignment: Alignment.center,
                 child: Icon(Icons.backspace_outlined,
-                    size: 22.sp, color: Colors.black),
+                    size: 24.sp, color: Colors.black),
               ),
             ),
           );
@@ -131,11 +131,11 @@ class AccessCodeView extends GetView<AccessCodeController> {
           child: InkWell(
             onTap: () => controller.onKeyTap(key),
             child: Container(
-              margin: EdgeInsets.all(1.w),
-              height: 7.h,
+              margin: EdgeInsets.all(4.w),
+              height: 56.h,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(5.r),
                 boxShadow: [
                   BoxShadow(
                       color: Colors.black12,
@@ -152,7 +152,7 @@ class AccessCodeView extends GetView<AccessCodeController> {
                   if (subTexts[index].isNotEmpty)
                     Text(subTexts[index],
                         style: TextStyle(
-                            fontSize: 9.sp,
+                            fontSize: 10.sp,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.5)),
                 ],

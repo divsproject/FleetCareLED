@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../../global_widgets/custom_button.dart';
-import '../../../../global_widgets/custom_textfield.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../core/values/app_colors.dart';
+import '../../../global_widgets/custom_button.dart';
+import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_text_field.dart';
 import '../controllers/signup_controller.dart';
 
 class SignupView extends StatelessWidget {
@@ -24,46 +27,44 @@ class SignupView extends StatelessWidget {
               ),
 
               // Blue overlay
-              Container(color: Colors.blue.withOpacity(0.85)),
+              Container(color: AppColors.primary.withOpacity(0.85)),
 
               // Card
               Center(
                 child: SingleChildScrollView(
-                  padding: const EdgeInsets.all(20),
+                  padding: EdgeInsets.all(20.w),
                   child: Container(
-                    padding: const EdgeInsets.all(20),
+                    padding: EdgeInsets.all(20.w),
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
+                      borderRadius: BorderRadius.circular(20.r),
                     ),
                     child: Form(
                       key: controller.formKey,
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Image.asset('assets/images/logo.png', height: 70),
-                          const SizedBox(height: 20),
-                          const Text(
+                          Image.asset('assets/images/logo.png', height: 70.h),
+                          SizedBox(height: 20.h),
+                          CustomText(
                             "Create Account",
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                            ),
+                            fontSize: 18.sp,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const SizedBox(height: 20),
+                          SizedBox(height: 20.h),
                           CustomTextField(
                             label:
                                 "", // Original uses only hint in _inputField helper
-                            hint: "Driver Email",
+                            hintText: "Driver Email",
                             icon: Icons.email_outlined,
                             controller: controller.emailController,
                             validator: controller.validateEmail,
                           ),
-                          const SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           Obx(
                             () => CustomTextField(
                               label: "",
-                              hint: "Password",
+                              hintText: "Password",
                               icon: Icons.lock_outline,
                               isPassword: true,
                               controller: controller.passwordController,
@@ -73,11 +74,11 @@ class SignupView extends StatelessWidget {
                                   controller.togglePasswordVisibility,
                             ),
                           ),
-                          const SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           Obx(
                             () => CustomTextField(
                               label: "",
-                              hint: "Confirm Password",
+                              hintText: "Confirm Password",
                               icon: Icons.lock_outline,
                               isPassword: true,
                               controller: controller.confirmPasswordController,
@@ -92,27 +93,27 @@ class SignupView extends StatelessWidget {
                                   controller.toggleConfirmPasswordVisibility,
                             ),
                           ),
-                          const SizedBox(height: 25),
+                          SizedBox(height: 25.h),
                           Obx(
                             () => CustomButton(
-                              text: "Create Account",
+                              label: "Create Account",
                               onPressed: controller.register,
                               isLoading: controller.isLoading.value,
-                              backgroundColor: Colors.blue,
-                              borderRadius: 14, // Matches source code
+                              backgroundColor: AppColors.primary,
+                              borderRadius: 14.r,
+                              height: 50.h,
                             ),
                           ),
-                          const SizedBox(height: 15),
+                          SizedBox(height: 15.h),
                           GestureDetector(
                             onTap: () {
                               Get.back(); // Navigate back to Login
                             },
-                            child: const Text(
+                            child: CustomText(
                               "Already have an account? Login",
-                              style: TextStyle(
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w600,
-                              ),
+                              color: AppColors.primary,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 14.sp,
                             ),
                           ),
                         ],

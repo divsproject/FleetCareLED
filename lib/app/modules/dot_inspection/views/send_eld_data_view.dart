@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../controllers/dot_inspection_controller.dart';
@@ -25,12 +25,12 @@ class SendEldDataView extends GetView<DotInspectionController> {
         centerTitle: true,
         backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
           onPressed: () => Get.back(),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 20.sp),
+            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
             onPressed: () {},
           )
         ],
@@ -46,7 +46,7 @@ class SendEldDataView extends GetView<DotInspectionController> {
                   child: Obx(() => InkWell(
                         onTap: () => isWebService.value = true,
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 2.h),
+                          padding: EdgeInsets.symmetric(vertical: 16.h),
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
@@ -73,7 +73,7 @@ class SendEldDataView extends GetView<DotInspectionController> {
                   child: Obx(() => InkWell(
                         onTap: () => isWebService.value = false,
                         child: Container(
-                          padding: EdgeInsets.symmetric(vertical: 2.h),
+                          padding: EdgeInsets.symmetric(vertical: 16.h),
                           decoration: BoxDecoration(
                             border: Border(
                               bottom: BorderSide(
@@ -104,7 +104,7 @@ class SendEldDataView extends GetView<DotInspectionController> {
           Obx(() => showSuccess.value
               ? Container(
                   width: double.infinity,
-                  padding: EdgeInsets.symmetric(vertical: 1.5.h),
+                  padding: EdgeInsets.symmetric(vertical: 12.h),
                   color: Colors.green,
                   child: CustomText(
                     "ELD Output File Send Successfully.",
@@ -119,7 +119,7 @@ class SendEldDataView extends GetView<DotInspectionController> {
           // Content
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(5.w),
+              padding: EdgeInsets.all(20.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -128,18 +128,18 @@ class SendEldDataView extends GetView<DotInspectionController> {
                     fontSize: 14.sp,
                     color: Colors.grey[700],
                   ),
-                  SizedBox(height: 3.h),
+                  SizedBox(height: 24.h),
                   CustomText(
                     "OFFICIAL COMMENT",
                     fontSize: 14.sp,
                     color: AppColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
-                  SizedBox(height: 5.h),
+                  SizedBox(height: 40.h),
                   Center(
                     child: SizedBox(
-                      width: 70.w,
-                      height: 6.h,
+                      width: 260.w,
+                      height: 48.h,
                       child: OutlinedButton(
                         onPressed: () {
                           showSuccess.value = true;
@@ -150,7 +150,7 @@ class SendEldDataView extends GetView<DotInspectionController> {
                         style: OutlinedButton.styleFrom(
                           side: BorderSide(color: AppColors.primary, width: 2),
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(30.r),
                           ),
                         ),
                         child: CustomText(

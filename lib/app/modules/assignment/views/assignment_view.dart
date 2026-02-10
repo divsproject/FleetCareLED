@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../global_widgets/custom_button.dart';
+import '../../../global_widgets/custom_text.dart';
 import '../../../core/values/app_colors.dart';
 import '../controllers/assignment_controller.dart';
 
@@ -12,20 +15,26 @@ class AssignmentView extends StatelessWidget {
       init: AssignmentController(),
       builder: (controller) {
         return Scaffold(
-          backgroundColor: const Color(0xFFEFF7FC),
+          backgroundColor: AppColors.scaffoldBackground,
           appBar: AppBar(
-            backgroundColor: const Color(0xFF2AA6DF),
+            backgroundColor: AppColors.primary,
             elevation: 0,
-            title: const Text("Assignments"),
+            title: CustomText(
+              "Assignments",
+              color: Colors.white,
+              fontSize: 18.sp,
+              fontWeight: FontWeight.w600,
+            ),
             leading: IconButton(
-              icon: const Icon(Icons.arrow_back),
+              icon: Icon(Icons.arrow_back, size: 24.sp),
               onPressed: () => Get.back(),
             ),
+            centerTitle: true,
           ),
           body: SafeArea(
             child: Center(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: EdgeInsets.symmetric(horizontal: 24.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -33,53 +42,37 @@ class AssignmentView extends StatelessWidget {
                       icon: Icons.local_shipping,
                       title: "Vehicle",
                       subtitle: "Select Vehicle",
-                      onTap: controller.navigateToSelectVehicle,
+                      onTap: () => controller.navigateToSelectVehicle(),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20.h),
                     _AssignmentCard(
                       icon: Icons.view_list,
                       title: "Trailer(s)",
                       subtitle:
                           "Add a Ship-related Trailer(s) or No Trailer ID",
                       big: true,
-                      onTap: controller.navigateToEnterTrailer,
+                      onTap: () => controller.navigateToEnterTrailer(),
                     ),
-                    const SizedBox(height: 20),
+                    SizedBox(height: 20.h),
                     _AssignmentCard(
                       icon: Icons.inventory_2,
                       title: "Shipping IDs",
                       subtitle: "Add a Shipping ID",
-                      onTap: controller.navigateToAddShippingId,
+                      onTap: () => controller.navigateToAddShippingId(),
                     ),
-                    const SizedBox(height: 40),
+                    SizedBox(height: 40.h),
                   ],
                 ),
               ),
             ),
           ),
           bottomNavigationBar: Padding(
-            padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
-            child: SizedBox(
-              height: 52,
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF2AA6DF),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  elevation: 3,
-                ),
-                onPressed: controller.completeAssignment,
-                child: const Text(
-                  "Done",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+            padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 20.h),
+            child: CustomButton(
+              label: "Done",
+              onPressed: controller.completeAssignment,
+              height: 52.h,
+              borderRadius: 30.r,
             ),
           ),
         );
@@ -89,7 +82,6 @@ class AssignmentView extends StatelessWidget {
 }
 
 /* ---------------- CARD WIDGET ---------------- */
-// Keeping internal widget as per original file structure preference
 class _AssignmentCard extends StatelessWidget {
   final IconData icon;
   final String title;
@@ -108,39 +100,42 @@ class _AssignmentCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(18),
+      borderRadius: BorderRadius.circular(18.r),
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(vertical: big ? 28 : 22, horizontal: 16),
+        padding:
+            EdgeInsets.symmetric(vertical: big ? 28.h : 22.h, horizontal: 16.w),
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(18.r),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.06),
-              blurRadius: 10,
-              offset: const Offset(0, 6),
+              blurRadius: 10.r,
+              offset: Offset(0, 6.h),
             ),
           ],
         ),
         child: Column(
           children: [
             CircleAvatar(
-              radius: 26,
+              radius: 26.r,
               backgroundColor: const Color(0xFFEAF6FF),
-              child: Icon(icon, color: const Color(0xFF2AA6DF), size: 26),
+              child: Icon(icon, color: AppColors.primary, size: 26.sp),
             ),
-            const SizedBox(height: 10),
-            Text(
+            SizedBox(height: 10.h),
+            CustomText(
               title,
-              style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              fontWeight: FontWeight.w600,
+              fontSize: 16.sp,
             ),
-            const SizedBox(height: 4),
-            Text(
+            SizedBox(height: 4.h),
+            CustomText(
               subtitle,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 12, color: Colors.black54),
+              fontSize: 12.sp,
+              color: Colors.black54,
             ),
           ],
         ),

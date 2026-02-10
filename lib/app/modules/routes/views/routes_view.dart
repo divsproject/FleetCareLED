@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
 
@@ -14,22 +15,25 @@ class RoutesView extends StatelessWidget {
         backgroundColor: AppColors.scaffoldBackground,
         appBar: AppBar(
           backgroundColor: AppColors.primary,
-          title: const CustomText(
+          title: CustomText(
             "Routes",
             color: Colors.white,
-            fontSize: 20,
+            fontSize: 20.sp,
             fontWeight: FontWeight.w600,
           ),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: Icon(Icons.arrow_back, size: 24.sp),
             onPressed: () => Get.back(),
           ),
-          bottom: const TabBar(
+          bottom: TabBar(
             indicatorColor: Colors.white,
-            labelStyle:
-                TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
-            unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
-            tabs: [
+            labelStyle: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+                fontSize: 14.sp),
+            unselectedLabelStyle:
+                TextStyle(fontWeight: FontWeight.normal, fontSize: 14.sp),
+            tabs: const [
               Tab(text: "Past"),
               Tab(text: "Today"),
               Tab(text: "Future"),
@@ -72,21 +76,22 @@ class _EmptyRoutes extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CircleAvatar(
-            radius: 40,
+          CircleAvatar(
+            radius: 40.r,
             backgroundColor: AppColors.lightBlueBg,
-            child: Icon(Icons.alt_route, size: 36, color: AppColors.primary),
+            child: Icon(Icons.alt_route, size: 36.sp, color: AppColors.primary),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           CustomText(
             title,
             fontWeight: FontWeight.w600,
+            fontSize: 16.sp,
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6.h),
           CustomText(
             subtitle,
             color: AppColors.textSecondary,
-            fontSize: 12,
+            fontSize: 12.sp,
           ),
         ],
       ),

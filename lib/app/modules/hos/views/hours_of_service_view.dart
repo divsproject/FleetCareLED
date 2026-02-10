@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/custom_text.dart';
@@ -26,26 +26,26 @@ class HoursOfServiceView extends StatelessWidget {
                 CustomText(
                   "Hours of Service",
                   color: Colors.white,
-                  fontSize: 17.sp,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.w600,
                 ),
                 Obx(() => CustomText(
                       "Driver: ${controller.currentDriver.value?.name ?? 'Unknown'}",
                       color: Colors.white70,
-                      fontSize: 15.sp,
+                      fontSize: 14.sp,
                       fontWeight: FontWeight.w400,
                     )),
               ],
             ),
             leading: IconButton(
-              icon: Icon(Icons.arrow_back, size: 20.sp),
+              icon: Icon(Icons.arrow_back, size: 24.sp),
               onPressed: () => Get.back(),
             ),
             actions: [
               Padding(
-                padding: EdgeInsets.only(right: 3.w),
+                padding: EdgeInsets.only(right: 16.w),
                 child: IconButton(
-                  icon: Icon(Icons.settings, size: 20.sp),
+                  icon: Icon(Icons.settings, size: 24.sp),
                   onPressed: () => Get.toNamed(AppRoutes.DAILY_LOG),
                   color: Colors.white,
                 ),
@@ -53,45 +53,45 @@ class HoursOfServiceView extends StatelessWidget {
             ],
           ),
           body: SingleChildScrollView(
-            padding: EdgeInsets.all(4.w),
+            padding: EdgeInsets.all(16.w),
             child: Column(
               children: [
                 // 🔴 Return to Rest Mode
                 Container(
-                  padding: EdgeInsets.all(2.5.w),
+                  padding: EdgeInsets.all(12.w),
                   decoration: BoxDecoration(
                     color: AppColors.redLight,
-                    borderRadius: BorderRadius.circular(10),
+                    borderRadius: BorderRadius.circular(10.r),
                   ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.refresh, color: AppColors.error, size: 18.sp),
-                      SizedBox(width: 1.5.w),
+                      Icon(Icons.refresh, color: AppColors.error, size: 20.sp),
+                      SizedBox(width: 8.w),
                       const CustomText("Return to Rest Mode",
                           color: AppColors.error),
                     ],
                   ),
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: 16.h),
 
                 // 🔵 Off Duty Card
                 InkWell(
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(16.r),
                   onTap: () {
                     // Navigate to Edit Log
                   },
                   child: Container(
-                    padding: EdgeInsets.all(4.w),
+                    padding: EdgeInsets.all(16.w),
                     decoration: BoxDecoration(
                       color: AppColors.lightBlueBg, // Restore Blue BG
-                      borderRadius: BorderRadius.circular(16),
+                      borderRadius: BorderRadius.circular(16.r),
                     ),
                     child: Row(
                       children: [
                         Container(
-                          height: 13.w,
-                          width: 13.w,
+                          height: 48.w,
+                          width: 48.w,
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             gradient: const LinearGradient(
@@ -102,7 +102,7 @@ class HoursOfServiceView extends StatelessWidget {
                             boxShadow: [
                               BoxShadow(
                                 color: Colors.blue.withOpacity(0.1),
-                                blurRadius: 10,
+                                blurRadius: 10.r,
                                 offset: const Offset(0, 5),
                               ),
                             ],
@@ -113,20 +113,20 @@ class HoursOfServiceView extends StatelessWidget {
                             size: 24.sp,
                           ),
                         ),
-                        SizedBox(width: 3.w),
+                        SizedBox(width: 12.w),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             CustomText(
                               "Off Duty",
                               fontWeight: FontWeight.w600,
-                              fontSize: 17.sp,
+                              fontSize: 18.sp,
                             ),
-                            SizedBox(height: 0.5.h),
+                            SizedBox(height: 4.h),
                             CustomText(
                               "01:07",
                               color: AppColors.textSecondary,
-                              fontSize: 15.sp,
+                              fontSize: 16.sp,
                             ),
                           ],
                         ),
@@ -134,16 +134,16 @@ class HoursOfServiceView extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: 16.h),
 
                 // ⏱ Time Boxes
                 GridView.count(
                   crossAxisCount: 2,
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
-                  mainAxisSpacing: 3.w,
-                  crossAxisSpacing: 3.w,
-                  childAspectRatio: 1.2, // Taller boxes to prevent overflow
+                  mainAxisSpacing: 12.h,
+                  crossAxisSpacing: 12.w,
+                  childAspectRatio: 1.5,
                   children: const [
                     _TimeBox("08:00", "Until Break"),
                     _TimeBox("11:00", "Drive"),
@@ -151,14 +151,14 @@ class HoursOfServiceView extends StatelessWidget {
                     _TimeBox("70:00", "Cycle"),
                   ],
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: 16.h),
 
                 // 🇺🇸 USA Property
                 Container(
-                  padding: EdgeInsets.all(4.w),
+                  padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                     color: AppColors.lightBlueBg, // Restore Blue BG
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(14.r),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -170,9 +170,9 @@ class HoursOfServiceView extends StatelessWidget {
                               fontWeight: FontWeight.w600, fontSize: 16.sp),
                         ],
                       ),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: 8.h),
                       const Divider(color: Colors.white),
-                      SizedBox(height: 1.h),
+                      SizedBox(height: 8.h),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -185,14 +185,14 @@ class HoursOfServiceView extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: 16.h),
                 // 🔘 Buttons (Logbook / Search Client)
                 Container(
                   width: double.infinity,
-                  height: 6.h,
+                  height: 50.h,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(30.r),
                     border: Border.all(color: Colors.white),
                   ),
                   child: Obx(
@@ -206,7 +206,7 @@ class HoursOfServiceView extends StatelessWidget {
                                 color: controller.isLogbook.value
                                     ? AppColors.primary
                                     : Colors.transparent,
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(30.r),
                               ),
                               alignment: Alignment.center,
                               child: CustomText(
@@ -228,7 +228,7 @@ class HoursOfServiceView extends StatelessWidget {
                                 color: !controller.isLogbook.value
                                     ? AppColors.primary
                                     : Colors.transparent,
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius: BorderRadius.circular(30.r),
                               ),
                               alignment: Alignment.center,
                               child: CustomText(
@@ -246,14 +246,14 @@ class HoursOfServiceView extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 2.h),
+                SizedBox(height: 16.h),
 
                 // 📜 Certified list
                 Container(
-                  padding: EdgeInsets.all(4.w),
+                  padding: EdgeInsets.all(16.w),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(14),
+                    borderRadius: BorderRadius.circular(14.r),
                   ),
                   child: const Column(
                     children: [
@@ -279,13 +279,12 @@ class _TimeBox extends StatelessWidget {
   const _TimeBox(this.time, this.label);
 
   @override
-  @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(4.w),
+      padding: EdgeInsets.all(16.w),
       decoration: BoxDecoration(
         color: AppColors.lightGreenBg, // Light Green BG
-        borderRadius: BorderRadius.circular(16.sp),
+        borderRadius: BorderRadius.circular(16.r),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -294,19 +293,19 @@ class _TimeBox extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: EdgeInsets.all(2.w),
+                padding: EdgeInsets.all(8.w),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(color: AppColors.success, width: 1.5.sp),
+                  border: Border.all(color: AppColors.success, width: 1.5.w),
                 ),
                 child: Icon(Icons.access_time,
                     size: 16.sp, color: AppColors.success),
               ),
-              SizedBox(width: 3.w),
+              SizedBox(width: 8.w),
               CustomText(time, fontSize: 18.sp, fontWeight: FontWeight.bold),
             ],
           ),
-          SizedBox(height: 1.5.h),
+          SizedBox(height: 8.h),
           CustomText(label, fontSize: 16.sp, color: Colors.black87),
         ],
       ),
@@ -323,10 +322,10 @@ class _CertRow extends StatelessWidget {
     final isCertified = status == "Certified";
 
     return InkWell(
-      borderRadius: BorderRadius.circular(12),
+      borderRadius: BorderRadius.circular(12.r),
       onTap: () {},
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 1.h),
+        padding: EdgeInsets.symmetric(vertical: 8.h),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -344,8 +343,8 @@ class _CertRow extends StatelessWidget {
                   status,
                   color: isCertified ? AppColors.success : AppColors.error,
                 ),
-                SizedBox(width: 1.5.w),
-                Icon(Icons.chevron_right, size: 18.sp, color: Colors.black38),
+                SizedBox(width: 8.w),
+                Icon(Icons.chevron_right, size: 20.sp, color: Colors.black38),
               ],
             ),
           ],

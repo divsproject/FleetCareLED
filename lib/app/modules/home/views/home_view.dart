@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart'; // Added import
 import '../../../data/models/duty_status.dart';
 import '../controllers/home_controller.dart';
 import 'home_drawer.dart';
@@ -17,7 +18,7 @@ class HomeView extends GetView<HomeController> {
           children: [
             // USER + VEHICLE
             Padding(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.all(16.w), // Responsive padding
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -30,12 +31,13 @@ class HomeView extends GetView<HomeController> {
                     },
                     child: Row(
                       children: [
-                        const Icon(Icons.person, size: 18),
-                        const SizedBox(width: 6),
+                        Icon(Icons.person, size: 18.sp), // Responsive icon
+                        SizedBox(width: 6.w), // Responsive spacing
                         Obx(() => Text(
                               controller.currentDriver.value?.name ?? "User",
-                              style:
-                                  const TextStyle(fontWeight: FontWeight.w600),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16.sp), // Responsive font
                             )),
                       ],
                     ),
@@ -46,9 +48,12 @@ class HomeView extends GetView<HomeController> {
                     onTap: () => _openChangeEquipment(context, controller),
                     child: Row(
                       children: [
-                        const Icon(Icons.local_shipping),
-                        const SizedBox(width: 4),
-                        Obx(() => Text(controller.vehicleNumber.value)),
+                        Icon(Icons.local_shipping,
+                            size: 20.sp), // Responsive icon
+                        SizedBox(width: 4.w), // Responsive spacing
+                        Obx(() => Text(controller.vehicleNumber.value,
+                            style:
+                                TextStyle(fontSize: 16.sp))), // Responsive font
                       ],
                     ),
                   ),
@@ -56,20 +61,20 @@ class HomeView extends GetView<HomeController> {
               ),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: 10.h), // Responsive spacing
 
             // ⏱ TIMER
             SizedBox(
-              height: 200,
+              height: 200.h, // Responsive height
               child: Stack(
                 alignment: Alignment.center,
                 children: [
                   SizedBox(
-                    width: 180,
-                    height: 180,
+                    width: 180.w, // Responsive width
+                    height: 180.w, // Responsive height (square)
                     child: CircularProgressIndicator(
                       value: 0.75,
-                      strokeWidth: 10,
+                      strokeWidth: 10.w, // Responsive stroke
                       color: Colors.grey.shade700,
                       backgroundColor: Colors.grey.shade200,
                     ),
@@ -77,15 +82,16 @@ class HomeView extends GetView<HomeController> {
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      const Text(
+                      Text(
                         "14:00",
                         style: TextStyle(
-                          fontSize: 32,
+                          fontSize: 32.sp, // Responsive font
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const Text("REMAINING"),
-                      const SizedBox(height: 6),
+                      Text("REMAINING",
+                          style: TextStyle(fontSize: 12.sp)), // Responsive font
+                      SizedBox(height: 6.h), // Responsive spacing
 
                       // Status Chip using Obx
                       Obx(
@@ -94,7 +100,9 @@ class HomeView extends GetView<HomeController> {
                           child: Chip(
                             label: Text(
                               controller.currentStatus.value.name.toUpperCase(),
-                              style: const TextStyle(color: Colors.white),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 12.sp), // Responsive font
                             ),
                             backgroundColor: controller.getStatusColor(
                               controller.currentStatus.value,
@@ -115,9 +123,9 @@ class HomeView extends GetView<HomeController> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               crossAxisCount: 2,
-              padding: const EdgeInsets.all(24),
-              mainAxisSpacing: 20,
-              crossAxisSpacing: 20,
+              padding: EdgeInsets.all(24.w), // Responsive padding
+              mainAxisSpacing: 20.h, // Responsive spacing
+              crossAxisSpacing: 20.w, // Responsive spacing
               children: const [
                 _CircleInfo("8:00", "BREAK", Colors.amber),
                 _CircleInfo("11:00", "DRIVING", Colors.green),
@@ -139,52 +147,60 @@ class HomeView extends GetView<HomeController> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20.r)), // Responsive radius
       ),
       builder: (_) {
         return Padding(
           padding: EdgeInsets.fromLTRB(
-            16,
-            20,
-            16,
-            MediaQuery.of(context).viewInsets.bottom + 20,
+            16.w,
+            20.h,
+            16.w,
+            MediaQuery.of(context).viewInsets.bottom + 20.h,
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              Text(
                 "Change Equipment",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 18.sp,
+                    fontWeight: FontWeight.bold), // Responsive font
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               TextField(
                 controller: controller.vehicleController,
                 decoration: const InputDecoration(labelText: "Vehicle"),
+                style: TextStyle(fontSize: 16.sp), // Responsive font
               ),
               TextField(
                 controller: controller.trailerController,
                 decoration: const InputDecoration(labelText: "Trailer"),
+                style: TextStyle(fontSize: 16.sp), // Responsive font
               ),
               TextButton(
                 onPressed: controller.addTrailer,
-                child: const Text("Add Trailer"),
+                child: Text("Add Trailer",
+                    style: TextStyle(fontSize: 14.sp)), // Responsive font
               ),
-              const SizedBox(height: 12),
+              SizedBox(height: 12.h),
               SizedBox(
                 width: double.infinity,
-                height: 48,
+                height: 48.h, // Responsive height
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.black,
                   ),
                   onPressed: controller.updateVehicle,
-                  child: const Text("Save"),
+                  child: Text("Save",
+                      style: TextStyle(fontSize: 16.sp)), // Responsive font
                 ),
               ),
               TextButton(
                 onPressed: () => Get.back(),
-                child: const Text("Cancel"),
+                child: Text("Cancel",
+                    style: TextStyle(fontSize: 14.sp)), // Responsive font
               ),
             ],
           ),
@@ -198,27 +214,31 @@ class HomeView extends GetView<HomeController> {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+            top: Radius.circular(20.r)), // Responsive radius
       ),
       builder: (_) {
         return SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: EdgeInsets.all(16.w), // Responsive padding
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Text(
+                Text(
                   "Change Status",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 18.sp,
+                      fontWeight: FontWeight.bold), // Responsive font
                 ),
-                const SizedBox(height: 16),
+                SizedBox(height: 16.h),
                 // STATUS GRID
                 GridView.count(
                   crossAxisCount: 3,
                   shrinkWrap: true,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10.w, // Responsive spacing
+                  mainAxisSpacing: 10.h, // Responsive spacing
+                  padding: EdgeInsets.zero,
                   children: [
                     _statusTile(
                       "OFF",
@@ -264,13 +284,16 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.h),
                 // ADD NOTE
                 Obx(
                   () => ListTile(
-                    title: const Text("Add Note"),
-                    subtitle: Text(controller.selectedNote.value),
-                    trailing: const Icon(Icons.chevron_right),
+                    title: Text("Add Note",
+                        style: TextStyle(fontSize: 16.sp)), // Responsive font
+                    subtitle: Text(controller.selectedNote.value,
+                        style: TextStyle(fontSize: 14.sp)), // Responsive font
+                    trailing: Icon(Icons.chevron_right,
+                        size: 24.sp), // Responsive icon
                     onTap: () async {
                       // Navigate to note selection widget
                       final note = await Get.to(() => const SelectNoteWidget());
@@ -278,13 +301,14 @@ class HomeView extends GetView<HomeController> {
                     },
                   ),
                 ),
-                const SizedBox(height: 12),
+                SizedBox(height: 12.h),
                 SizedBox(
                   width: double.infinity,
-                  height: 48,
+                  height: 48.h, // Responsive height
                   child: ElevatedButton(
                     onPressed: () => Get.back(),
-                    child: const Text("Update"),
+                    child: Text("Update",
+                        style: TextStyle(fontSize: 16.sp)), // Responsive font
                   ),
                 ),
               ],
@@ -309,7 +333,7 @@ class HomeView extends GetView<HomeController> {
         child: Container(
           decoration: BoxDecoration(
             color: isSelected ? color.withOpacity(0.15) : Colors.white,
-            borderRadius: BorderRadius.circular(14),
+            borderRadius: BorderRadius.circular(14.r), // Responsive radius
             border: Border.all(
               color: isSelected ? color : Colors.grey.shade300,
               width: 1.5,
@@ -320,19 +344,21 @@ class HomeView extends GetView<HomeController> {
             children: [
               CircleAvatar(
                 backgroundColor: isSelected ? color : Colors.grey.shade300,
+                radius: 20.r, // Responsive radius
                 child: Text(
                   short,
                   style: TextStyle(
                     color: isSelected ? Colors.white : Colors.black54,
                     fontWeight: FontWeight.bold,
+                    fontSize: 14.sp, // Responsive font
                   ),
                 ),
               ),
-              const SizedBox(height: 6),
+              SizedBox(height: 6.h),
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 11,
+                  fontSize: 11.sp, // Responsive font
                   fontWeight: FontWeight.w600,
                   color: isSelected ? color : Colors.black54,
                 ),
@@ -357,7 +383,7 @@ class _CircleInfo extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: color, width: 6),
+        border: Border.all(color: color, width: 6.w), // Responsive border width
       ),
       child: Center(
         child: Column(
@@ -365,9 +391,11 @@ class _CircleInfo extends StatelessWidget {
           children: [
             Text(
               time,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 20.sp,
+                  fontWeight: FontWeight.bold), // Responsive font
             ),
-            Text(label),
+            Text(label, style: TextStyle(fontSize: 12.sp)), // Responsive font
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../controllers/splash_controller.dart';
 
 class SplashView extends StatelessWidget {
@@ -23,7 +24,7 @@ class SplashView extends StatelessWidget {
 
               // 🔹 BLUR EFFECT
               BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 4, sigmaY: 4),
+                filter: ImageFilter.blur(sigmaX: 4.r, sigmaY: 4.r),
                 child: Container(
                   color: Colors.blue.withOpacity(0.55),
                 ),
@@ -33,7 +34,7 @@ class SplashView extends StatelessWidget {
               Center(
                 child: Image.asset(
                   'assets/images/logo.png',
-                  width: 220,
+                  width: 220.w,
                 ),
               ),
             ],

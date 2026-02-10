@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../controllers/dot_inspection_controller.dart';
@@ -22,23 +22,23 @@ class DotInspectionDetailView extends GetView<DotInspectionController> {
         centerTitle: true,
         backgroundColor: AppColors.primary,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
+          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
           onPressed: () => Get.back(),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 20.sp),
+            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
             onPressed: () {},
           )
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(3.w),
+        padding: EdgeInsets.all(12.w),
         child: Container(
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black, width: 1),
           ),
-          padding: EdgeInsets.all(2.w),
+          padding: EdgeInsets.all(8.w),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -51,17 +51,17 @@ class DotInspectionDetailView extends GetView<DotInspectionController> {
               Divider(thickness: 1, color: Colors.black),
 
               // Graph
-              SizedBox(height: 2.h),
+              SizedBox(height: 16.h),
               _buildGraphSection(),
-              SizedBox(height: 2.h),
+              SizedBox(height: 16.h),
 
               // Event Table
               _buildEventTable(),
-              SizedBox(height: 2.h),
+              SizedBox(height: 16.h),
 
               // Recap Table (Mock)
               _buildRecapTable(),
-              SizedBox(height: 2.h),
+              SizedBox(height: 16.h),
 
               // Signature
               Center(
@@ -72,14 +72,14 @@ class DotInspectionDetailView extends GetView<DotInspectionController> {
                         fontSize: 13.sp,
                         fontWeight: FontWeight.w600,
                         textAlign: TextAlign.center),
-                    SizedBox(height: 2.h),
+                    SizedBox(height: 16.h),
                     // Mock Signature
                     Icon(Icons.draw, size: 30.sp, color: Colors.black54),
-                    Container(height: 1, width: 40.w, color: Colors.black),
+                    Container(height: 1, width: 150.w, color: Colors.black),
                   ],
                 ),
               ),
-              SizedBox(height: 5.h),
+              SizedBox(height: 40.h),
             ],
           ),
         ),
@@ -148,16 +148,16 @@ class DotInspectionDetailView extends GetView<DotInspectionController> {
               child: Row(
                 children: [
                   Container(
-                    width: 30.w,
+                    width: 112.w,
                     padding:
-                        EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 1.w),
+                        EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
                     child: CustomText(label1,
                         fontSize: 12.sp, fontWeight: FontWeight.bold),
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 0.5.h, horizontal: 1.w),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
                       decoration: BoxDecoration(
                           border:
                               Border(left: BorderSide(color: Colors.black26))),
@@ -172,16 +172,16 @@ class DotInspectionDetailView extends GetView<DotInspectionController> {
               child: Row(
                 children: [
                   Container(
-                    width: 30.w,
+                    width: 112.w,
                     padding:
-                        EdgeInsets.symmetric(vertical: 0.5.h, horizontal: 1.w),
+                        EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
                     child: CustomText(label2,
                         fontSize: 12.sp, fontWeight: FontWeight.bold),
                   ),
                   Expanded(
                     child: Container(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 0.5.h, horizontal: 1.w),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 4.h, horizontal: 4.w),
                       decoration: BoxDecoration(
                           border:
                               Border(left: BorderSide(color: Colors.black26))),
@@ -212,13 +212,13 @@ class DotInspectionDetailView extends GetView<DotInspectionController> {
     return Row(
       children: [
         SizedBox(
-            width: 10.w,
+            width: 40.w,
             child: Text(label,
                 textAlign: TextAlign.right, style: TextStyle(fontSize: 12.sp))),
-        SizedBox(width: 2.w),
+        SizedBox(width: 8.w),
         Expanded(
           child: Container(
-              height: 2.h,
+              height: 16.h,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey),
                   color: label == "OFF" ? Colors.grey[300] : Colors.white),
@@ -233,9 +233,9 @@ class DotInspectionDetailView extends GetView<DotInspectionController> {
                                       right: BorderSide(
                                           color: Colors.grey[300]!)))))))),
         ),
-        SizedBox(width: 2.w),
+        SizedBox(width: 8.w),
         SizedBox(
-            width: 10.w,
+            width: 40.w,
             child: Text(hours.toStringAsFixed(2),
                 style: TextStyle(fontSize: 12.sp))),
       ],
@@ -291,7 +291,7 @@ class DotInspectionDetailView extends GetView<DotInspectionController> {
           BoxDecoration(color: isHeader ? Colors.grey[200] : Colors.white),
       children: cells
           .map((cell) => Padding(
-                padding: EdgeInsets.all(1.w),
+                padding: EdgeInsets.all(4.w),
                 child: Text(cell,
                     style: TextStyle(
                         fontSize: 10.sp,

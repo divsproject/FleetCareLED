@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../home/views/home_view.dart';
 import '../../home/views/home_drawer.dart';
 import '../../home/controllers/home_controller.dart';
@@ -29,24 +30,44 @@ class DashboardView extends GetView<DashboardController> {
               // 🔵 CUSTOM APP BAR LOGIC
               Obx(() {
                 if (controller.currentIndex.value == 3) {
-                  return const SizedBox.shrink();
+                  return SizedBox.shrink();
                 }
-                return AppBar(
-                  backgroundColor: const Color(0xFF2AA6DF),
-                  title: Text(
-                    controller.titles[controller.currentIndex.value],
-                    style: const TextStyle(color: Colors.white),
+                return Container(
+                  color: const Color(0xFF2AA6DF),
+                  padding: EdgeInsets.only(
+                    top: 50.h, // Responsive top padding
+                    left: 16.w, // Responsive left padding
+                    right: 16.w, // Responsive right padding
+                    bottom: 16.h, // Responsive bottom padding
                   ),
-                  leading: IconButton(
-                    icon: const Icon(Icons.menu, color: Colors.white),
-                    onPressed: homeController.toggleQuickActions,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.menu,
+                            color: Colors.white,
+                            size: 24.sp), // Responsive icon
+                        onPressed: homeController.toggleQuickActions,
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
+                      Text(
+                        controller.titles[controller.currentIndex.value],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20.sp, // Responsive font
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(Icons.notifications,
+                            color: Colors.red, size: 24.sp), // Responsive icon
+                        onPressed: () => Get.toNamed(AppRoutes.NOTIFICATION),
+                        padding: EdgeInsets.zero,
+                        constraints: const BoxConstraints(),
+                      ),
+                    ],
                   ),
-                  actions: [
-                    IconButton(
-                      icon: const Icon(Icons.notifications, color: Colors.red),
-                      onPressed: () => Get.toNamed(AppRoutes.NOTIFICATION),
-                    ),
-                  ],
                 );
               }),
 
@@ -96,70 +117,103 @@ class DashboardView extends GetView<DashboardController> {
 
       // 🔵 BOTTOM NAV
       bottomNavigationBar: Obx(
-        () => BottomNavigationBar(
-          currentIndex: controller.currentIndex.value,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: const Color(0xFF2AA6DF),
-          unselectedItemColor: Colors.grey,
-          onTap: controller.changeTab,
-          items: [
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/icons/home 03.svg',
-                width: 24,
-                height: 24,
-                colorFilter: ColorFilter.mode(
-                  controller.currentIndex.value == 0
-                      ? const Color(0xFF2AA6DF)
-                      : Colors.grey,
-                  BlendMode.srcIn,
-                ),
+        () => Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 10.r, // Responsive radius
+                offset: const Offset(0, -5),
               ),
-              label: "Home",
+            ],
+          ),
+          child: BottomNavigationBar(
+            currentIndex: controller.currentIndex.value,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            selectedItemColor: const Color(0xFF2AA6DF),
+            unselectedItemColor: Colors.grey,
+            selectedLabelStyle: TextStyle(
+              fontSize: 12.sp, // Responsive font
+              fontWeight: FontWeight.w500,
             ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/icons/direct.svg',
-                width: 24,
-                height: 24,
-                colorFilter: ColorFilter.mode(
-                  controller.currentIndex.value == 1
-                      ? const Color(0xFF2AA6DF)
-                      : Colors.grey,
-                  BlendMode.srcIn,
+            unselectedLabelStyle: TextStyle(
+              fontSize: 12.sp, // Responsive font
+              fontWeight: FontWeight.w500,
+            ),
+            onTap: controller.changeTab,
+            items: [
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 4.h), // Responsive padding
+                  child: SvgPicture.asset(
+                    'assets/icons/home 03.svg',
+                    width: 24.w, // Responsive width
+                    height: 24.h, // Responsive height
+                    colorFilter: ColorFilter.mode(
+                      controller.currentIndex.value == 0
+                          ? const Color(0xFF2AA6DF)
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ),
+                label: "Home",
               ),
-              label: "Inbox",
-            ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/icons/message.svg',
-                width: 24,
-                height: 24,
-                colorFilter: ColorFilter.mode(
-                  controller.currentIndex.value == 2
-                      ? const Color(0xFF2AA6DF)
-                      : Colors.grey,
-                  BlendMode.srcIn,
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 4.h),
+                  child: SvgPicture.asset(
+                    'assets/icons/direct.svg',
+                    width: 24.w,
+                    height: 24.h,
+                    colorFilter: ColorFilter.mode(
+                      controller.currentIndex.value == 1
+                          ? const Color(0xFF2AA6DF)
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ),
+                label: "Inbox",
               ),
-              label: "Message",
-            ),
-            BottomNavigationBarItem(
-              icon: SvgPicture.asset(
-                'assets/icons/user.svg',
-                width: 24,
-                height: 24,
-                colorFilter: ColorFilter.mode(
-                  controller.currentIndex.value == 3
-                      ? const Color(0xFF2AA6DF)
-                      : Colors.grey,
-                  BlendMode.srcIn,
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 4.h),
+                  child: SvgPicture.asset(
+                    'assets/icons/message.svg',
+                    width: 24.w,
+                    height: 24.h,
+                    colorFilter: ColorFilter.mode(
+                      controller.currentIndex.value == 2
+                          ? const Color(0xFF2AA6DF)
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
                 ),
+                label: "Message",
               ),
-              label: "Profile",
-            ),
-          ],
+              BottomNavigationBarItem(
+                icon: Padding(
+                  padding: EdgeInsets.only(bottom: 4.h),
+                  child: SvgPicture.asset(
+                    'assets/icons/user.svg',
+                    width: 24.w,
+                    height: 24.h,
+                    colorFilter: ColorFilter.mode(
+                      controller.currentIndex.value == 3
+                          ? const Color(0xFF2AA6DF)
+                          : Colors.grey,
+                      BlendMode.srcIn,
+                    ),
+                  ),
+                ),
+                label: "Profile",
+              ),
+            ],
+          ),
         ),
       ),
     );
