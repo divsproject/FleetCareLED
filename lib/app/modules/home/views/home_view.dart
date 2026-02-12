@@ -18,28 +18,30 @@ class HomeView extends GetView<HomeController> {
         final isLandscape = orientation == Orientation.landscape;
 
         if (isLandscape) {
-          return Row(
+          //add user and vehicle section here in colum
+          return Column(
             children: [
-              // ⏱ TIMER (Left Side)
+              _buildUserAndVehicle(context, isLandscape),
               Expanded(
-                flex: 4,
-                child: Center(
-                  child: SizedBox(
-                    height: 200.h,
-                    child: _buildTimer(isLandscape),
-                  ),
-                ),
-              ),
-
-              // Right Side (User Info + Grid)
-              Expanded(
-                flex: 6,
-                child: Column(
+                child: Row(
                   children: [
-                    _buildUserAndVehicle(context, isLandscape),
+                    // ⏱ TIMER (Left Side)
                     Expanded(
-                      child: SingleChildScrollView(
-                        child: _buildStatusGrid(isLandscape),
+                      flex: 4,
+                      child: Center(
+                        child: SingleChildScrollView(
+                          child: _buildTimer(isLandscape),
+                        ),
+                      ),
+                    ),
+
+                    // Right Side (User Info + Grid)
+                    Expanded(
+                      flex: 6,
+                      child: Center(
+                        child: SingleChildScrollView(
+                          child: _buildStatusGrid(isLandscape),
+                        ),
                       ),
                     ),
                   ],
@@ -50,21 +52,30 @@ class HomeView extends GetView<HomeController> {
         }
 
         // PORTRAIT
-        return Stack(
-          children: [
-            Column(
-              children: [
-                _buildUserAndVehicle(context, isLandscape),
-                SizedBox(height: 10.h),
-                SizedBox(
-                  height: 200.h,
-                  child: _buildTimer(isLandscape),
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  minHeight: constraints.maxHeight,
                 ),
-                const Spacer(),
-                _buildStatusGrid(isLandscape),
-              ],
-            ),
-          ],
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _buildUserAndVehicle(context, isLandscape),
+                        SizedBox(height: 10.h),
+                        SizedBox(child: _buildTimer(isLandscape)),
+                      ],
+                    ),
+                    _buildStatusGrid(isLandscape),
+                  ],
+                ),
+              ),
+            );
+          },
         );
       },
     );
@@ -72,10 +83,15 @@ class HomeView extends GetView<HomeController> {
 
   Widget _buildUserAndVehicle(BuildContext context, bool isLandscape) {
     // Prevent huge text in landscape by limiting scaling
-    double fontSize(double size) => isLandscape ? size : size.sp;
+    double fontSize(double size) => isLandscape ? size : size.spMin;
 
     return Padding(
-      padding: EdgeInsets.all(isLandscape ? 8.w : 16.w),
+      padding: EdgeInsets.only(
+        top: isLandscape ? 4.h : 16.h,
+        bottom: isLandscape ? 4.h : 16.h,
+        left: isLandscape ? 8.w : 16.w,
+        right: isLandscape ? 8.w : 16.w,
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -113,49 +129,84 @@ class HomeView extends GetView<HomeController> {
   }
 
   Widget _buildTimer(bool isLandscape) {
-    double fontSize(double size) => isLandscape ? size : size.sp;
+    double fontSize(double size) => isLandscape ? size : size.spMin;
 
-    return Stack(
-      alignment: Alignment.center,
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        SizedBox(
-          width: isLandscape ? 140.h : 180.w,
-          height: isLandscape ? 140.h : 180.w,
-          child: CircularProgressIndicator(
-            value: 0.75,
-            strokeWidth: isLandscape ? 8 : 10.w,
-            color: Colors.grey.shade700,
-            backgroundColor: Colors.grey.shade200,
-          ),
-        ),
-        Column(
-          mainAxisSize: MainAxisSize.min,
+        Stack(
+          alignment: Alignment.center,
           children: [
-            Text(
-              "14:00",
-              style: TextStyle(
-                fontSize: fontSize(32),
-                fontWeight: FontWeight.bold,
+            SizedBox(
+              width: isLandscape ? 130.h : 180.w,
+              height: isLandscape ? 130.h : 180.w,
+              child: CircularProgressIndicator(
+                value: 0.75,
+                strokeWidth: isLandscape ? 8 : 12.w,
+                color: Colors.grey.shade800,
+                backgroundColor: Colors.grey.shade200,
+                strokeCap: StrokeCap.round,
               ),
             ),
-            Text("REMAINING", style: TextStyle(fontSize: fontSize(12))),
-            SizedBox(height: 6.h),
-            Obx(
-              () => InkWell(
-                onTap: () => _openChangeStatus(Get.context!, controller),
-                child: Chip(
-                  label: Text(
-                    controller.currentStatus.value.name.toUpperCase(),
-                    style:
-                        TextStyle(color: Colors.white, fontSize: fontSize(12)),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "14:00",
+                  style: TextStyle(
+                    fontSize: fontSize(36),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87,
                   ),
-                  backgroundColor: controller.getStatusColor(
-                    controller.currentStatus.value,
+                ),
+                Text(
+                  "REMAINING",
+                  style: TextStyle(
+                    fontSize: fontSize(12),
+                    color: Colors.grey.shade600,
+                    letterSpacing: 1.2,
                   ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        SizedBox(height: 12.h),
+        Obx(
+          () => InkWell(
+            onTap: () => _openChangeStatus(Get.context!, controller),
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 24.w,
+                vertical: 8.h,
+              ),
+              decoration: BoxDecoration(
+                color: controller.getStatusColor(
+                  controller.currentStatus.value,
+                ),
+                borderRadius: BorderRadius.circular(30.r),
+                boxShadow: [
+                  BoxShadow(
+                    color: controller
+                        .getStatusColor(controller.currentStatus.value)
+                        .withOpacity(0.4),
+                    blurRadius: 8,
+                    offset: const Offset(0, 4),
+                  ),
+                ],
+              ),
+              child: Text(
+                controller.currentStatus.value.name.toUpperCase(),
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: fontSize(14),
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 1.1,
                 ),
               ),
             ),
-          ],
+          ),
         ),
       ],
     );
@@ -166,10 +217,17 @@ class HomeView extends GetView<HomeController> {
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
       crossAxisCount: 2,
-      childAspectRatio: isLandscape ? 2.5 : 1.0, // Flatter items in landscape
-      padding: EdgeInsets.all(isLandscape ? 12.w : 24.w),
-      mainAxisSpacing: isLandscape ? 10.w : 20.h,
-      crossAxisSpacing: isLandscape ? 10.w : 20.w,
+      childAspectRatio: isLandscape
+          ? 1.6
+          : 1.0, // Increased height ratio to prevent clipping (1.6)
+      padding: EdgeInsets.only(
+        top: isLandscape ? 4.h : 24.h,
+        bottom: isLandscape ? 4.h : 24.h,
+        left: isLandscape ? 12.w : 24.w,
+        right: isLandscape ? 12.w : 24.w,
+      ),
+      mainAxisSpacing: isLandscape ? 8.h : 20.h,
+      crossAxisSpacing: isLandscape ? 16.w : 20.w,
       children: [
         _CircleInfo("8:00", "BREAK", Colors.amber, isLandscape: isLandscape),
         _CircleInfo("11:00", "DRIVING", Colors.green, isLandscape: isLandscape),
@@ -261,7 +319,11 @@ class HomeView extends GetView<HomeController> {
       builder: (_) {
         return SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w), // Responsive padding
+            padding: EdgeInsets.only(
+                top: 16.h,
+                bottom: 16.h,
+                left: 16.w,
+                right: 16.w), // Responsive padding
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -329,9 +391,11 @@ class HomeView extends GetView<HomeController> {
                 Obx(
                   () => ListTile(
                     title: Text("Add Note",
-                        style: TextStyle(fontSize: 16.spMin)), // Responsive font
+                        style:
+                            TextStyle(fontSize: 16.spMin)), // Responsive font
                     subtitle: Text(controller.selectedNote.value,
-                        style: TextStyle(fontSize: 14.spMin)), // Responsive font
+                        style:
+                            TextStyle(fontSize: 14.spMin)), // Responsive font
                     trailing: Icon(Icons.chevron_right,
                         size: 24.sp), // Responsive icon
                     onTap: () async {
@@ -348,7 +412,8 @@ class HomeView extends GetView<HomeController> {
                   child: ElevatedButton(
                     onPressed: () => Get.back(),
                     child: Text("Update",
-                        style: TextStyle(fontSize: 16.spMin)), // Responsive font
+                        style:
+                            TextStyle(fontSize: 16.spMin)), // Responsive font
                   ),
                 ),
               ],
@@ -422,7 +487,8 @@ class _CircleInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double fontSize(double size) => isLandscape ? size : size.sp;
+    // Reduce font slightly more in landscape to ensure fit
+    double fontSize(double size) => isLandscape ? size * 0.9 : size.spMin;
 
     return Container(
       decoration: BoxDecoration(
@@ -433,14 +499,25 @@ class _CircleInfo extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              time,
-              style: TextStyle(
-                  fontSize: fontSize(20),
-                  fontWeight: FontWeight.bold), // Responsive font
+            Flexible(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(
+                  time,
+                  style: TextStyle(
+                      fontSize: fontSize(20),
+                      fontWeight: FontWeight.bold), // Responsive font
+                ),
+              ),
             ),
-            Text(label,
-                style: TextStyle(fontSize: fontSize(12))), // Responsive font
+            Flexible(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Text(label,
+                    style:
+                        TextStyle(fontSize: fontSize(12))), // Responsive font
+              ),
+            ),
           ],
         ),
       ),

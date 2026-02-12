@@ -18,7 +18,8 @@ class SettingsView extends GetView<SettingsController> {
         bgColor: const Color(0xFF2AA6DF),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
+            icon:
+                Icon(Icons.edit_outlined, color: Colors.white, size: 24.spMin),
             onPressed: () {
               // Edit action placeholder
             },

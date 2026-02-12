@@ -17,7 +17,8 @@ class CreateDvirView extends GetView<DvirController> {
         title: "Create DVIR",
         actions: [
           IconButton(
-            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
+            icon:
+                Icon(Icons.edit_outlined, color: Colors.white, size: 24.spMin),
             onPressed: () {},
           )
         ],
@@ -90,7 +91,8 @@ class CreateDvirView extends GetView<DvirController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(defect.name,
-                                  fontWeight: FontWeight.bold, fontSize: 16.spMin),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.spMin),
                               CustomText(defect.description,
                                   color: Colors.grey, fontSize: 15.spMin),
                             ],

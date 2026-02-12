@@ -1,9 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../routes/app_routes.dart';
 
 class AccessCodeController extends GetxController {
   final code = "".obs;
   final isConfirming = false.obs; // false = Set Mode, true = Confirm Mode
+  final TextEditingController textController = TextEditingController();
+  final FocusNode focusNode = FocusNode();
+
   String _firstCode = "";
   String? nextRoute;
 
@@ -12,21 +16,33 @@ class AccessCodeController extends GetxController {
     super.onInit();
     // Get the next route from arguments
     nextRoute = Get.arguments as String?;
-  }
 
-  void onKeyTap(String value) {
-    if (code.value.length < 4) {
-      code.value += value;
-      if (code.value.length == 4) {
-        _handleCodeCompletion();
+    // Listen to text changes
+    textController.addListener(() {
+      final val = textController.text;
+      if (val.length <= 4) {
+        code.value = val;
+        if (val.length == 4) {
+          _handleCodeCompletion();
+        }
+      } else {
+        // Prevent more than 4 chars
+        textController.text = val.substring(0, 4);
+        textController.selection = TextSelection.fromPosition(
+            TextPosition(offset: textController.text.length));
       }
-    }
+    });
   }
 
-  void onBackspace() {
-    if (code.value.isNotEmpty) {
-      code.value = code.value.substring(0, code.value.length - 1);
-    }
+  @override
+  void onClose() {
+    textController.dispose();
+    focusNode.dispose();
+    super.onClose();
+  }
+
+  void requestFocus() {
+    focusNode.requestFocus();
   }
 
   void _handleCodeCompletion() {
@@ -36,7 +52,9 @@ class AccessCodeController extends GetxController {
       // Small delay for UX
       Future.delayed(const Duration(milliseconds: 300), () {
         code.value = "";
+        textController.clear();
         isConfirming.value = true;
+        requestFocus(); // Keep keyboard up
       });
     } else {
       // Confirm Mode Completed
@@ -48,6 +66,7 @@ class AccessCodeController extends GetxController {
         // Mismatch
         Get.snackbar("Error", "Codes do not match. Please try again.");
         code.value = "";
+        textController.clear();
         // Optional: Go back to 'Set' mode or just retry confirm?
         // Usually better to let them retry confirm or give option to reset start.
         // For now, let's reset to start if they fail, or just clear confirm.
