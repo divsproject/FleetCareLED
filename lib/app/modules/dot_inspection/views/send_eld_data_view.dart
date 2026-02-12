@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../controllers/dot_inspection_controller.dart';
 
 class SendEldDataView extends GetView<DotInspectionController> {
@@ -15,19 +16,8 @@ class SendEldDataView extends GetView<DotInspectionController> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Send Output File",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Send Output File",
         actions: [
           IconButton(
             icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
@@ -63,7 +53,7 @@ class SendEldDataView extends GetView<DotInspectionController> {
                             color: isWebService.value
                                 ? AppColors.primary
                                 : Colors.grey,
-                            fontSize: 15.sp,
+                            fontSize: 15.spMin,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -90,7 +80,7 @@ class SendEldDataView extends GetView<DotInspectionController> {
                             color: !isWebService.value
                                 ? AppColors.primary
                                 : Colors.grey,
-                            fontSize: 15.sp,
+                            fontSize: 15.spMin,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -110,7 +100,7 @@ class SendEldDataView extends GetView<DotInspectionController> {
                     "ELD Output File Send Successfully.",
                     textAlign: TextAlign.center,
                     color: Colors.white,
-                    fontSize: 14.sp,
+                    fontSize: 14.spMin,
                     fontWeight: FontWeight.w600,
                   ),
                 )
@@ -119,19 +109,19 @@ class SendEldDataView extends GetView<DotInspectionController> {
           // Content
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(20.w),
+              padding: EdgeInsets.only(top: 20.h, bottom: 20.h, left: 20.w, right: 20.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(
                     "Send ELD data for the last 8 days for vehicle SIM-00012844SLM-00012844",
-                    fontSize: 14.sp,
+                    fontSize: 14.spMin,
                     color: Colors.grey[700],
                   ),
                   SizedBox(height: 24.h),
                   CustomText(
                     "OFFICIAL COMMENT",
-                    fontSize: 14.sp,
+                    fontSize: 14.spMin,
                     color: AppColors.primary,
                     fontWeight: FontWeight.bold,
                   ),
@@ -156,7 +146,7 @@ class SendEldDataView extends GetView<DotInspectionController> {
                         child: CustomText(
                           "Send",
                           color: AppColors.primary,
-                          fontSize: 16.sp,
+                          fontSize: 16.spMin,
                           fontWeight: FontWeight.bold,
                         ),
                       ),

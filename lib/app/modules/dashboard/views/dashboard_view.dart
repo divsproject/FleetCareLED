@@ -7,6 +7,7 @@ import '../../home/views/home_drawer.dart';
 import '../../home/controllers/home_controller.dart';
 import '../../edit_profile/views/edit_profile_view.dart';
 import '../controllers/dashboard_controller.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../../../routes/app_routes.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -20,97 +21,59 @@ class DashboardView extends GetView<DashboardController> {
     final homeController = Get.find<HomeController>();
 
     return Scaffold(
+      key: controller.scaffoldKey,
       backgroundColor: Colors.white,
-
-      // 🔵 BODY - AppBar is moved here to allow full hiding
-      body: Stack(
-        children: [
-          Column(
-            children: [
-              // 🔵 CUSTOM APP BAR LOGIC
-              Obx(() {
-                if (controller.currentIndex.value == 3) {
-                  return SizedBox.shrink();
-                }
-                return Container(
-                  color: const Color(0xFF2AA6DF),
-                  padding: EdgeInsets.only(
-                    top: 50.h, // Responsive top padding
-                    left: 16.w, // Responsive left padding
-                    right: 16.w, // Responsive right padding
-                    bottom: 16.h, // Responsive bottom padding
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.menu,
-                            color: Colors.white,
-                            size: 24.sp), // Responsive icon
-                        onPressed: homeController.toggleQuickActions,
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                      ),
-                      Text(
-                        controller.titles[controller.currentIndex.value],
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.sp, // Responsive font
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.notifications,
-                            color: Colors.red, size: 24.sp), // Responsive icon
-                        onPressed: () => Get.toNamed(AppRoutes.NOTIFICATION),
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                      ),
-                    ],
-                  ),
-                );
-              }),
-
-              // 🔵 MAIN CONTENT
-              Expanded(
-                child: Obx(() {
-                  switch (controller.currentIndex.value) {
-                    case 0:
-                      // HomeView now contains just the gauges/timers
-                      return const HomeView();
-                    case 3:
-                      return const EditProfileView();
-                    default:
-                      return Center(
-                          child: Text(
-                              "${controller.titles[controller.currentIndex.value]} Coming Soon"));
-                  }
-                }),
+      drawer: HomeDrawer(controller: homeController),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight),
+        child: Obx(() {
+          if (controller.currentIndex.value == 3) {
+            return const SizedBox.shrink();
+          }
+          return CustomAppBar(
+            title: controller.titles[controller.currentIndex.value],
+            bgColor: const Color(0xFF2AA6DF),
+            centerTitle: true,
+            leading: IconButton(
+              icon: Icon(Icons.menu, color: Colors.white, size: 24.spMin),
+              onPressed: controller.openDrawer,
+            ),
+            actions: [
+              IconButton(
+                icon: Icon(Icons.notifications,
+                    color: Colors.red, size: 24.spMin),
+                onPressed: () => Get.toNamed(AppRoutes.NOTIFICATION),
               ),
             ],
-          ),
-
-          // DIM Overlay
-          Obx(
-            () => homeController.showQuickActions.value
-                ? Positioned.fill(
-                    child: GestureDetector(
-                      onTap: homeController.closeQuickActions,
-                      child: Container(color: Colors.black.withOpacity(0.25)),
-                    ),
-                  )
-                : const SizedBox.shrink(),
-          ),
-
-          // LEFT PANEL (DRAWER)
-          Obx(
-            () => AnimatedPositioned(
-              duration: const Duration(milliseconds: 200),
-              left: homeController.showQuickActions.value ? 0 : -280,
-              top: 0,
-              bottom: 0,
-              child: HomeDrawer(controller: homeController),
+            customTitle: Text(
+              controller.titles[controller.currentIndex.value],
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20.spMin,
+                fontWeight: FontWeight.w600,
+              ),
             ),
+          );
+        }),
+      ),
+      // 🔵 BODY - AppBar is moved here to allow full hiding
+      body: Column(
+        children: [
+          // 🔵 MAIN CONTENT
+          Expanded(
+            child: Obx(() {
+              switch (controller.currentIndex.value) {
+                case 0:
+                  // HomeView now contains just the gauges/timers
+                  return const HomeView();
+                case 3:
+                  return const EditProfileView();
+                default:
+                  return Center(
+                      child: Text(
+                          "${controller.titles[controller.currentIndex.value]} Coming Soon"));
+              }
+            }),
           ),
         ],
       ),
@@ -135,11 +98,11 @@ class DashboardView extends GetView<DashboardController> {
             selectedItemColor: const Color(0xFF2AA6DF),
             unselectedItemColor: Colors.grey,
             selectedLabelStyle: TextStyle(
-              fontSize: 12.sp, // Responsive font
+              fontSize: 12.spMin, // Responsive font
               fontWeight: FontWeight.w500,
             ),
             unselectedLabelStyle: TextStyle(
-              fontSize: 12.sp, // Responsive font
+              fontSize: 12.spMin, // Responsive font
               fontWeight: FontWeight.w500,
             ),
             onTap: controller.changeTab,

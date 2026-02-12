@@ -32,9 +32,9 @@ class SignupView extends StatelessWidget {
               // Card
               Center(
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.all(20.w),
+                  padding: EdgeInsets.only(top: 20.h, bottom: 20.h, left: 20.w, right: 20.w),
                   child: Container(
-                    padding: EdgeInsets.all(20.w),
+                    padding: EdgeInsets.only(top: 20.h, bottom: 20.h, left: 20.w, right: 20.w),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20.r),
@@ -48,7 +48,7 @@ class SignupView extends StatelessWidget {
                           SizedBox(height: 20.h),
                           CustomText(
                             "Create Account",
-                            fontSize: 18.sp,
+                            fontSize: 18.spMin,
                             fontWeight: FontWeight.bold,
                           ),
                           SizedBox(height: 20.h),
@@ -113,7 +113,7 @@ class SignupView extends StatelessWidget {
                               "Already have an account? Login",
                               color: AppColors.primary,
                               fontWeight: FontWeight.w600,
-                              fontSize: 14.sp,
+                              fontSize: 14.spMin,
                             ),
                           ),
                         ],

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 
 class RoutesView extends StatelessWidget {
   const RoutesView({Key? key}) : super(key: key);
@@ -13,26 +14,16 @@ class RoutesView extends StatelessWidget {
       length: 3,
       child: Scaffold(
         backgroundColor: AppColors.scaffoldBackground,
-        appBar: AppBar(
-          backgroundColor: AppColors.primary,
-          title: CustomText(
-            "Routes",
-            color: Colors.white,
-            fontSize: 20.sp,
-            fontWeight: FontWeight.w600,
-          ),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, size: 24.sp),
-            onPressed: () => Get.back(),
-          ),
+        appBar: CustomAppBar(
+          title: "Routes",
           bottom: TabBar(
             indicatorColor: Colors.white,
             labelStyle: TextStyle(
                 fontWeight: FontWeight.w600,
                 color: Colors.white,
-                fontSize: 14.sp),
+                fontSize: 14.spMin),
             unselectedLabelStyle:
-                TextStyle(fontWeight: FontWeight.normal, fontSize: 14.sp),
+                TextStyle(fontWeight: FontWeight.normal, fontSize: 14.spMin),
             tabs: const [
               Tab(text: "Past"),
               Tab(text: "Today"),
@@ -85,13 +76,13 @@ class _EmptyRoutes extends StatelessWidget {
           CustomText(
             title,
             fontWeight: FontWeight.w600,
-            fontSize: 16.sp,
+            fontSize: 16.spMin,
           ),
           SizedBox(height: 6.h),
           CustomText(
             subtitle,
             color: AppColors.textSecondary,
-            fontSize: 12.sp,
+            fontSize: 12.spMin,
           ),
         ],
       ),

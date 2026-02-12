@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
-import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
+
 import '../../../global_widgets/custom_text_field.dart';
 import '../controllers/dvir_controller.dart';
 
@@ -13,19 +14,8 @@ class AddDefectView extends GetView<DvirController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Add New vehicale defects",
-          color: Colors.white,
-          fontSize: 17.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Add New vehicale defects",
         actions: [
           TextButton(
             onPressed: controller.saveDefects,
@@ -33,7 +23,7 @@ class AddDefectView extends GetView<DvirController> {
               "Done",
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16.sp,
+                fontSize: 16.spMin,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -44,7 +34,7 @@ class AddDefectView extends GetView<DvirController> {
         children: [
           // 🔍 Search bar
           Padding(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
             child: CustomTextField(
               hintText: "Search here...",
               prefixIcon: Icon(Icons.search, color: Colors.black, size: 24.sp),
@@ -60,7 +50,7 @@ class AddDefectView extends GetView<DvirController> {
 
                 // Camera Button Section (Mocking under 'Other' or separate)
                 Padding(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: Container(
@@ -91,7 +81,7 @@ class AddDefectView extends GetView<DvirController> {
                     "Enter Comment",
                     style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 16.sp,
+                        fontSize: 16.spMin,
                         fontWeight: FontWeight.bold),
                   ),
                 )
@@ -114,7 +104,7 @@ class AddDefectView extends GetView<DvirController> {
           child: Text(
             title,
             style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 16.spMin,
               fontWeight: FontWeight.bold,
               color: Colors.grey.shade700,
             ),
@@ -129,7 +119,7 @@ class AddDefectView extends GetView<DvirController> {
                         title: Text(
                           item,
                           style: TextStyle(
-                            fontSize: 16.sp,
+                            fontSize: 16.spMin,
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
                           ),

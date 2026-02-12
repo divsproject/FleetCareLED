@@ -34,7 +34,12 @@ class CustomButton extends StatelessWidget {
   double _r(double val) => isResponsive ? val.r : val;
   double _w(double val) => isResponsive ? val.w : val;
   double _h(double val) => isResponsive ? val.h : val;
-  double _sp(double val) => isResponsive ? val.sp : val;
+  double _sp(double val) {
+    if (!isResponsive) return val;
+    // On tablets/desktop (width > 600), use fixed size to prevent huge text
+    if (ScreenUtil().screenWidth > 600) return val;
+    return val.spMin;
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../controllers/daily_log_controller.dart';
 import '../../../core/values/app_colors.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../widgets/hos_daily_graph.dart';
 import 'trailer_view.dart';
 import 'shipping_id_view.dart';
@@ -17,27 +18,17 @@ class DailyLogView extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBackground,
-          appBar: AppBar(
-            backgroundColor: AppColors.primary,
-            title: CustomText(
-              "Daily Log",
-              color: Colors.white,
-              fontSize: 19.sp, // Increased
-              fontWeight: FontWeight.w600,
-            ),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, size: 24.sp),
-              onPressed: () => Get.back(),
-            ),
+          appBar: CustomAppBar(
+            title: "Daily Log",
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: 12.w),
-                child: Icon(Icons.edit_note, size: 24.sp),
+                child: Icon(Icons.edit_note, size: 24.sp, color: Colors.white),
               )
             ],
           ),
           body: SingleChildScrollView(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
             child: Column(
               children: [
                 // 📅 Date Header
@@ -57,7 +48,7 @@ class DailyLogView extends StatelessWidget {
                       CustomText(
                         "Sunday, Oct 19th, 2025",
                         fontWeight: FontWeight.bold,
-                        fontSize: 17.sp, // Increased
+                        fontSize: 17.spMin, // Increased
                       ),
                       IconButton(
                         onPressed: () {},
@@ -84,7 +75,7 @@ class DailyLogView extends StatelessWidget {
 
                 // 📋 Logs Section
                 Container(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.r),
@@ -96,14 +87,14 @@ class DailyLogView extends StatelessWidget {
                         children: [
                           CustomText(
                             "Logs",
-                            fontSize: 17.sp, // Matched section headers
+                            fontSize: 17.spMin, // Matched section headers
                             fontWeight: FontWeight.bold,
                           ),
                         ],
                       ),
                       SizedBox(height: 12.h),
                       Container(
-                        padding: EdgeInsets.all(16.w),
+                        padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
                         decoration: BoxDecoration(
                           color: AppColors.lightBlueBg,
                           borderRadius: BorderRadius.circular(12.r),
@@ -111,7 +102,7 @@ class DailyLogView extends StatelessWidget {
                         child: Row(
                           children: [
                             Container(
-                              padding: EdgeInsets.all(8.w),
+                              padding: EdgeInsets.only(top: 8.h, bottom: 8.h, left: 8.w, right: 8.w),
                               decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: const LinearGradient(
@@ -130,17 +121,17 @@ class DailyLogView extends StatelessWidget {
                                   children: [
                                     CustomText("Off Duty",
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16.sp),
+                                        fontSize: 16.spMin),
                                     SizedBox(width: 8.w),
                                     CustomText("12:00 AM - 5h 3m",
                                         color: AppColors.primary,
-                                        fontSize: 14.sp),
+                                        fontSize: 14.spMin),
                                   ],
                                 ),
                                 SizedBox(height: 4.h),
                                 CustomText("No Location",
                                     color: AppColors.textSecondary,
-                                    fontSize: 14.sp),
+                                    fontSize: 14.spMin),
                               ],
                             )),
                             Icon(Icons.edit_outlined,
@@ -165,7 +156,7 @@ class DailyLogView extends StatelessWidget {
                 // ➕ More Section
                 Container(
                   width: double.infinity,
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(12.r),
@@ -174,21 +165,21 @@ class DailyLogView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       CustomText("More",
-                          fontSize: 17.sp, fontWeight: FontWeight.bold),
+                          fontSize: 17.spMin, fontWeight: FontWeight.bold),
                       SizedBox(height: 16.h),
                       CustomText("Ruleset",
-                          fontWeight: FontWeight.bold, fontSize: 16.sp),
+                          fontWeight: FontWeight.bold, fontSize: 16.spMin),
                       SizedBox(height: 4.h),
                       CustomText("USA 70 hour / 8 day",
-                          color: AppColors.textSecondary, fontSize: 15.sp),
+                          color: AppColors.textSecondary, fontSize: 15.spMin),
                       SizedBox(height: 8.h),
                       const Divider(),
                       SizedBox(height: 8.h),
                       CustomText("Time zone",
-                          fontWeight: FontWeight.bold, fontSize: 16.sp),
+                          fontWeight: FontWeight.bold, fontSize: 16.spMin),
                       SizedBox(height: 4.h),
                       CustomText("America/New_York",
-                          color: AppColors.textSecondary, fontSize: 15.sp),
+                          color: AppColors.textSecondary, fontSize: 15.spMin),
                     ],
                   ),
                 ),
@@ -207,7 +198,7 @@ class DailyLogView extends StatelessWidget {
                     ),
                     child: CustomText("Certify and Submit",
                         color: Colors.white,
-                        fontSize: 17.sp,
+                        fontSize: 17.spMin,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -223,7 +214,7 @@ class DailyLogView extends StatelessWidget {
   Widget _buildSectionCard(String title, List<Widget> children) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12.r),
@@ -231,7 +222,7 @@ class DailyLogView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(title, fontSize: 17.sp, fontWeight: FontWeight.bold),
+          CustomText(title, fontSize: 17.spMin, fontWeight: FontWeight.bold),
           SizedBox(height: 8.h),
           ...children,
         ],
@@ -247,7 +238,7 @@ class DailyLogView extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            CustomText(title, fontSize: 16.sp, fontWeight: FontWeight.w600),
+            CustomText(title, fontSize: 16.spMin, fontWeight: FontWeight.w600),
             Icon(Icons.chevron_right, size: 24.sp),
           ],
         ),

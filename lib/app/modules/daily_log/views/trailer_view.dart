@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../../../global_widgets/custom_text_field.dart';
 
@@ -12,26 +13,15 @@ class TrailerView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackground,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        title: CustomText(
-          "Trailer",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
-        centerTitle: true,
+      appBar: const CustomAppBar(
+        title: "Trailer",
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.w),
+        padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CustomText("Trailer", fontWeight: FontWeight.bold, fontSize: 16.sp),
+            CustomText("Trailer", fontWeight: FontWeight.bold, fontSize: 16.spMin),
             SizedBox(height: 8.h),
             const CustomTextField(hintText: ""),
             Spacer(),
@@ -47,7 +37,7 @@ class TrailerView extends StatelessWidget {
                 ),
                 child: CustomText("Save",
                     color: Colors.white,
-                    fontSize: 17.sp,
+                    fontSize: 17.spMin,
                     fontWeight: FontWeight.bold),
               ),
             ),

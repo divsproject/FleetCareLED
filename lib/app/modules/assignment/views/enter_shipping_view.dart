@@ -1,10 +1,12 @@
+import 'package:fleetcare_eld/app/global_widgets/custom_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../global_widgets/custom_button.dart';
-import '../../../global_widgets/custom_text.dart';
+
 import '../../../global_widgets/custom_text_field.dart';
 import '../../../core/values/app_colors.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../controllers/assignment_controller.dart';
 
 class EnterShippingView extends StatelessWidget {
@@ -16,23 +18,11 @@ class EnterShippingView extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBackground,
-          appBar: AppBar(
-            backgroundColor: AppColors.primary,
-            elevation: 0,
-            title: CustomText(
-              "Shipping ID",
-              color: Colors.white,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w600,
-            ),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, size: 24.sp),
-              onPressed: () => Get.back(),
-            ),
-            centerTitle: true,
+          appBar: const CustomAppBar(
+            title: "Shipping ID",
           ),
           body: Padding(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
             child: Column(
               children: [
                 // 🔹 Input
@@ -49,7 +39,7 @@ class EnterShippingView extends StatelessWidget {
                   child: CustomText(
                     "Suggestions\nHello",
                     color: Colors.grey.shade600,
-                    fontSize: 12.sp,
+                    fontSize: 12.spMin,
                   ),
                 ),
 

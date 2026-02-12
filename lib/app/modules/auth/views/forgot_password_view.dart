@@ -37,7 +37,8 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
         child: SingleChildScrollView(
           child: ForgotPasswordForm(
             width: 1.sw,
-            padding: EdgeInsets.all(20.w),
+            padding: EdgeInsets.only(
+                top: 20.h, bottom: 20.h, left: 20.w, right: 20.w),
             isMobile: true,
           ),
         ),
@@ -58,7 +59,8 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
         child: ForgotPasswordForm(
           width: kAuthCardWidth,
           height: kAuthCardHeight,
-          padding: EdgeInsets.all(30.w),
+          padding:
+              EdgeInsets.only(top: 30.h, bottom: 30.h, left: 30.w, right: 30.w),
           isMobile: false,
         ),
       ),
@@ -86,7 +88,8 @@ class ForgotPasswordView extends GetView<ForgotPasswordController> {
             child: ForgotPasswordForm(
               width: kAuthCardWidth,
               height: kAuthCardHeight,
-              padding: EdgeInsets.all(40.w),
+              padding: EdgeInsets.only(
+                  top: 20.h, bottom: 20.h, left: 20.w, right: 20.w),
               isMobile: false,
               showLogo: false,
             ),
@@ -114,7 +117,7 @@ class ForgotPasswordForm extends StatelessWidget {
   }) : super(key: key);
 
   // Helper
-  double _sp(double val) => isMobile ? val.sp : val;
+  double _sp(double val) => isMobile ? val.spMin : val;
   double _h(double val) => isMobile ? val.h : val;
   double _r(double val) => isMobile ? val.r : val;
 
@@ -131,7 +134,7 @@ class ForgotPasswordForm extends StatelessWidget {
       decoration: isMobile
           ? BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(_r(18)),
+              borderRadius: BorderRadius.circular(20.r),
             )
           : BoxDecoration(
               color: Colors.white,
@@ -207,7 +210,7 @@ class ForgotPasswordForm extends StatelessWidget {
             style: TextStyle(
               color: AppColors.primary,
               fontWeight: FontWeight.w600,
-              fontSize: 14.sp,
+              fontSize: 14.spMin,
             ),
           ),
         ),

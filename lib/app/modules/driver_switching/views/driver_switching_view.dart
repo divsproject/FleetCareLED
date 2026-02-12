@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../../../services/driver_service.dart';
 import '../controllers/driver_switching_controller.dart';
 
@@ -13,19 +14,8 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Driver Switching",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: const CustomAppBar(
+        title: "Driver Switching",
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
@@ -35,7 +25,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
             CustomText(
               "Drivers",
               fontWeight: FontWeight.bold,
-              fontSize: 17.sp,
+              fontSize: 17.spMin,
               color: Colors.black,
             ),
             SizedBox(height: 16.h),
@@ -48,7 +38,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
             CustomText(
               "Switching Drivers",
               fontWeight: FontWeight.bold,
-              fontSize: 17.sp,
+              fontSize: 17.spMin,
               color: Colors.black,
             ),
             SizedBox(height: 24.h),
@@ -104,7 +94,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
               style: TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.bold,
-                fontSize: 15.sp,
+                fontSize: 15.spMin,
               ),
             ),
           ),
@@ -113,7 +103,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
             Text(
               driver.name,
               style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: 16.spMin,
                 fontWeight: FontWeight.bold,
                 color: Colors.black,
               ),
@@ -142,7 +132,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
                       Text(
                         "Current Driver",
                         style: TextStyle(
-                          fontSize: 12.sp,
+                          fontSize: 12.spMin,
                           fontWeight: FontWeight.w600,
                           color: AppColors.success,
                         ),
@@ -160,7 +150,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
             child: Text(
               "Edit",
               style: TextStyle(
-                fontSize: 15.sp,
+                fontSize: 15.spMin,
                 fontWeight: FontWeight.w600,
                 color: AppColors.primary,
                 decoration: TextDecoration.underline,
@@ -202,7 +192,8 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
               style: TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.bold,
-                fontSize: 12.sp, // Slightly reduced font size for longer text
+                fontSize:
+                    12.spMin, // Slightly reduced font size for longer text
               ),
             ),
           ),
@@ -210,7 +201,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
           Text(
             driver.name,
             style: TextStyle(
-              fontSize: 15.sp,
+              fontSize: 15.spMin,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
@@ -231,7 +222,7 @@ class DriverSwitchingView extends GetView<DriverSwitchingController> {
           color: AppColors.primary, // Blue button
           shape: BoxShape.circle,
         ),
-        child: Icon(icon, color: Colors.white, size: 20.sp),
+        child: Icon(icon, color: Colors.white, size: 20.spMin),
       ),
     );
   }

@@ -37,7 +37,7 @@ class CoDriverLoginView extends GetView<CoDriverLoginController> {
         child: SingleChildScrollView(
           child: CoDriverLoginForm(
             width: 1.sw,
-            padding: EdgeInsets.all(24.w),
+            padding: EdgeInsets.only(top: 24.h, bottom: 24.h, left: 24.w, right: 24.w),
             isMobile: true,
           ),
         ),
@@ -59,7 +59,7 @@ class CoDriverLoginView extends GetView<CoDriverLoginController> {
           child: CoDriverLoginForm(
             width: kAuthCardWidth,
             height: kAuthCardHeight,
-            padding: EdgeInsets.all(30.w),
+            padding: EdgeInsets.only(top: 30.h, bottom: 30.h, left: 30.w, right: 30.w),
             isMobile: false,
           ),
         ),
@@ -89,7 +89,7 @@ class CoDriverLoginView extends GetView<CoDriverLoginController> {
               child: CoDriverLoginForm(
                 width: kAuthCardWidth,
                 height: kAuthCardHeight,
-                padding: EdgeInsets.all(40.w),
+                padding: EdgeInsets.only(top: 40.h, bottom: 40.h, left: 40.w, right: 40.w),
                 isMobile: false,
                 showLogo: false,
               ),
@@ -118,11 +118,9 @@ class CoDriverLoginForm extends StatelessWidget {
   }) : super(key: key);
 
   // Helper
-  // Helper
-  double _sp(double val) => isMobile ? val.sp : val;
+  double _sp(double val) => isMobile ? val.spMin : val;
   double _h(double val) => isMobile ? val.h : val;
   double _w(double val) => isMobile ? val.w : val;
-  double _r(double val) => isMobile ? val.r : val;
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +135,7 @@ class CoDriverLoginForm extends StatelessWidget {
       decoration: isMobile
           ? BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(_r(18)),
+              borderRadius: BorderRadius.circular(12.r),
             )
           : BoxDecoration(
               color: Colors.white,
@@ -241,7 +239,7 @@ class CoDriverLoginForm extends StatelessWidget {
                 onChanged: controller.toggleRememberMe,
                 side: const BorderSide(color: AppColors.inputBorder),
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(_r(4))),
+                    borderRadius: BorderRadius.circular(4.r)),
               ),
             ),
             SizedBox(width: _w(8)),

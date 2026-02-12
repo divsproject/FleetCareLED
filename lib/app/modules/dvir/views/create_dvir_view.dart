@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../controllers/dvir_controller.dart';
 
@@ -12,19 +13,8 @@ class CreateDvirView extends GetView<DvirController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Create DVIR",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Create DVIR",
         actions: [
           IconButton(
             icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
@@ -62,7 +52,7 @@ class CreateDvirView extends GetView<DvirController> {
             CustomText(
               "Previous Defects",
               fontWeight: FontWeight.w700,
-              fontSize: 17.sp,
+              fontSize: 17.spMin,
               color: Colors.black87,
             ),
             SizedBox(height: 16.h),
@@ -100,9 +90,9 @@ class CreateDvirView extends GetView<DvirController> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(defect.name,
-                                  fontWeight: FontWeight.bold, fontSize: 16.sp),
+                                  fontWeight: FontWeight.bold, fontSize: 16.spMin),
                               CustomText(defect.description,
-                                  color: Colors.grey, fontSize: 15.sp),
+                                  color: Colors.grey, fontSize: 15.spMin),
                             ],
                           ),
                           const Spacer(),
@@ -111,7 +101,7 @@ class CreateDvirView extends GetView<DvirController> {
                             color:
                                 defect.isResolved ? Colors.green : Colors.red,
                             fontWeight: FontWeight.bold,
-                            fontSize: 14.sp,
+                            fontSize: 14.spMin,
                           ),
                         ],
                       ),
@@ -123,13 +113,13 @@ class CreateDvirView extends GetView<DvirController> {
             CustomText(
               "Add New vehicle Defects",
               fontWeight: FontWeight.bold,
-              fontSize: 16.sp,
+              fontSize: 16.spMin,
             ),
             SizedBox(height: 8.h),
             CustomText(
               "It is a long established fact that a reader will be distracted by the readable",
               color: Colors.grey,
-              fontSize: 15.sp,
+              fontSize: 15.spMin,
             ),
             SizedBox(height: 16.h),
             SizedBox(
@@ -145,7 +135,7 @@ class CreateDvirView extends GetView<DvirController> {
                 child: Text(
                   "Add Defects",
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 16.spMin,
                     color: Colors.grey[800],
                     fontWeight: FontWeight.w600,
                   ),
@@ -164,7 +154,7 @@ class CreateDvirView extends GetView<DvirController> {
             CustomText(
               "Choose Inspection Type",
               fontWeight: FontWeight.bold,
-              fontSize: 16.sp,
+              fontSize: 16.spMin,
             ),
             SizedBox(height: 16.h),
             Row(
@@ -196,7 +186,7 @@ class CreateDvirView extends GetView<DvirController> {
                 child: Text(
                   "Next",
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 16.spMin,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -216,13 +206,13 @@ class CreateDvirView extends GetView<DvirController> {
       children: [
         CustomText(label,
             fontWeight: FontWeight.w700,
-            fontSize: 16.sp,
+            fontSize: 16.spMin,
             color: Colors.black87),
         SizedBox(height: 8.h),
         TextFormField(
           controller: textCtrl,
           style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 16.spMin,
               fontWeight: FontWeight.w500,
               color: Colors.black),
           decoration: InputDecoration(
@@ -275,7 +265,7 @@ class CreateDvirView extends GetView<DvirController> {
         Text(
           label,
           style: TextStyle(
-              fontSize: 13.5.sp,
+              fontSize: 13.5.spMin,
               fontWeight: FontWeight.w600,
               color: Colors.black87),
         ),
@@ -299,7 +289,7 @@ class CreateDvirView extends GetView<DvirController> {
         child: Text(
           label,
           style: TextStyle(
-            fontSize: 15.sp,
+            fontSize: 15.spMin,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),

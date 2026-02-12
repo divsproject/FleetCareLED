@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../controllers/dot_inspection_controller.dart';
 
 class SendLogsView extends GetView<DotInspectionController> {
@@ -16,19 +17,8 @@ class SendLogsView extends GetView<DotInspectionController> {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Send Logs & inspections",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Send Logs & inspections",
         actions: [
           IconButton(
             icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
@@ -63,7 +53,7 @@ class SendLogsView extends GetView<DotInspectionController> {
                             textAlign: TextAlign.center,
                             color:
                                 isEmail.value ? AppColors.primary : Colors.grey,
-                            fontSize: 15.sp,
+                            fontSize: 15.spMin,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -90,7 +80,7 @@ class SendLogsView extends GetView<DotInspectionController> {
                             color: !isEmail.value
                                 ? AppColors.primary
                                 : Colors.grey,
-                            fontSize: 15.sp,
+                            fontSize: 15.spMin,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
@@ -110,7 +100,7 @@ class SendLogsView extends GetView<DotInspectionController> {
                     "Your Logs are being faxed to (248) 765-83-8395.",
                     textAlign: TextAlign.center,
                     color: Colors.white,
-                    fontSize: 14.sp,
+                    fontSize: 14.spMin,
                     fontWeight: FontWeight.w600,
                   ),
                 )
@@ -119,20 +109,20 @@ class SendLogsView extends GetView<DotInspectionController> {
           // Content
           Expanded(
             child: SingleChildScrollView(
-              padding: EdgeInsets.all(20.w),
+              padding: EdgeInsets.only(top: 20.h, bottom: 20.h, left: 20.w, right: 20.w),
               child: Obx(() => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (!isEmail.value) ...[
                         CustomText(
                           "Fax 8 Logs & 2 Vehicle Inspections & 2 Vehicle Inspections",
-                          fontSize: 14.sp,
+                          fontSize: 14.spMin,
                           color: Colors.grey[700],
                         ),
                         SizedBox(height: 24.h),
                         CustomText(
                           "RECIPIENT FAX",
-                          fontSize: 14.sp,
+                          fontSize: 14.spMin,
                           color: AppColors.primary,
                           fontWeight: FontWeight.bold,
                         ),
@@ -174,7 +164,7 @@ class SendLogsView extends GetView<DotInspectionController> {
                             child: CustomText(
                               "Send",
                               color: AppColors.primary,
-                              fontSize: 16.sp,
+                              fontSize: 16.spMin,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

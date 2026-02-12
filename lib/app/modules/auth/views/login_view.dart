@@ -35,7 +35,8 @@ class LoginView extends GetView<LoginController> {
         child: SingleChildScrollView(
           child: LoginForm(
             width: 1.sw, // Full width
-            padding: EdgeInsets.all(20.w),
+            padding: EdgeInsets.only(
+                top: 20.h, bottom: 20.h, left: 20.w, right: 20.w),
             isMobile: true,
           ),
         ),
@@ -57,7 +58,8 @@ class LoginView extends GetView<LoginController> {
           child: LoginForm(
             width: kAuthCardWidth, // Fixed logical pixels
             height: kAuthCardHeight,
-            padding: EdgeInsets.all(30.r), // Use .r for adaptive padding
+            padding: EdgeInsets.only(
+                top: 20.h, bottom: 20.h, left: 20.w, right: 20.w),
             isMobile: false,
           ),
         ),
@@ -87,7 +89,8 @@ class LoginView extends GetView<LoginController> {
               child: LoginForm(
                 width: kAuthCardWidth, // Fixed logical pixels
                 height: kAuthCardHeight,
-                padding: EdgeInsets.all(40.r),
+                padding: EdgeInsets.only(
+                    top: 20.h, bottom: 20.h, left: 20.w, right: 20.w),
                 isMobile: false,
                 showLogo: false, // Hide logo in form since it's on the left
               ),
@@ -116,7 +119,7 @@ class LoginForm extends StatelessWidget {
   }) : super(key: key);
 
   // Helper
-  double _sp(double val) => isMobile ? val.sp : val;
+  double _sp(double val) => isMobile ? val.spMin : val;
   double _h(double val) => isMobile ? val.h : val;
   double _w(double val) => isMobile ? val.w : val;
   double _r(double val) => isMobile ? val.r : val;
@@ -134,11 +137,11 @@ class LoginForm extends StatelessWidget {
       decoration: isMobile
           ? BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.circular(_r(18)),
+              borderRadius: BorderRadius.circular(18.r),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black.withOpacity(0.15),
-                  blurRadius: _r(10),
+                  blurRadius: 10.r,
                 ),
               ],
             )

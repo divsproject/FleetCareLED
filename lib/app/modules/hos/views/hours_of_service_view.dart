@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 
 import '../controllers/hours_of_service_controller.dart';
 import '../../../routes/app_routes.dart';
@@ -18,47 +19,44 @@ class HoursOfServiceView extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBackground,
-          appBar: AppBar(
-            backgroundColor: AppColors.primary,
-            title: Column(
+          appBar: CustomAppBar(
+            customTitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 CustomText(
                   "Hours of Service",
                   color: Colors.white,
-                  fontSize: 18.sp,
+                  fontSize: 18.spMin, // Fixed size
                   fontWeight: FontWeight.w600,
                 ),
                 Obx(() => CustomText(
                       "Driver: ${controller.currentDriver.value?.name ?? 'Unknown'}",
                       color: Colors.white70,
-                      fontSize: 14.sp,
+                      fontSize: 14.spMin, // Fixed size
                       fontWeight: FontWeight.w400,
                     )),
               ],
-            ),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, size: 24.sp),
-              onPressed: () => Get.back(),
             ),
             actions: [
               Padding(
                 padding: EdgeInsets.only(right: 16.w),
                 child: IconButton(
-                  icon: Icon(Icons.settings, size: 24.sp),
+                  icon: Icon(Icons.settings, size: 24.spMin),
                   onPressed: () => Get.toNamed(AppRoutes.DAILY_LOG),
                   color: Colors.white,
                 ),
               )
             ],
+            centerTitle: false,
           ),
           body: SingleChildScrollView(
-            padding: EdgeInsets.all(16.w),
+            padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
             child: Column(
               children: [
                 // 🔴 Return to Rest Mode
                 Container(
-                  padding: EdgeInsets.all(12.w),
+                  padding: EdgeInsets.only(
+                      top: 12.h, bottom: 12.h, left: 12.w, right: 12.w),
                   decoration: BoxDecoration(
                     color: AppColors.redLight,
                     borderRadius: BorderRadius.circular(10.r),
@@ -66,7 +64,8 @@ class HoursOfServiceView extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Icon(Icons.refresh, color: AppColors.error, size: 20.sp),
+                      Icon(Icons.refresh,
+                          color: AppColors.error, size: 20.spMin),
                       SizedBox(width: 8.w),
                       const CustomText("Return to Rest Mode",
                           color: AppColors.error),
@@ -82,7 +81,7 @@ class HoursOfServiceView extends StatelessWidget {
                     // Navigate to Edit Log
                   },
                   child: Container(
-                    padding: EdgeInsets.all(16.w),
+                    padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
                     decoration: BoxDecoration(
                       color: AppColors.lightBlueBg, // Restore Blue BG
                       borderRadius: BorderRadius.circular(16.r),
@@ -120,13 +119,13 @@ class HoursOfServiceView extends StatelessWidget {
                             CustomText(
                               "Off Duty",
                               fontWeight: FontWeight.w600,
-                              fontSize: 18.sp,
+                              fontSize: 18.spMin,
                             ),
                             SizedBox(height: 4.h),
                             CustomText(
                               "01:07",
                               color: AppColors.textSecondary,
-                              fontSize: 16.sp,
+                              fontSize: 16.spMin,
                             ),
                           ],
                         ),
@@ -155,7 +154,7 @@ class HoursOfServiceView extends StatelessWidget {
 
                 // 🇺🇸 USA Property
                 Container(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
                   decoration: BoxDecoration(
                     color: AppColors.lightBlueBg, // Restore Blue BG
                     borderRadius: BorderRadius.circular(14.r),
@@ -167,7 +166,7 @@ class HoursOfServiceView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText("USA Property (8/70)",
-                              fontWeight: FontWeight.w600, fontSize: 16.sp),
+                              fontWeight: FontWeight.w600, fontSize: 16.spMin),
                         ],
                       ),
                       SizedBox(height: 8.h),
@@ -177,9 +176,11 @@ class HoursOfServiceView extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CustomText("USA Property (8/70)",
-                              color: AppColors.textSecondary, fontSize: 14.sp),
+                              color: AppColors.textSecondary,
+                              fontSize: 14.spMin),
                           CustomText("70:00h / 70h",
-                              color: AppColors.textSecondary, fontSize: 14.sp),
+                              color: AppColors.textSecondary,
+                              fontSize: 14.spMin),
                         ],
                       ),
                     ],
@@ -215,7 +216,7 @@ class HoursOfServiceView extends StatelessWidget {
                                     ? Colors.white
                                     : Colors.black, // Or AppColors.textPrimary
                                 fontWeight: FontWeight.w600,
-                                fontSize: 16.sp,
+                                fontSize: 16.spMin,
                               ),
                             ),
                           ),
@@ -237,7 +238,7 @@ class HoursOfServiceView extends StatelessWidget {
                                     ? Colors.white
                                     : Colors.black, // Or AppColors.textPrimary
                                 fontWeight: FontWeight.w500,
-                                fontSize: 16.sp,
+                                fontSize: 16.spMin,
                               ),
                             ),
                           ),
@@ -250,7 +251,7 @@ class HoursOfServiceView extends StatelessWidget {
 
                 // 📜 Certified list
                 Container(
-                  padding: EdgeInsets.all(16.w),
+                  padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(14.r),
@@ -281,7 +282,7 @@ class _TimeBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16.w),
+      padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
       decoration: BoxDecoration(
         color: AppColors.lightGreenBg, // Light Green BG
         borderRadius: BorderRadius.circular(16.r),
@@ -293,7 +294,7 @@ class _TimeBox extends StatelessWidget {
           Row(
             children: [
               Container(
-                padding: EdgeInsets.all(8.w),
+                padding: EdgeInsets.only(top: 8.h, bottom: 8.h, left: 8.w, right: 8.w),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   border: Border.all(color: AppColors.success, width: 1.5.w),
@@ -302,11 +303,11 @@ class _TimeBox extends StatelessWidget {
                     size: 16.sp, color: AppColors.success),
               ),
               SizedBox(width: 8.w),
-              CustomText(time, fontSize: 18.sp, fontWeight: FontWeight.bold),
+              CustomText(time, fontSize: 18.spMin, fontWeight: FontWeight.bold),
             ],
           ),
           SizedBox(height: 8.h),
-          CustomText(label, fontSize: 16.sp, color: Colors.black87),
+          CustomText(label, fontSize: 16.spMin, color: Colors.black87),
         ],
       ),
     );
@@ -334,7 +335,7 @@ class _CertRow extends StatelessWidget {
               children: [
                 CustomText(day, fontWeight: FontWeight.w600),
                 CustomText(time,
-                    fontSize: 12.sp, color: AppColors.textSecondary),
+                    fontSize: 12.spMin, color: AppColors.textSecondary),
               ],
             ),
             Row(

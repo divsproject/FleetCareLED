@@ -12,7 +12,11 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
   ]);
+
   await Get.putAsync(() async => DriverService());
   runApp(const MyApp());
 }
@@ -25,7 +29,7 @@ class MyApp extends StatelessWidget {
     // Note: ResponsiveSizer adapts automatically to any screen size using percentages.
     // Unlike ScreenUtil, it does not require a fixed design reference size (e.g. 440x956).
     return ScreenUtilInit(
-      designSize: const Size(375, 812),
+      designSize: const Size(402, 874),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {

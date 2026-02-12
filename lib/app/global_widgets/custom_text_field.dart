@@ -38,7 +38,7 @@ class CustomTextField extends StatelessWidget {
   double _r(double val) => isResponsive ? val.r : val;
   double _w(double val) => isResponsive ? val.w : val;
   double _h(double val) => isResponsive ? val.h : val;
-  double _sp(double val) => isResponsive ? val.sp : val;
+  double _sp(double val) => isResponsive ? val.spMin : val;
 
   @override
   Widget build(BuildContext context) {

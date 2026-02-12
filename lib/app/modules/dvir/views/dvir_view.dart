@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../routes/app_routes.dart';
 import '../../../core/values/app_colors.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/custom_text.dart';
 
@@ -13,18 +14,8 @@ class DvirView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackground,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        title: CustomText(
-          "DVIRs",
-          color: Colors.white,
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: const CustomAppBar(
+        title: "DVIRs",
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -39,13 +30,13 @@ class DvirView extends StatelessWidget {
           CustomText(
             "No DVIRs Available",
             fontWeight: FontWeight.w600,
-            fontSize: 16.sp,
+            fontSize: 16.spMin,
           ),
           SizedBox(height: 6.h),
           CustomText(
             "Tap the button below to create a DVIR.",
             color: AppColors.textSecondary,
-            fontSize: 12.sp,
+            fontSize: 12.spMin,
           ),
           SizedBox(height: 20.h),
           Padding(

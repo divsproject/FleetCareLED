@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../../../global_widgets/custom_text_field.dart';
 import '../controllers/edit_profile_controller.dart';
 
@@ -17,25 +18,13 @@ class EditProfileView extends GetView<EditProfileController> {
 
     return Scaffold(
       backgroundColor: Colors.white, // As per design
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF2AA6DF), // Matching dashboard blue
-        automaticallyImplyLeading: canGoBack,
-        leading: canGoBack
-            ? IconButton(
-                icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
-                onPressed: () => Get.back(),
-              )
-            : null,
-        title: CustomText(
-          "Edit Driver Profile",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
+      appBar: CustomAppBar(
+        title: "Edit Driver Profile",
+        bgColor: const Color(0xFF2AA6DF), // Matching dashboard blue
+        showBackButton: canGoBack,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.w), // Adjusted to 16.w for better spacing
+        padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w), // Adjusted to 16.w for better spacing
         child: Column(
           children: [
             // Profile Image Section
@@ -74,7 +63,7 @@ class EditProfileView extends GetView<EditProfileController> {
                   ),
                   SizedBox(height: 10.h),
                   CustomText("Upload Photo",
-                      fontWeight: FontWeight.bold, fontSize: 16.sp),
+                      fontWeight: FontWeight.bold, fontSize: 16.spMin),
                 ],
               ),
             ),
@@ -117,7 +106,7 @@ class EditProfileView extends GetView<EditProfileController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomText(label, fontWeight: FontWeight.bold, fontSize: 14.sp),
+          CustomText(label, fontWeight: FontWeight.bold, fontSize: 14.spMin),
           SizedBox(height: 8.h),
           CustomTextField(
             controller: textController,

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 
 class FuelingView extends StatelessWidget {
   const FuelingView({Key? key}) : super(key: key);
@@ -11,26 +12,16 @@ class FuelingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackground,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        title: CustomText(
-          "Fueling",
-          color: Colors.white,
-          fontSize: 20.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: const CustomAppBar(
+        title: "Fueling",
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.r),
+        padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
         child: Column(
           children: [
             // 🔹 Top Stats
             Container(
-              padding: EdgeInsets.all(16.r),
+              padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(16.r),
@@ -79,12 +70,12 @@ class _Stat extends StatelessWidget {
       children: [
         CustomText(
           value,
-          fontSize: 18.sp,
+          fontSize: 18.spMin,
           fontWeight: FontWeight.w700,
         ),
         CustomText(
           label,
-          fontSize: 12.sp,
+          fontSize: 12.spMin,
           color: AppColors.textSecondary,
         ),
       ],
@@ -99,7 +90,7 @@ class _FuelTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 12.h),
-      padding: EdgeInsets.all(14.r),
+      padding: EdgeInsets.only(top: 14.h, bottom: 14.h, left: 14.w, right: 14.w),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(14.r),
@@ -110,12 +101,12 @@ class _FuelTile extends StatelessWidget {
           CustomText(
             "55000 INR",
             fontWeight: FontWeight.w600,
-            fontSize: 14.sp,
+            fontSize: 14.spMin,
           ),
           SizedBox(height: 4.h),
           CustomText(
             "OCT 8 • 09:08 PM • Kalupur Station",
-            fontSize: 12.sp,
+            fontSize: 12.spMin,
             color: AppColors.textSecondary,
           ),
         ],

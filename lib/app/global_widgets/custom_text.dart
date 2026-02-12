@@ -31,7 +31,7 @@ class CustomText extends StatelessWidget {
   static const double small = 12.0;
 
   // Helper
-  double _sp(double val) => isResponsive ? val.sp : val;
+  double _sp(double val) => isResponsive ? val.spMin : val;
 
   @override
   Widget build(BuildContext context) {

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../controllers/access_code_controller.dart';
 
 class AccessCodeView extends GetView<AccessCodeController> {
@@ -14,19 +15,8 @@ class AccessCodeView extends GetView<AccessCodeController> {
     // Actually relying on GetPage binding property.
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Access Code",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Access Code",
         actions: [
           IconButton(
             icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
@@ -47,7 +37,7 @@ class AccessCodeView extends GetView<AccessCodeController> {
                             ? "Confirm your access code"
                             : "Set a 4-digit access code to lock the app in DOT Inspection Mode, you will have to re-enter the code to exit DOT inspection Mode",
                         color: Colors.grey[700],
-                        fontSize: 15.sp,
+                        fontSize: 15.spMin,
                         textAlign: TextAlign.center,
                       ),
                     )),
@@ -64,7 +54,7 @@ class AccessCodeView extends GetView<AccessCodeController> {
                             children: [
                               CustomText(
                                 filled ? controller.code.value[index] : "",
-                                fontSize: 22.sp,
+                                fontSize: 22.spMin,
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
                               ),
@@ -84,7 +74,7 @@ class AccessCodeView extends GetView<AccessCodeController> {
                   child: CustomText(
                     "Skip to DOT Inspection Mode",
                     color: AppColors.primary,
-                    fontSize: 15.sp,
+                    fontSize: 15.spMin,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -131,7 +121,7 @@ class AccessCodeView extends GetView<AccessCodeController> {
           child: InkWell(
             onTap: () => controller.onKeyTap(key),
             child: Container(
-              margin: EdgeInsets.all(4.w),
+              margin: EdgeInsets.only(top: 4.h, bottom: 4.h, left: 4.w, right: 4.w),
               height: 56.h,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -148,11 +138,11 @@ class AccessCodeView extends GetView<AccessCodeController> {
                 children: [
                   Text(key,
                       style: TextStyle(
-                          fontSize: 20.sp, fontWeight: FontWeight.w500)),
+                          fontSize: 20.spMin, fontWeight: FontWeight.w500)),
                   if (subTexts[index].isNotEmpty)
                     Text(subTexts[index],
                         style: TextStyle(
-                            fontSize: 10.sp,
+                            fontSize: 10.spMin,
                             fontWeight: FontWeight.bold,
                             letterSpacing: 1.5)),
                 ],

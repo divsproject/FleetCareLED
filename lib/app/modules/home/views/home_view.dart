@@ -11,130 +11,170 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
 
   @override
+  @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Column(
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        final isLandscape = orientation == Orientation.landscape;
+
+        if (isLandscape) {
+          return Row(
+            children: [
+              // ⏱ TIMER (Left Side)
+              Expanded(
+                flex: 4,
+                child: Center(
+                  child: SizedBox(
+                    height: 200.h,
+                    child: _buildTimer(isLandscape),
+                  ),
+                ),
+              ),
+
+              // Right Side (User Info + Grid)
+              Expanded(
+                flex: 6,
+                child: Column(
+                  children: [
+                    _buildUserAndVehicle(context, isLandscape),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: _buildStatusGrid(isLandscape),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        }
+
+        // PORTRAIT
+        return Stack(
           children: [
-            // USER + VEHICLE
-            Padding(
-              padding: EdgeInsets.all(16.w), // Responsive padding
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  InkWell(
-                    // Navigate to Profile tab (Index 3) using DashboardController
-                    onTap: () {
-                      final dashboardController =
-                          Get.find<DashboardController>();
-                      dashboardController.changeTab(3);
-                    },
-                    child: Row(
-                      children: [
-                        Icon(Icons.person, size: 18.sp), // Responsive icon
-                        SizedBox(width: 6.w), // Responsive spacing
-                        Obx(() => Text(
-                              controller.currentDriver.value?.name ?? "User",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 16.sp), // Responsive font
-                            )),
-                      ],
-                    ),
-                  ),
-
-                  // 🚚 VEHICLE CLICK
-                  InkWell(
-                    onTap: () => _openChangeEquipment(context, controller),
-                    child: Row(
-                      children: [
-                        Icon(Icons.local_shipping,
-                            size: 20.sp), // Responsive icon
-                        SizedBox(width: 4.w), // Responsive spacing
-                        Obx(() => Text(controller.vehicleNumber.value,
-                            style:
-                                TextStyle(fontSize: 16.sp))), // Responsive font
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            SizedBox(height: 10.h), // Responsive spacing
-
-            // ⏱ TIMER
-            SizedBox(
-              height: 200.h, // Responsive height
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: 180.w, // Responsive width
-                    height: 180.w, // Responsive height (square)
-                    child: CircularProgressIndicator(
-                      value: 0.75,
-                      strokeWidth: 10.w, // Responsive stroke
-                      color: Colors.grey.shade700,
-                      backgroundColor: Colors.grey.shade200,
-                    ),
-                  ),
-                  Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        "14:00",
-                        style: TextStyle(
-                          fontSize: 32.sp, // Responsive font
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Text("REMAINING",
-                          style: TextStyle(fontSize: 12.sp)), // Responsive font
-                      SizedBox(height: 6.h), // Responsive spacing
-
-                      // Status Chip using Obx
-                      Obx(
-                        () => InkWell(
-                          onTap: () => _openChangeStatus(context, controller),
-                          child: Chip(
-                            label: Text(
-                              controller.currentStatus.value.name.toUpperCase(),
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12.sp), // Responsive font
-                            ),
-                            backgroundColor: controller.getStatusColor(
-                              controller.currentStatus.value,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-
-            const Spacer(),
-
-            // ⭕ CIRCLES
-            GridView.count(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
-              padding: EdgeInsets.all(24.w), // Responsive padding
-              mainAxisSpacing: 20.h, // Responsive spacing
-              crossAxisSpacing: 20.w, // Responsive spacing
-              children: const [
-                _CircleInfo("8:00", "BREAK", Colors.amber),
-                _CircleInfo("11:00", "DRIVING", Colors.green),
-                _CircleInfo("14:00", "SHIFT", Colors.black),
-                _CircleInfo("70:00", "CYCLE", Colors.blue),
+            Column(
+              children: [
+                _buildUserAndVehicle(context, isLandscape),
+                SizedBox(height: 10.h),
+                SizedBox(
+                  height: 200.h,
+                  child: _buildTimer(isLandscape),
+                ),
+                const Spacer(),
+                _buildStatusGrid(isLandscape),
               ],
             ),
           ],
+        );
+      },
+    );
+  }
+
+  Widget _buildUserAndVehicle(BuildContext context, bool isLandscape) {
+    // Prevent huge text in landscape by limiting scaling
+    double fontSize(double size) => isLandscape ? size : size.sp;
+
+    return Padding(
+      padding: EdgeInsets.all(isLandscape ? 8.w : 16.w),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          InkWell(
+            onTap: () {
+              final dashboardController = Get.find<DashboardController>();
+              dashboardController.changeTab(3);
+            },
+            child: Row(
+              children: [
+                Icon(Icons.person, size: fontSize(18)),
+                SizedBox(width: 6.w),
+                Obx(() => Text(
+                      controller.currentDriver.value?.name ?? "User",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: fontSize(16)),
+                    )),
+              ],
+            ),
+          ),
+          InkWell(
+            onTap: () => _openChangeEquipment(context, controller),
+            child: Row(
+              children: [
+                Icon(Icons.local_shipping, size: fontSize(20)),
+                SizedBox(width: 4.w),
+                Obx(() => Text(controller.vehicleNumber.value,
+                    style: TextStyle(fontSize: fontSize(16)))),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTimer(bool isLandscape) {
+    double fontSize(double size) => isLandscape ? size : size.sp;
+
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SizedBox(
+          width: isLandscape ? 140.h : 180.w,
+          height: isLandscape ? 140.h : 180.w,
+          child: CircularProgressIndicator(
+            value: 0.75,
+            strokeWidth: isLandscape ? 8 : 10.w,
+            color: Colors.grey.shade700,
+            backgroundColor: Colors.grey.shade200,
+          ),
         ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "14:00",
+              style: TextStyle(
+                fontSize: fontSize(32),
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text("REMAINING", style: TextStyle(fontSize: fontSize(12))),
+            SizedBox(height: 6.h),
+            Obx(
+              () => InkWell(
+                onTap: () => _openChangeStatus(Get.context!, controller),
+                child: Chip(
+                  label: Text(
+                    controller.currentStatus.value.name.toUpperCase(),
+                    style:
+                        TextStyle(color: Colors.white, fontSize: fontSize(12)),
+                  ),
+                  backgroundColor: controller.getStatusColor(
+                    controller.currentStatus.value,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStatusGrid(bool isLandscape) {
+    return GridView.count(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      crossAxisCount: 2,
+      childAspectRatio: isLandscape ? 2.5 : 1.0, // Flatter items in landscape
+      padding: EdgeInsets.all(isLandscape ? 12.w : 24.w),
+      mainAxisSpacing: isLandscape ? 10.w : 20.h,
+      crossAxisSpacing: isLandscape ? 10.w : 20.w,
+      children: [
+        _CircleInfo("8:00", "BREAK", Colors.amber, isLandscape: isLandscape),
+        _CircleInfo("11:00", "DRIVING", Colors.green, isLandscape: isLandscape),
+        _CircleInfo("14:00", "SHIFT", Colors.black, isLandscape: isLandscape),
+        _CircleInfo("70:00", "CYCLE", Colors.blue, isLandscape: isLandscape),
       ],
     );
   }
@@ -165,24 +205,24 @@ class HomeView extends GetView<HomeController> {
               Text(
                 "Change Equipment",
                 style: TextStyle(
-                    fontSize: 18.sp,
+                    fontSize: 18.spMin,
                     fontWeight: FontWeight.bold), // Responsive font
               ),
               SizedBox(height: 20.h),
               TextField(
                 controller: controller.vehicleController,
                 decoration: const InputDecoration(labelText: "Vehicle"),
-                style: TextStyle(fontSize: 16.sp), // Responsive font
+                style: TextStyle(fontSize: 16.spMin), // Responsive font
               ),
               TextField(
                 controller: controller.trailerController,
                 decoration: const InputDecoration(labelText: "Trailer"),
-                style: TextStyle(fontSize: 16.sp), // Responsive font
+                style: TextStyle(fontSize: 16.spMin), // Responsive font
               ),
               TextButton(
                 onPressed: controller.addTrailer,
                 child: Text("Add Trailer",
-                    style: TextStyle(fontSize: 14.sp)), // Responsive font
+                    style: TextStyle(fontSize: 14.spMin)), // Responsive font
               ),
               SizedBox(height: 12.h),
               SizedBox(
@@ -194,13 +234,13 @@ class HomeView extends GetView<HomeController> {
                   ),
                   onPressed: controller.updateVehicle,
                   child: Text("Save",
-                      style: TextStyle(fontSize: 16.sp)), // Responsive font
+                      style: TextStyle(fontSize: 16.spMin)), // Responsive font
                 ),
               ),
               TextButton(
                 onPressed: () => Get.back(),
                 child: Text("Cancel",
-                    style: TextStyle(fontSize: 14.sp)), // Responsive font
+                    style: TextStyle(fontSize: 14.spMin)), // Responsive font
               ),
             ],
           ),
@@ -221,14 +261,14 @@ class HomeView extends GetView<HomeController> {
       builder: (_) {
         return SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(16.w), // Responsive padding
+            padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w), // Responsive padding
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   "Change Status",
                   style: TextStyle(
-                      fontSize: 18.sp,
+                      fontSize: 18.spMin,
                       fontWeight: FontWeight.bold), // Responsive font
                 ),
                 SizedBox(height: 16.h),
@@ -289,9 +329,9 @@ class HomeView extends GetView<HomeController> {
                 Obx(
                   () => ListTile(
                     title: Text("Add Note",
-                        style: TextStyle(fontSize: 16.sp)), // Responsive font
+                        style: TextStyle(fontSize: 16.spMin)), // Responsive font
                     subtitle: Text(controller.selectedNote.value,
-                        style: TextStyle(fontSize: 14.sp)), // Responsive font
+                        style: TextStyle(fontSize: 14.spMin)), // Responsive font
                     trailing: Icon(Icons.chevron_right,
                         size: 24.sp), // Responsive icon
                     onTap: () async {
@@ -308,7 +348,7 @@ class HomeView extends GetView<HomeController> {
                   child: ElevatedButton(
                     onPressed: () => Get.back(),
                     child: Text("Update",
-                        style: TextStyle(fontSize: 16.sp)), // Responsive font
+                        style: TextStyle(fontSize: 16.spMin)), // Responsive font
                   ),
                 ),
               ],
@@ -350,7 +390,7 @@ class HomeView extends GetView<HomeController> {
                   style: TextStyle(
                     color: isSelected ? Colors.white : Colors.black54,
                     fontWeight: FontWeight.bold,
-                    fontSize: 14.sp, // Responsive font
+                    fontSize: 14.spMin, // Responsive font
                   ),
                 ),
               ),
@@ -358,7 +398,7 @@ class HomeView extends GetView<HomeController> {
               Text(
                 label,
                 style: TextStyle(
-                  fontSize: 11.sp, // Responsive font
+                  fontSize: 11.spMin, // Responsive font
                   fontWeight: FontWeight.w600,
                   color: isSelected ? color : Colors.black54,
                 ),
@@ -375,11 +415,15 @@ class _CircleInfo extends StatelessWidget {
   final String time;
   final String label;
   final Color color;
+  final bool isLandscape;
 
-  const _CircleInfo(this.time, this.label, this.color);
+  const _CircleInfo(this.time, this.label, this.color,
+      {this.isLandscape = false});
 
   @override
   Widget build(BuildContext context) {
+    double fontSize(double size) => isLandscape ? size : size.sp;
+
     return Container(
       decoration: BoxDecoration(
         shape: BoxShape.circle,
@@ -392,10 +436,11 @@ class _CircleInfo extends StatelessWidget {
             Text(
               time,
               style: TextStyle(
-                  fontSize: 20.sp,
+                  fontSize: fontSize(20),
                   fontWeight: FontWeight.bold), // Responsive font
             ),
-            Text(label, style: TextStyle(fontSize: 12.sp)), // Responsive font
+            Text(label,
+                style: TextStyle(fontSize: fontSize(12))), // Responsive font
           ],
         ),
       ),

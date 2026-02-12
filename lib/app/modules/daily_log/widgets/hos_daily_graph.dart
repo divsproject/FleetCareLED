@@ -90,7 +90,7 @@ class HosDailyGraph extends StatelessWidget {
           child: Padding(
             padding: EdgeInsets.only(top: 8.h, right: 8.w),
             child: CustomText("15.75",
-                fontWeight: FontWeight.bold, fontSize: 13.sp),
+                fontWeight: FontWeight.bold, fontSize: 13.spMin),
           ),
         )
       ],
@@ -102,7 +102,7 @@ class HosDailyGraph extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 10.sp,
+        fontSize: 10.spMin,
         color: Colors.black,
         fontWeight: fontWeight,
       ),
@@ -126,7 +126,7 @@ class HosDailyGraph extends StatelessWidget {
         ),
         child: CustomText(
           text,
-          fontSize: 12.sp,
+          fontSize: 12.spMin,
           fontWeight: FontWeight.bold,
         ),
       ),

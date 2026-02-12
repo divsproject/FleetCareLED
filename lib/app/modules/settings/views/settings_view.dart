@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
-import '../../../global_widgets/custom_text.dart';
+
+import '../../../global_widgets/custom_app_bar.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
@@ -12,20 +13,9 @@ class SettingsView extends GetView<SettingsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Setting",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: const Color(0xFF2AA6DF),
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Setting",
+        bgColor: const Color(0xFF2AA6DF),
         actions: [
           IconButton(
             icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
@@ -119,7 +109,7 @@ class SettingsView extends GetView<SettingsController> {
             child: Text(
               title,
               style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: 16.spMin,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
@@ -157,7 +147,7 @@ class SettingsView extends GetView<SettingsController> {
         child: Text(
           title,
           style: TextStyle(
-            fontSize: 15.sp,
+            fontSize: 15.spMin,
             fontWeight: FontWeight.w500,
             color: Colors.black87,
           ),

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../global_widgets/custom_button.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../../../core/values/app_colors.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../controllers/assignment_controller.dart';
 
 class AssignmentView extends StatelessWidget {
@@ -16,63 +17,66 @@ class AssignmentView extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           backgroundColor: AppColors.scaffoldBackground,
-          appBar: AppBar(
-            backgroundColor: AppColors.primary,
-            elevation: 0,
-            title: CustomText(
-              "Assignments",
-              color: Colors.white,
-              fontSize: 18.sp,
-              fontWeight: FontWeight.w600,
-            ),
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back, size: 24.sp),
-              onPressed: () => Get.back(),
-            ),
-            centerTitle: true,
+          appBar: const CustomAppBar(
+            title: "Assignments",
           ),
           body: SafeArea(
-            child: Center(
-              child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 24.w),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _AssignmentCard(
-                      icon: Icons.local_shipping,
-                      title: "Vehicle",
-                      subtitle: "Select Vehicle",
-                      onTap: () => controller.navigateToSelectVehicle(),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 600),
+                      child: SingleChildScrollView(
+                        padding: EdgeInsets.symmetric(horizontal: 24.w),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(height: 20.h),
+                            _AssignmentCard(
+                              icon: Icons.local_shipping,
+                              title: "Vehicle",
+                              subtitle: "Select Vehicle",
+                              onTap: () => controller.navigateToSelectVehicle(),
+                            ),
+                            SizedBox(height: 20.h),
+                            _AssignmentCard(
+                              icon: Icons.view_list,
+                              title: "Trailer(s)",
+                              subtitle:
+                                  "Add a Ship-related Trailer(s) or No Trailer ID",
+                              big: true,
+                              onTap: () => controller.navigateToEnterTrailer(),
+                            ),
+                            SizedBox(height: 20.h),
+                            _AssignmentCard(
+                              icon: Icons.inventory_2,
+                              title: "Shipping IDs",
+                              subtitle: "Add a Shipping ID",
+                              onTap: () => controller.navigateToAddShippingId(),
+                            ),
+                            SizedBox(height: 20.h),
+                          ],
+                        ),
+                      ),
                     ),
-                    SizedBox(height: 20.h),
-                    _AssignmentCard(
-                      icon: Icons.view_list,
-                      title: "Trailer(s)",
-                      subtitle:
-                          "Add a Ship-related Trailer(s) or No Trailer ID",
-                      big: true,
-                      onTap: () => controller.navigateToEnterTrailer(),
-                    ),
-                    SizedBox(height: 20.h),
-                    _AssignmentCard(
-                      icon: Icons.inventory_2,
-                      title: "Shipping IDs",
-                      subtitle: "Add a Shipping ID",
-                      onTap: () => controller.navigateToAddShippingId(),
-                    ),
-                    SizedBox(height: 40.h),
-                  ],
+                  ),
                 ),
-              ),
-            ),
-          ),
-          bottomNavigationBar: Padding(
-            padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 20.h),
-            child: CustomButton(
-              label: "Done",
-              onPressed: controller.completeAssignment,
-              height: 52.h,
-              borderRadius: 30.r,
+                Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 600),
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(20.w, 10.h, 20.w, 20.h),
+                      child: CustomButton(
+                        label: "Done",
+                        onPressed: controller.completeAssignment,
+                        height: 52.h,
+                        borderRadius: 30.r,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         );
@@ -122,19 +126,19 @@ class _AssignmentCard extends StatelessWidget {
             CircleAvatar(
               radius: 26.r,
               backgroundColor: const Color(0xFFEAF6FF),
-              child: Icon(icon, color: AppColors.primary, size: 26.sp),
+              child: Icon(icon, color: AppColors.primary, size: 26.spMin),
             ),
             SizedBox(height: 10.h),
             CustomText(
               title,
               fontWeight: FontWeight.w600,
-              fontSize: 16.sp,
+              fontSize: 16.spMin,
             ),
             SizedBox(height: 4.h),
             CustomText(
               subtitle,
               textAlign: TextAlign.center,
-              fontSize: 12.sp,
+              fontSize: 12.spMin,
               color: Colors.black54,
             ),
           ],

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../controllers/notification_controller.dart';
 
 class NotificationView extends GetView<NotificationController> {
@@ -12,19 +13,8 @@ class NotificationView extends GetView<NotificationController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Notifications",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Notifications",
         actions: [
           Obx(() => controller.unreadCount > 0
               ? TextButton(
@@ -32,10 +22,10 @@ class NotificationView extends GetView<NotificationController> {
                   child: CustomText(
                     "Mark all read",
                     color: Colors.white,
-                    fontSize: 14.sp,
+                    fontSize: 14.spMin,
                   ),
                 )
-              : SizedBox()),
+              : const SizedBox()),
         ],
       ),
       body: Obx(() {
@@ -49,7 +39,7 @@ class NotificationView extends GetView<NotificationController> {
                 SizedBox(height: 16.h),
                 CustomText(
                   "No notifications",
-                  fontSize: 16.sp,
+                  fontSize: 16.spMin,
                   color: Colors.grey[600],
                 ),
               ],
@@ -108,20 +98,20 @@ class NotificationView extends GetView<NotificationController> {
                           children: [
                             CustomText(
                               notification.title,
-                              fontSize: 16.sp,
+                              fontSize: 16.spMin,
                               fontWeight: FontWeight.bold,
                               color: Colors.black,
                             ),
                             SizedBox(height: 4.h),
                             CustomText(
                               notification.message,
-                              fontSize: 15.sp,
+                              fontSize: 15.spMin,
                               color: Colors.grey[700],
                             ),
                             SizedBox(height: 8.h),
                             CustomText(
                               notification.time,
-                              fontSize: 14.sp,
+                              fontSize: 14.spMin,
                               color: Colors.grey[500],
                             ),
                           ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../controllers/help_controller.dart';
 
 class HelpView extends GetView<HelpController> {
@@ -11,21 +12,9 @@ class HelpView extends GetView<HelpController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Help",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor:
-            const Color(0xFF2AA6DF), // Matching Settings AppBar color
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 24.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Help",
+        bgColor: const Color(0xFF2AA6DF), // Matching Settings AppBar color
         actions: [
           IconButton(
             icon: Icon(Icons.edit_outlined, color: Colors.white, size: 24.sp),
@@ -42,7 +31,7 @@ class HelpView extends GetView<HelpController> {
           children: [
             CustomText(
               "Power data malfunctions :",
-              fontSize: 17.sp,
+              fontSize: 17.spMin,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
@@ -50,7 +39,7 @@ class HelpView extends GetView<HelpController> {
             Text(
               "The ELD records a power data malfunctions when an ELD is not powered for a cumulative in-motions driving time of 30 minutes or more over a 24-hour period, for all drivers.",
               style: TextStyle(
-                fontSize: 15.sp,
+                fontSize: 15.spMin,
                 color: Colors.grey[600],
                 height: 1.5,
               ),
@@ -58,7 +47,7 @@ class HelpView extends GetView<HelpController> {
             SizedBox(height: 24.h),
             CustomText(
               "What should i do next?",
-              fontSize: 17.sp,
+              fontSize: 17.spMin,
               fontWeight: FontWeight.bold,
               color: Colors.black,
             ),
@@ -74,7 +63,7 @@ class HelpView extends GetView<HelpController> {
               child: Text(
                 "For any questions or concerns, contact your administrator.",
                 style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: 14.spMin,
                   color: Colors.grey[600],
                 ),
                 textAlign: TextAlign.center,
@@ -95,7 +84,7 @@ class HelpView extends GetView<HelpController> {
                 child: Text(
                   "OK",
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 16.spMin,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -124,7 +113,7 @@ class HelpView extends GetView<HelpController> {
             child: Text(
               text,
               style: TextStyle(
-                fontSize: 15.sp,
+                fontSize: 15.spMin,
                 color: Colors.grey[600],
                 height: 1.4,
               ),
