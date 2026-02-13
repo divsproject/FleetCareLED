@@ -288,11 +288,11 @@ class HomeView extends GetView<HomeController> {
                 height: 48.h, // Responsive height
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
+                    backgroundColor: const Color(0xFF007BFF), // Updated to a blue color
                   ),
                   onPressed: controller.updateVehicle,
                   child: Text("Save",
-                      style: TextStyle(fontSize: 16.spMin)), // Responsive font
+                      style: TextStyle(fontSize: 16.spMin, color: Colors.white)), // Responsive font
                 ),
               ),
               TextButton(
@@ -410,10 +410,13 @@ class HomeView extends GetView<HomeController> {
                   width: double.infinity,
                   height: 48.h, // Responsive height
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF007BFF), // Updated to a blue color
+                    ),
                     onPressed: () => Get.back(),
                     child: Text("Update",
                         style:
-                            TextStyle(fontSize: 16.spMin)), // Responsive font
+                            TextStyle(fontSize: 16.spMin, color: Colors.white)), // Responsive font
                   ),
                 ),
               ],

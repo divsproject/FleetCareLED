@@ -215,7 +215,10 @@ class HoursOfServiceView extends StatelessWidget {
                       children: [
                         Expanded(
                           child: InkWell(
-                            onTap: () => controller.toggleView(true),
+                            onTap: () => {
+                              controller.toggleView(true),
+                              Get.toNamed(AppRoutes.LOGBOOK),
+                            },
                             child: Container(
                               decoration: BoxDecoration(
                                 color: controller.isLogbook.value

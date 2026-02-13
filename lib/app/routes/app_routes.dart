@@ -32,6 +32,7 @@ abstract class AppRoutes {
   static const SEND_ELD_DATA = _Paths.SEND_ELD_DATA;
   static const SEND_LOGS = _Paths.SEND_LOGS;
   static const NOTIFICATION = _Paths.NOTIFICATION;
+  static const LOGBOOK = _Paths.LOGBOOK;
 }
 
 abstract class _Paths {
@@ -68,4 +69,5 @@ abstract class _Paths {
   static const SEND_ELD_DATA = '/send-eld-data';
   static const SEND_LOGS = '/send-logs';
   static const NOTIFICATION = '/notification';
+  static const LOGBOOK = '/logbook';
 }

@@ -14,6 +14,8 @@ import 'package:fleetcare_eld/app/modules/dot_inspection/views/send_logs_view.da
 import 'package:fleetcare_eld/app/modules/dot_inspection/controllers/access_code_controller.dart';
 import 'package:fleetcare_eld/app/modules/help/bindings/help_binding.dart';
 import 'package:fleetcare_eld/app/modules/help/views/help_view.dart';
+import 'package:fleetcare_eld/app/modules/logbook/bindings/logbook_binding.dart';
+import 'package:fleetcare_eld/app/modules/logbook/views/logbook_view.dart';
 import 'package:fleetcare_eld/app/modules/notification/bindings/notification_binding.dart';
 import 'package:fleetcare_eld/app/modules/notification/views/notification_view.dart';
 import 'package:fleetcare_eld/app/modules/settings/bindings/settings_binding.dart';
@@ -205,6 +207,11 @@ class AppPages {
       name: AppRoutes.HELP,
       page: () => const HelpView(),
       binding: HelpBinding(),
+    ),
+   GetPage(
+      name: AppRoutes.LOGBOOK,
+      page: () =>  LogbookView(),
+      binding: LogbookBinding(),
     ),
   ];
 }
