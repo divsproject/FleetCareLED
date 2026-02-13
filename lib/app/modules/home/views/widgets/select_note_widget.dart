@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import '../../../../core/values/app_colors.dart';
 import '../../../../global_widgets/custom_text.dart';
@@ -50,7 +51,8 @@ class SelectNoteWidget extends StatelessWidget {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.only(
+                top: 12.h, bottom: 12.h, left: 12.w, right: 12.w),
             child: const CustomTextField(
               hintText: "Search Note",
               suffixIcon: Icon(Icons.search, color: AppColors.textSecondary),
@@ -70,7 +72,8 @@ class SelectNoteWidget extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(12),
+            padding: EdgeInsets.only(
+                top: 12.h, bottom: 12.h, left: 12.w, right: 12.w),
             child: CustomButton(
               label: "Confirm",
               onPressed: () {

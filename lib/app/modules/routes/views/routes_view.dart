@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 
 class RoutesView extends StatelessWidget {
   const RoutesView({Key? key}) : super(key: key);
@@ -12,24 +14,17 @@ class RoutesView extends StatelessWidget {
       length: 3,
       child: Scaffold(
         backgroundColor: AppColors.scaffoldBackground,
-        appBar: AppBar(
-          backgroundColor: AppColors.primary,
-          title: const CustomText(
-            "Routes",
-            color: Colors.white,
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-          ),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () => Get.back(),
-          ),
-          bottom: const TabBar(
+        appBar: CustomAppBar(
+          title: "Routes",
+          bottom: TabBar(
             indicatorColor: Colors.white,
-            labelStyle:
-                TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
-            unselectedLabelStyle: TextStyle(fontWeight: FontWeight.normal),
-            tabs: [
+            labelStyle: TextStyle(
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+                fontSize: 14.spMin),
+            unselectedLabelStyle:
+                TextStyle(fontWeight: FontWeight.normal, fontSize: 14.spMin),
+            tabs: const [
               Tab(text: "Past"),
               Tab(text: "Today"),
               Tab(text: "Future"),
@@ -72,21 +67,22 @@ class _EmptyRoutes extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const CircleAvatar(
-            radius: 40,
+          CircleAvatar(
+            radius: 40.r,
             backgroundColor: AppColors.lightBlueBg,
-            child: Icon(Icons.alt_route, size: 36, color: AppColors.primary),
+            child: Icon(Icons.alt_route, size: 36.sp, color: AppColors.primary),
           ),
-          const SizedBox(height: 16),
+          SizedBox(height: 16.h),
           CustomText(
             title,
             fontWeight: FontWeight.w600,
+            fontSize: 16.spMin,
           ),
-          const SizedBox(height: 6),
+          SizedBox(height: 6.h),
           CustomText(
             subtitle,
             color: AppColors.textSecondary,
-            fontSize: 12,
+            fontSize: 12.spMin,
           ),
         ],
       ),

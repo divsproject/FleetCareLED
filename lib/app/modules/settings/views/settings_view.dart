@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
-import '../../../global_widgets/custom_text.dart';
+
+import '../../../global_widgets/custom_app_bar.dart';
 import '../controllers/settings_controller.dart';
 
 class SettingsView extends GetView<SettingsController> {
@@ -12,23 +13,13 @@ class SettingsView extends GetView<SettingsController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Setting",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: const Color(0xFF2AA6DF),
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Setting",
+        bgColor: const Color(0xFF2AA6DF),
         actions: [
           IconButton(
-            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 20.sp),
+            icon:
+                Icon(Icons.edit_outlined, color: Colors.white, size: 24.spMin),
             onPressed: () {
               // Edit action placeholder
             },
@@ -36,7 +27,7 @@ class SettingsView extends GetView<SettingsController> {
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 2.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
         child: Column(
           children: [
             _buildSection(
@@ -50,7 +41,7 @@ class SettingsView extends GetView<SettingsController> {
                     onTap: controller.openDisplaySettings),
               ],
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             _buildSection(
               title: "HOS & Compliance",
               children: [
@@ -63,7 +54,7 @@ class SettingsView extends GetView<SettingsController> {
                         isUsa: false)),
               ],
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             _buildSection(
               title: "Vehicle & Device",
               children: [
@@ -75,7 +66,7 @@ class SettingsView extends GetView<SettingsController> {
                     onTap: () => _showObdDialog(context, controller)),
               ],
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             _buildSection(
               title: "Application Details",
               children: [
@@ -83,7 +74,7 @@ class SettingsView extends GetView<SettingsController> {
                 _buildItem("Version", onTap: controller.showVersion),
               ],
             ),
-            SizedBox(height: 4.h),
+            SizedBox(height: 32.h),
           ],
         ),
       ),
@@ -99,7 +90,7 @@ class SettingsView extends GetView<SettingsController> {
             0xFFF7F9FC), // Light grey/blue background for the specific item
         // Actually the image shows the Header has a background, and the items are below.
         // Let's wrap everything in a "Card" lookalike.
-        borderRadius: BorderRadius.circular(12.sp),
+        borderRadius: BorderRadius.circular(12.r),
         border: Border.all(color: Colors.grey.withOpacity(0.2)),
       ),
       child: Column(
@@ -108,18 +99,18 @@ class SettingsView extends GetView<SettingsController> {
           // Header
           Container(
             width: double.infinity,
-            padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.5.h),
+            padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
             decoration: BoxDecoration(
               color: const Color(0xFFEBF7FC), // Light blue header background
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(12.sp),
-                topRight: Radius.circular(12.sp),
+                topLeft: Radius.circular(12.r),
+                topRight: Radius.circular(12.r),
               ),
             ),
             child: Text(
               title,
               style: TextStyle(
-                fontSize: 16.sp,
+                fontSize: 16.spMin,
                 fontWeight: FontWeight.bold,
                 color: Colors.black87,
               ),
@@ -130,8 +121,8 @@ class SettingsView extends GetView<SettingsController> {
             decoration: BoxDecoration(
               color: const Color(0xFFF7F9FC), // Very light background for items
               borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(12.sp),
-                bottomRight: Radius.circular(12.sp),
+                bottomLeft: Radius.circular(12.r),
+                bottomRight: Radius.circular(12.r),
               ),
             ),
             child: Column(
@@ -148,7 +139,7 @@ class SettingsView extends GetView<SettingsController> {
       onTap: onTap,
       child: Container(
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.5.h),
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(color: Colors.grey.withOpacity(0.1), width: 1),
@@ -157,7 +148,7 @@ class SettingsView extends GetView<SettingsController> {
         child: Text(
           title,
           style: TextStyle(
-            fontSize: 15.sp,
+            fontSize: 15.spMin,
             fontWeight: FontWeight.w500,
             color: Colors.black87,
           ),
@@ -173,8 +164,8 @@ class SettingsView extends GetView<SettingsController> {
     Get.defaultDialog(
       title: isUsa ? "USA Exemptions" : "Canada Exemptions",
       content: SizedBox(
-        width: 80.w,
-        height: 40.h,
+        width: 300.w,
+        height: 320.h,
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,8 +212,8 @@ class SettingsView extends GetView<SettingsController> {
     Get.defaultDialog(
       title: "OBD Troubleshooting",
       content: SizedBox(
-        width: 80.w,
-        height: 40.h,
+        width: 300.w,
+        height: 320.h,
         child: Column(
           children: [
             ElevatedButton.icon(
@@ -233,7 +224,7 @@ class SettingsView extends GetView<SettingsController> {
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white),
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             Expanded(
               child: Obx(() {
                 if (controller.isScanningObd.value)

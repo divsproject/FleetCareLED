@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../core/values/app_colors.dart';
 
 class CustomButton extends StatelessWidget {
@@ -11,6 +12,8 @@ class CustomButton extends StatelessWidget {
   final double borderRadius;
   final bool isOutlined;
   final IconData? icon;
+  final bool isLoading;
+  final bool isResponsive;
 
   const CustomButton({
     Key? key,
@@ -23,41 +26,73 @@ class CustomButton extends StatelessWidget {
     this.borderRadius = 14,
     this.isOutlined = false,
     this.icon,
+    this.isLoading = false,
+    this.isResponsive = true,
   }) : super(key: key);
+
+  // Helper methods for conditional responsiveness
+  double _r(double val) => isResponsive ? val.r : val;
+  double _w(double val) => isResponsive ? val.w : val;
+  double _h(double val) => isResponsive ? val.h : val;
+  double _sp(double val) {
+    if (!isResponsive) return val;
+    // On tablets/desktop (width > 600), use fixed size to prevent huge text
+    if (ScreenUtil().screenWidth > 600) return val;
+    return val.spMin;
+  }
 
   @override
   Widget build(BuildContext context) {
     if (isOutlined) {
       return SizedBox(
         width: width ?? double.infinity,
-        height: height,
+        height: _h(height),
         child: OutlinedButton(
-          onPressed: onPressed,
+          onPressed: isLoading ? null : onPressed,
           style: OutlinedButton.styleFrom(
             side: BorderSide(color: backgroundColor ?? AppColors.primary),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(borderRadius),
+              borderRadius: BorderRadius.circular(_r(borderRadius)),
             ),
           ),
-          child:
-              _buildContent(textColor ?? backgroundColor ?? AppColors.primary),
+          child: isLoading
+              ? SizedBox(
+                  width: _w(24),
+                  height: _w(24),
+                  child: CircularProgressIndicator(
+                    strokeWidth: _w(2),
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                        textColor ?? backgroundColor ?? AppColors.primary),
+                  ),
+                )
+              : _buildContent(
+                  textColor ?? backgroundColor ?? AppColors.primary),
         ),
       );
     }
 
     return SizedBox(
       width: width ?? double.infinity,
-      height: height,
+      height: _h(height),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: backgroundColor ?? AppColors.primary,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
+            borderRadius: BorderRadius.circular(_r(borderRadius)),
           ),
           elevation: 0,
         ),
-        onPressed: onPressed,
-        child: _buildContent(textColor ?? Colors.white),
+        onPressed: isLoading ? null : onPressed,
+        child: isLoading
+            ? SizedBox(
+                width: _w(24),
+                height: _w(24),
+                child: CircularProgressIndicator(
+                  strokeWidth: _w(2),
+                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.white),
+                ),
+              )
+            : _buildContent(textColor ?? Colors.white),
       ),
     );
   }
@@ -67,12 +102,12 @@ class CustomButton extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: color, size: 20),
-          const SizedBox(width: 8),
+          Icon(icon, color: color, size: _sp(20)),
+          SizedBox(width: _w(8)),
           Text(
             label,
             style: TextStyle(
-              fontSize: 16,
+              fontSize: _sp(16),
               fontWeight: FontWeight.w600,
               color: color,
             ),
@@ -83,7 +118,7 @@ class CustomButton extends StatelessWidget {
     return Text(
       label,
       style: TextStyle(
-        fontSize: 16,
+        fontSize: _sp(16),
         fontWeight: FontWeight.w600,
         color: color,
       ),

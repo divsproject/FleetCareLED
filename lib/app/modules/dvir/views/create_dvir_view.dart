@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 import '../../../global_widgets/custom_text.dart';
 import '../controllers/dvir_controller.dart';
 
@@ -12,38 +13,28 @@ class CreateDvirView extends GetView<DvirController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: CustomText(
-          "Create DVIR",
-          color: Colors.white,
-          fontSize: 18.sp,
-          fontWeight: FontWeight.w600,
-        ),
-        centerTitle: true,
-        backgroundColor: AppColors.primary,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white, size: 20.sp),
-          onPressed: () => Get.back(),
-        ),
+      appBar: CustomAppBar(
+        title: "Create DVIR",
         actions: [
           IconButton(
-            icon: Icon(Icons.edit_outlined, color: Colors.white, size: 20.sp),
+            icon:
+                Icon(Icons.edit_outlined, color: Colors.white, size: 24.spMin),
             onPressed: () {},
           )
         ],
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(horizontal: 5.w, vertical: 2.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 16.h),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Vehicle Info
             _buildTextField("Vehicle", controller.vehicleController),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             _buildTextField("VIN", controller.vinController),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             _buildTextField("Location", controller.locationController),
-            SizedBox(height: 3.h),
+            SizedBox(height: 24.h),
 
             // Visual Circles
             Row(
@@ -56,20 +47,20 @@ class CreateDvirView extends GetView<DvirController> {
                 _buildCircleItem("Back"),
               ],
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: 24.h),
 
             // Previous Defects
             CustomText(
               "Previous Defects",
               fontWeight: FontWeight.w700,
-              fontSize: 17.sp,
+              fontSize: 17.spMin,
               color: Colors.black87,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             Obx(() => Column(
                   children: controller.defects.map((defect) {
                     return Padding(
-                      padding: EdgeInsets.only(bottom: 2.h),
+                      padding: EdgeInsets.only(bottom: 16.h),
                       child: Row(
                         children: [
                           Icon(
@@ -80,10 +71,10 @@ class CreateDvirView extends GetView<DvirController> {
                                 defect.isResolved ? Colors.green : Colors.black,
                             size: 18.sp,
                           ),
-                          SizedBox(width: 3.w),
+                          SizedBox(width: 12.w),
                           Container(
-                            height: 5.h,
-                            width: 5.h,
+                            height: 40.h,
+                            width: 40.h,
                             decoration: BoxDecoration(
                                 shape: BoxShape.circle,
                                 gradient: LinearGradient(
@@ -95,14 +86,15 @@ class CreateDvirView extends GetView<DvirController> {
                                   ],
                                 )),
                           ),
-                          SizedBox(width: 3.w),
+                          SizedBox(width: 12.w),
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               CustomText(defect.name,
-                                  fontWeight: FontWeight.bold, fontSize: 16.sp),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16.spMin),
                               CustomText(defect.description,
-                                  color: Colors.grey, fontSize: 15.sp),
+                                  color: Colors.grey, fontSize: 15.spMin),
                             ],
                           ),
                           const Spacer(),
@@ -111,7 +103,7 @@ class CreateDvirView extends GetView<DvirController> {
                             color:
                                 defect.isResolved ? Colors.green : Colors.red,
                             fontWeight: FontWeight.bold,
-                            fontSize: 14.sp,
+                            fontSize: 14.spMin,
                           ),
                         ],
                       ),
@@ -119,61 +111,61 @@ class CreateDvirView extends GetView<DvirController> {
                   }).toList(),
                 )),
 
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             CustomText(
               "Add New vehicle Defects",
               fontWeight: FontWeight.bold,
-              fontSize: 16.sp,
+              fontSize: 16.spMin,
             ),
-            SizedBox(height: 1.h),
+            SizedBox(height: 8.h),
             CustomText(
               "It is a long established fact that a reader will be distracted by the readable",
               color: Colors.grey,
-              fontSize: 15.sp,
+              fontSize: 15.spMin,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             SizedBox(
               width: double.infinity,
-              height: 6.h,
+              height: 48.h,
               child: OutlinedButton(
                 onPressed: controller.navigateToAddDefect,
                 style: OutlinedButton.styleFrom(
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12.0),
+                    borderRadius: BorderRadius.circular(12.r),
                   ),
                 ),
                 child: Text(
                   "Add Defects",
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 16.spMin,
                     color: Colors.grey[800],
                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 3.h),
+            SizedBox(height: 24.h),
 
             // Additional Info
             _buildTextField("License Plate", controller.licensePlateController),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             _buildTextField("Odometer (mi)",
                 controller.odometerController), // Typo in design 'Odomeber'
 
-            SizedBox(height: 3.h),
+            SizedBox(height: 24.h),
             CustomText(
               "Choose Inspection Type",
               fontWeight: FontWeight.bold,
-              fontSize: 16.sp,
+              fontSize: 16.spMin,
             ),
-            SizedBox(height: 2.h),
+            SizedBox(height: 16.h),
             Row(
               children: [
                 Expanded(
                   child: Obx(() => _buildInspectionButton("Pre-Trip",
                       controller.inspectionType.value == "Pre-Trip")),
                 ),
-                SizedBox(width: 4.w),
+                SizedBox(width: 16.w),
                 Expanded(
                   child: Obx(() => _buildInspectionButton("Post-Trip",
                       controller.inspectionType.value == "Post-Trip")),
@@ -181,29 +173,29 @@ class CreateDvirView extends GetView<DvirController> {
               ],
             ),
 
-            SizedBox(height: 4.h),
+            SizedBox(height: 32.h),
             SizedBox(
               width: double.infinity,
-              height: 6.h,
+              height: 48.h,
               child: ElevatedButton(
                 onPressed: controller.submitDvir,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(30.r),
                   ),
                 ),
                 child: Text(
                   "Next",
                   style: TextStyle(
-                    fontSize: 16.sp,
+                    fontSize: 16.spMin,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
               ),
             ),
-            SizedBox(height: 4.h),
+            SizedBox(height: 32.h),
           ],
         ),
       ),
@@ -216,28 +208,28 @@ class CreateDvirView extends GetView<DvirController> {
       children: [
         CustomText(label,
             fontWeight: FontWeight.w700,
-            fontSize: 16.sp,
+            fontSize: 16.spMin,
             color: Colors.black87),
-        SizedBox(height: 1.h),
+        SizedBox(height: 8.h),
         TextFormField(
           controller: textCtrl,
           style: TextStyle(
-              fontSize: 16.sp,
+              fontSize: 16.spMin,
               fontWeight: FontWeight.w500,
               color: Colors.black),
           decoration: InputDecoration(
             contentPadding:
-                EdgeInsets.symmetric(horizontal: 4.w, vertical: 1.8.h),
+                EdgeInsets.symmetric(horizontal: 16.w, vertical: 14.h),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(10.r),
               borderSide: const BorderSide(color: Colors.grey),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(10.r),
               borderSide: BorderSide(color: Colors.grey.withOpacity(0.4)),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10.0),
+              borderRadius: BorderRadius.circular(10.r),
               borderSide: const BorderSide(color: AppColors.primary, width: 2),
             ),
             filled: true,
@@ -252,8 +244,8 @@ class CreateDvirView extends GetView<DvirController> {
     return Column(
       children: [
         Container(
-          height: 7.h,
-          width: 7.h,
+          height: 56.h,
+          width: 56.h,
           decoration: BoxDecoration(
               shape: BoxShape.circle,
               gradient: LinearGradient(
@@ -267,15 +259,15 @@ class CreateDvirView extends GetView<DvirController> {
               boxShadow: [
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.2),
-                    blurRadius: 4,
-                    spreadRadius: 1)
+                    blurRadius: 4.r,
+                    spreadRadius: 1.r)
               ]),
         ),
-        SizedBox(height: 1.h),
+        SizedBox(height: 8.h),
         Text(
           label,
           style: TextStyle(
-              fontSize: 13.5.sp,
+              fontSize: 13.5.spMin,
               fontWeight: FontWeight.w600,
               color: Colors.black87),
         ),
@@ -287,19 +279,19 @@ class CreateDvirView extends GetView<DvirController> {
     return InkWell(
       onTap: () => controller.setInspectionType(label),
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 1.5.h),
+        padding: EdgeInsets.symmetric(vertical: 12.h),
         decoration: BoxDecoration(
           color: isSelected ? Colors.white : Colors.white,
           border: Border.all(
               color: isSelected ? Colors.black : Colors.grey.withOpacity(0.5),
               width: isSelected ? 1.5 : 1),
-          borderRadius: BorderRadius.circular(12.0),
+          borderRadius: BorderRadius.circular(12.r),
         ),
         alignment: Alignment.center,
         child: Text(
           label,
           style: TextStyle(
-            fontSize: 15.sp,
+            fontSize: 15.spMin,
             fontWeight: FontWeight.bold,
             color: Colors.black,
           ),

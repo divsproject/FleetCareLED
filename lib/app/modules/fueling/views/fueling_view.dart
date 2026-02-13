@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/values/app_colors.dart';
 import '../../../global_widgets/custom_text.dart';
+import '../../../global_widgets/custom_app_bar.dart';
 
 class FuelingView extends StatelessWidget {
   const FuelingView({Key? key}) : super(key: key);
@@ -10,44 +12,35 @@ class FuelingView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.scaffoldBackground,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        title: const CustomText(
-          "Fueling",
-          color: Colors.white,
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Get.back(),
-        ),
+      appBar: const CustomAppBar(
+        title: "Fueling",
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
         child: Column(
           children: [
             // 🔹 Top Stats
             Container(
-              padding: const EdgeInsets.all(16),
+              padding: EdgeInsets.only(top: 16.h, bottom: 16.h, left: 16.w, right: 16.w),
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(16),
+                borderRadius: BorderRadius.circular(16.r),
               ),
-              child: const Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _Stat("35000", "km"),
                   CircleAvatar(
-                    radius: 28,
+                    radius: 28.r,
                     backgroundColor: AppColors.lightBlueBg,
-                    child: Icon(Icons.local_shipping, color: AppColors.primary),
+                    child: Icon(Icons.local_shipping,
+                        color: AppColors.primary, size: 24.sp),
                   ),
                   _Stat("800", "Avg"),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: 16.h),
 
             // 🔹 Fueling List
             Expanded(
@@ -77,12 +70,12 @@ class _Stat extends StatelessWidget {
       children: [
         CustomText(
           value,
-          fontSize: 18,
+          fontSize: 18.spMin,
           fontWeight: FontWeight.w700,
         ),
         CustomText(
           label,
-          fontSize: 12,
+          fontSize: 12.spMin,
           color: AppColors.textSecondary,
         ),
       ],
@@ -96,23 +89,24 @@ class _FuelTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(14),
+      margin: EdgeInsets.only(bottom: 12.h),
+      padding: EdgeInsets.only(top: 14.h, bottom: 14.h, left: 14.w, right: 14.w),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(14),
+        borderRadius: BorderRadius.circular(14.r),
       ),
-      child: const Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CustomText(
             "55000 INR",
             fontWeight: FontWeight.w600,
+            fontSize: 14.spMin,
           ),
-          SizedBox(height: 4),
+          SizedBox(height: 4.h),
           CustomText(
             "OCT 8 • 09:08 PM • Kalupur Station",
-            fontSize: 12,
+            fontSize: 12.spMin,
             color: AppColors.textSecondary,
           ),
         ],

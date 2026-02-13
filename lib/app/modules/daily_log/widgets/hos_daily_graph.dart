@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../../core/values/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../global_widgets/custom_text.dart';
 
 class HosDailyGraph extends StatelessWidget {
@@ -13,7 +12,7 @@ class HosDailyGraph extends StatelessWidget {
         // 🕒 Time Markers (Top Row)
         Padding(
           padding: EdgeInsets.only(
-              left: 10.w, right: 10.w, bottom: 0.5.h), // Align with grid
+              left: 40.w, right: 40.w, bottom: 4.h), // Align with grid
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -28,7 +27,7 @@ class HosDailyGraph extends StatelessWidget {
 
         // 📊 The Main Chart Grid
         Container(
-          height: 25.h, // Fixed height for the chart area
+          height: 200.h, // Fixed height for the chart area
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey.shade400),
           ),
@@ -36,7 +35,7 @@ class HosDailyGraph extends StatelessWidget {
             children: [
               // 🏷 Left Labels (OFF, SB, DR, ON)
               SizedBox(
-                width: 10.w,
+                width: 40.w,
                 child: Column(
                   children: [
                     _buildSideLabel("OFF", border: true),
@@ -71,7 +70,7 @@ class HosDailyGraph extends StatelessWidget {
 
               // 🔢 Right Totals (15.50, 00.00 ...)
               SizedBox(
-                width: 10.w,
+                width: 40.w,
                 child: Column(
                   children: [
                     _buildSideLabel("15.50", border: true),
@@ -89,9 +88,9 @@ class HosDailyGraph extends StatelessWidget {
         Align(
           alignment: Alignment.centerRight,
           child: Padding(
-            padding: EdgeInsets.only(top: 1.h, right: 2.w),
+            padding: EdgeInsets.only(top: 8.h, right: 8.w),
             child: CustomText("15.75",
-                fontWeight: FontWeight.bold, fontSize: 13.sp),
+                fontWeight: FontWeight.bold, fontSize: 13.spMin),
           ),
         )
       ],
@@ -103,7 +102,7 @@ class HosDailyGraph extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: 10.sp,
+        fontSize: 10.spMin,
         color: Colors.black,
         fontWeight: fontWeight,
       ),
@@ -127,7 +126,7 @@ class HosDailyGraph extends StatelessWidget {
         ),
         child: CustomText(
           text,
-          fontSize: 12.sp,
+          fontSize: 12.spMin,
           fontWeight: FontWeight.bold,
         ),
       ),

@@ -13,7 +13,6 @@ class HomeController extends GetxController {
   // State from original HomeScreen & DriverProvider
   final currentStatus = Rx<DutyStatus>(DutyStatus.offDuty);
   final selectedNote = "No note".obs;
-  final showQuickActions = false.obs;
   final currentIndex = 0.obs;
 
   // Driver Info
@@ -45,14 +44,6 @@ class HomeController extends GetxController {
     vehicleController.dispose();
     trailerController.dispose();
     super.onClose();
-  }
-
-  void toggleQuickActions() {
-    showQuickActions.value = !showQuickActions.value;
-  }
-
-  void closeQuickActions() {
-    showQuickActions.value = false;
   }
 
   void changeTab(int index) {
